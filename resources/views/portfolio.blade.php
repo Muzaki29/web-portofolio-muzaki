@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="id" data-theme="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -59,8 +59,8 @@
                         <a href="#works" class="btn btn-outline">Review Portfolio</a>
                     </div>
                 </div>
-                <div class="hero-image">
-                    <div class="profile-circle">
+                <div class="hero-image parallax-element">
+                    <div class="profile-circle float-animation">
                         <img src="{{ asset('images/profil.jpg.jpg') }}" alt="Muzaki Abdullah Irsyad" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
                         <div class="profile-placeholder" style="display: none;">
                             <i class="fas fa-user"></i>
@@ -124,17 +124,17 @@
                     <div class="edu-item">
                         <h4>STT Terpadu Nurul Fikri</h4>
                         <p>Informatics Engineering (2021-2025)</p>
-                        <p style="color: var(--dark-text-secondary); font-size: 0.9rem; margin-top: 0.5rem;">GPA: 3.86/4.00 | Graduation: 18 July 2025</p>
+                        <p style="color: var(--text-secondary); font-size: 0.9rem; margin-top: 0.5rem;">GPA: 3.86/4.00 | Graduation: 18 July 2025</p>
                     </div>
                     <div class="edu-item">
                         <h4>PT Nurul Fikri Cipta Inovasi</h4>
                         <p>Student Codeless Data Science - MSIB Batch 6</p>
-                        <p style="color: var(--dark-text-secondary); font-size: 0.9rem; margin-top: 0.5rem;">Feb - Jun 2024</p>
+                        <p style="color: var(--text-secondary); font-size: 0.9rem; margin-top: 0.5rem;">Feb - Jun 2024</p>
                     </div>
                     <div class="edu-item">
                         <h4>Infinite Learning</h4>
                         <p>Student Web Development - MSIB Batch 5</p>
-                        <p style="color: var(--dark-text-secondary); font-size: 0.9rem; margin-top: 0.5rem;">Aug - Dec 2023</p>
+                        <p style="color: var(--text-secondary); font-size: 0.9rem; margin-top: 0.5rem;">Aug - Dec 2023</p>
                     </div>
                     <div class="edu-item">
                         <h4>SMKN 5 Jakarta</h4>
@@ -405,15 +405,15 @@
             </div>
             <div class="achievements">
                 <div class="achievement-item">
-                    <div class="achievement-number">3.86</div>
+                    <div class="achievement-number counter-number">3.86</div>
                     <div class="achievement-label">GPA Score</div>
                 </div>
                 <div class="achievement-item">
-                    <div class="achievement-number">4</div>
+                    <div class="achievement-number counter-number">4</div>
                     <div class="achievement-label">Certifications</div>
                 </div>
                 <div class="achievement-item">
-                    <div class="achievement-number">2+</div>
+                    <div class="achievement-number counter-number">2</div>
                     <div class="achievement-label">Years Experience</div>
                 </div>
             </div>

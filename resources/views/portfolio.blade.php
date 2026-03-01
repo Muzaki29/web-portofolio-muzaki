@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="id" data-theme="dark">
+<html lang="{{ app()->getLocale() }}" data-theme="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Portfolio of Muzaki Abdullah Irsyad - Fresh Graduate Informatics Engineering, Software Development & IT Support">
+    <meta name="description" content="Portfolio of Muzaki Abdullah Irsyad - Informatics Engineering, Software Development & IT Support">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Muzaki Abdullah Irsyad - Portfolio</title>
     
@@ -24,19 +24,21 @@
         <div class="container">
             <div class="nav-brand">Muzaki Abdullah Irsyad</div>
             <ul class="nav-menu" id="navMenu">
-                <li><a href="#about" class="nav-link">About</a></li>
-                <li><a href="#skills" class="nav-link">Skills</a></li>
-                <li><a href="#works" class="nav-link">Works</a></li>
-                <li><a href="#certifications" class="nav-link">Certifications</a></li>
-                <li><a href="#contact" class="nav-link">Contact</a></li>
+                <li><a href="#about" class="nav-link">{{ __('nav.about') }}</a></li>
+                <li><a href="#skills" class="nav-link">{{ __('nav.skills') }}</a></li>
+                <li><a href="#works" class="nav-link">{{ __('nav.works') }}</a></li>
+                <li><a href="#certifications" class="nav-link">{{ __('nav.certifications') }}</a></li>
+                <li><a href="#contact" class="nav-link">{{ __('nav.contact') }}</a></li>
             </ul>
             <div class="nav-actions">
+                <div class="lang-toggle" role="group" aria-label="{{ __('nav.language') }}">
+                    <a href="{{ route('locale.switch', ['locale' => 'id']) }}" class="lang-option {{ app()->getLocale() === 'id' ? 'active' : '' }}" title="Bahasa Indonesia">ID</a>
+                    <span class="lang-sep">|</span>
+                    <a href="{{ route('locale.switch', ['locale' => 'en']) }}" class="lang-option {{ app()->getLocale() === 'en' ? 'active' : '' }}" title="English">EN</a>
+                </div>
                 <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
                     <i class="fas fa-moon" id="themeIcon"></i>
                 </button>
-                <div class="nav-search">
-                    <i class="fas fa-search"></i>
-                </div>
             </div>
             <div class="hamburger" id="hamburger">
                 <span></span>
@@ -51,12 +53,12 @@
         <div class="container">
             <div class="hero-content">
                 <div class="hero-text">
-                    <p class="hero-greeting">Hello, I'm</p>
-                    <h1 class="hero-name">Muzaki Abdullah <span class="hero-name-last">Irsyad</span></h1>
-                    <p class="hero-title">Fresh Graduate Informatics Engineering&nbsp;|<br>Software Development &amp; IT Support</p>
+                    <p class="hero-greeting">{{ __('hero.greeting') }}</p>
+                    <h1 class="hero-name">Muzaki Abdullah <br><span class="hero-name-last">Irsyad</span></h1>
+                    <p class="hero-title">{{ __('hero.title_1') }}<br>{{ __('hero.title_2') }}</p>
                     <div class="hero-buttons">
-                        <a href="#contact" class="btn btn-primary">Hire Me</a>
-                        <a href="#works" class="btn btn-outline">Review Portfolio</a>
+                        <a href="#contact" class="btn btn-primary">{{ __('hero.hire_me') }}</a>
+                        <a href="#works" class="btn btn-outline">{{ __('hero.review_portfolio') }}</a>
                     </div>
                 </div>
                 <div class="hero-image parallax-element">
@@ -71,15 +73,15 @@
             <div class="hero-services">
                 <div class="service-card">
                     <i class="fas fa-code"></i>
-                    <h3>Software Development</h3>
+                    <h3>{{ __('hero.service_software') }}</h3>
                 </div>
                 <div class="service-card">
                     <i class="fas fa-tools"></i>
-                    <h3>IT Support</h3>
+                    <h3>{{ __('hero.service_it') }}</h3>
                 </div>
                 <div class="service-card">
                     <i class="fas fa-graduation-cap"></i>
-                    <h3>Teaching Assistant</h3>
+                    <h3>{{ __('hero.service_teaching') }}</h3>
                 </div>
             </div>
         </div>
@@ -88,102 +90,100 @@
     <!-- About Section -->
     <section class="about" id="about">
         <div class="container">
-            <h2 class="section-title">Here's a bit about me</h2>
-            <p class="about-description">
-                I am Muzaki Abdullah Irsyad, a fresh graduate in Informatics Engineering from STT Terpadu Nurul Fikri with a GPA of 3.86/4.00. I have a strong passion for software development and IT support, and have earned certifications in Microsoft Office, cloud computing, graphic design, and video editing. I have gained practical experience through the Kampus Merdeka program in Web Development and Codeless Data Science, and have worked as a Junior IT Support and Trainee Engineer.
-            </p>
+            <h2 class="section-title">{{ __('about.title') }}</h2>
+            <p class="about-description">{{ __('about.description') }}</p>
             <div class="about-details">
                 <div class="detail-row">
-                    <span class="detail-label">Experience:</span>
-                    <span class="detail-value">2+ Years</span>
+                    <span class="detail-label">{{ __('about.experience') }}</span>
+                    <span class="detail-value">{{ __('about.experience_value') }}</span>
                 </div>
                 <div class="detail-row">
-                    <span class="detail-label">Specialty:</span>
-                    <span class="detail-value">Software Development & IT Support</span>
+                    <span class="detail-label">{{ __('about.specialty') }}</span>
+                    <span class="detail-value">{{ __('about.specialty_value') }}</span>
                 </div>
                 <div class="detail-row">
-                    <span class="detail-label">Education:</span>
+                    <span class="detail-label">{{ __('about.education') }}</span>
                     <span class="detail-value">STT Terpadu Nurul Fikri</span>
                 </div>
                 <div class="detail-row">
-                    <span class="detail-label">GPA:</span>
+                    <span class="detail-label">{{ __('about.gpa') }}</span>
                     <span class="detail-value">3.86/4.00</span>
                 </div>
                 <div class="detail-row">
-                    <span class="detail-label">Location:</span>
+                    <span class="detail-label">{{ __('about.location') }}</span>
                     <span class="detail-value">Jakarta, Indonesia</span>
                 </div>
                 <div class="detail-row">
-                    <span class="detail-label">LinkedIn:</span>
+                    <span class="detail-label">{{ __('about.linkedin') }}</span>
                     <span class="detail-value"><a href="https://www.linkedin.com/in/muzaki-abdullah-irsyad-893a98220/" target="_blank" style="color: var(--blue-primary);">muzaki-abdullah-irsyad</a></span>
                 </div>
             </div>
             <div class="education-experience">
                 <div class="education">
-                    <h3>Education</h3>
+                    <h3>{{ __('about.education_section') }}</h3>
                     <div class="edu-item">
-                        <h4>STT Terpadu Nurul Fikri</h4>
-                        <p>Informatics Engineering (2021-2025)</p>
-                        <p style="color: var(--text-secondary); font-size: 0.9rem; margin-top: 0.5rem;">GPA: 3.86/4.00 | Graduation: 18 July 2025</p>
+                        <h4>{{ __('about.edu_nf') }}</h4>
+                        <p>{{ __('about.edu_nf_desc') }}</p>
+                        <p style="color: var(--text-secondary); font-size: 0.9rem; margin-top: 0.5rem;">{{ __('about.edu_nf_detail') }}</p>
                     </div>
                     <div class="edu-item">
-                        <h4>PT Nurul Fikri Cipta Inovasi</h4>
-                        <p>Student Codeless Data Science - MSIB Batch 6</p>
+                        <h4>{{ __('about.edu_cipta') }}</h4>
+                        <p>{{ __('about.edu_cipta_desc') }}</p>
                         <p style="color: var(--text-secondary); font-size: 0.9rem; margin-top: 0.5rem;">Feb - Jun 2024</p>
                     </div>
                     <div class="edu-item">
-                        <h4>Infinite Learning</h4>
-                        <p>Student Web Development - MSIB Batch 5</p>
+                        <h4>{{ __('about.edu_infinite') }}</h4>
+                        <p>{{ __('about.edu_infinite_desc') }}</p>
                         <p style="color: var(--text-secondary); font-size: 0.9rem; margin-top: 0.5rem;">Aug - Dec 2023</p>
                     </div>
                     <div class="edu-item">
-                        <h4>SMKN 5 Jakarta</h4>
-                        <p>Electrical Power Installation Engineering (2018-2021)</p>
+                        <h4>{{ __('about.edu_smkn') }}</h4>
+                        <p>{{ __('about.edu_smkn_desc') }}</p>
                     </div>
                 </div>
                 <div class="work-exp">
-                    <h3>Work Experience</h3>
+                    <h3>{{ __('about.work_experience') }}</h3>
                     <div class="exp-item">
-                        <h4>Pranata Komputer</h4>
-                        <p>Museum Penerangan</p>
-                        <p style="color: var(--text-secondary); font-size: 0.9rem; margin-top: 0.5rem;">Present</p>
+                        <h4>{{ __('about.exp_pranata') }}</h4>
+                        <p>{{ __('about.exp_pranata_place') }}</p>
+                        <p style="color: var(--text-secondary); font-size: 0.9rem; margin-top: 0.5rem;">{{ __('about.exp_present') }}</p>
                         <ul style="color: var(--text-secondary); font-size: 0.9rem; margin-top: 0.5rem; padding-left: 1.5rem;">
-                            <li>Planning, analyzing, designing, implementing, and operating computer-based information systems</li>
-                            <li>Managing data, IT infrastructure, and information systems</li>
-                            <li>Ensuring technology services run securely, stably, and efficiently</li>
+                            <li>{{ __('about.exp_pranata_1') }}</li>
+                            <li>{{ __('about.exp_pranata_2') }}</li>
+                            <li>{{ __('about.exp_pranata_3') }}</li>
                         </ul>
                     </div>
                     <div class="exp-item">
-                        <h4>Junior IT Support Freelancer</h4>
-                        <p>PT. Onexpert International Indonesia</p>
+                        <h4>{{ __('about.exp_onexpert') }}</h4>
+                        <p>{{ __('about.exp_onexpert_place') }}</p>
                         <p style="color: var(--text-secondary); font-size: 0.9rem; margin-top: 0.5rem;">Dec 2022 – Dec 2024</p>
                         <ul style="color: var(--text-secondary); font-size: 0.9rem; margin-top: 0.5rem; padding-left: 1.5rem;">
-                            <li>Ensure computer functionality and support company machines</li>
-                            <li>Check and maintain application functionality</li>
+                            <li>{{ __('about.exp_onexpert_1') }}</li>
+                            <li>{{ __('about.exp_onexpert_2') }}</li>
                         </ul>
                     </div>
                     <div class="exp-item">
-                        <h4>Assistant Lecturer</h4>
+                        <h4>{{ __('about.exp_lecturer') }}</h4>
                         <p>STT Terpadu Nurul Fikri</p>
                         <p style="color: var(--text-secondary); font-size: 0.9rem; margin-top: 0.5rem;">Sep 2023 – Jul 2024 & Sep 2024 – Jan 2025</p>
                         <ul style="color: var(--text-secondary); font-size: 0.9rem; margin-top: 0.5rem; padding-left: 1.5rem;">
-                            <li>English Course, Computer Network, Civic Education (PPKN), DevOps</li>
-                            <li>Introduction to Information Systems (PSI), Software Engineering (RPL), Indonesian Language</li>
+                            <li>{{ __('about.exp_lecturer_1') }}</li>
+                            <li>{{ __('about.exp_lecturer_2') }}</li>
                         </ul>
                     </div>
                     <div class="exp-item">
-                        <h4>Trainee Engineering</h4>
-                        <p>The Mayflower, Jakarta – Marriot Executive Apartements</p>
+                        <h4>{{ __('about.exp_trainee') }}</h4>
+                        <p>{{ __('about.exp_trainee_place') }}</p>
                         <p style="color: var(--text-secondary); font-size: 0.9rem; margin-top: 0.5rem;">Oct 2019 – Mar 2020</p>
                         <ul style="color: var(--text-secondary); font-size: 0.9rem; margin-top: 0.5rem; padding-left: 1.5rem;">
-                            <li>Apply electrical equipment and K3 working principles</li>
-                            <li>Operate simple building electrical installations</li>
+                            <li>{{ __('about.exp_trainee_1') }}</li>
+                            <li>{{ __('about.exp_trainee_2') }}</li>
                         </ul>
                     </div>
                 </div>
             </div>
             <a href="{{ asset('cv/muzaki-abdullah-irsyad.pdf') }}" class="btn btn-primary" download>
-                Download CV
+                {{ __('about.download_cv') }}
             </a>
         </div>
     </section>
@@ -191,62 +191,52 @@
     <!-- Skills Section -->
     <section class="skills" id="skills">
         <div class="container">
-            <h2 class="section-title">Skills & Expertise</h2>
-            <p class="section-subtitle">Comprehensive technologies in software development, IT support, & cloud computing.</p>
+            <h2 class="section-title">{{ __('skills.title') }}</h2>
+            <p class="section-subtitle">{{ __('skills.subtitle') }}</p>
             <div class="skills-grid">
                 <div class="skill-category">
-                    <h3>Software Development</h3>
+                    <h3>{{ __('skills.category_software') }}</h3>
                     <div class="skill-tags">
-                        <span class="skill-tag">Web Development</span>
-                        <span class="skill-tag">HTML</span>
-                        <span class="skill-tag">CSS</span>
-                        <span class="skill-tag">JavaScript</span>
-                        <span class="skill-tag">Codeless Data Science</span>
-                        <span class="skill-tag">Git</span>
+                        @foreach(array_map('trim', explode(',', __('skills.software_tags'))) as $tag)
+                        <span class="skill-tag">{{ $tag }}</span>
+                        @endforeach
                     </div>
                 </div>
                 <div class="skill-category">
-                    <h3>Microsoft Office & Design</h3>
+                    <h3>{{ __('skills.category_office') }}</h3>
                     <div class="skill-tags">
-                        <span class="skill-tag">Microsoft Word</span>
-                        <span class="skill-tag">Microsoft Excel</span>
-                        <span class="skill-tag">Microsoft PowerPoint</span>
-                        <span class="skill-tag">Canva</span>
-                        <span class="skill-tag">Graphic Design</span>
-                        <span class="skill-tag">Video Editing</span>
-                        <span class="skill-tag">Capcut</span>
+                        @foreach(array_map('trim', explode(',', __('skills.office_tags'))) as $tag)
+                        <span class="skill-tag">{{ $tag }}</span>
+                        @endforeach
                     </div>
                 </div>
                 <div class="skill-category">
-                    <h3>Cloud Computing</h3>
+                    <h3>{{ __('skills.category_cloud') }}</h3>
                     <div class="skill-tags">
-                        <span class="skill-tag">Cloud & Web Instant</span>
-                        <span class="skill-tag">Cloud Computing</span>
-                        <span class="skill-tag">Web Technologies</span>
+                        @foreach(array_map('trim', explode(',', __('skills.cloud_tags'))) as $tag)
+                        <span class="skill-tag">{{ $tag }}</span>
+                        @endforeach
                     </div>
                 </div>
                 <div class="skill-category">
-                    <h3>Soft Skills</h3>
+                    <h3>{{ __('skills.category_soft') }}</h3>
                     <div class="skill-tags">
-                        <span class="skill-tag">Public Speaking</span>
-                        <span class="skill-tag">Communication</span>
-                        <span class="skill-tag">Team Building</span>
-                        <span class="skill-tag">Adaptability</span>
-                        <span class="skill-tag">Time Management</span>
-                        <span class="skill-tag">Critical Thinking</span>
-                        <span class="skill-tag">Patience</span>
+                        @foreach(array_map('trim', explode(',', __('skills.soft_tags'))) as $tag)
+                        <span class="skill-tag">{{ $tag }}</span>
+                        @endforeach
                     </div>
                 </div>
                 <div class="skill-category">
-                    <h3>Languages</h3>
+                    <h3>{{ __('skills.category_lang') }}</h3>
                     <div class="skill-tags">
-                        <span class="skill-tag">Bahasa Indonesia (Native)</span>
-                        <span class="skill-tag">English (Intermediate)</span>
+                        @foreach(array_map('trim', explode(',', __('skills.lang_tags'))) as $tag)
+                        <span class="skill-tag">{{ $tag }}</span>
+                        @endforeach
                     </div>
                 </div>
             </div>
             <div class="skills-cta">
-                <a href="#contact" class="btn btn-primary">Ready to leverage these skills for your project?</a>
+                <a href="#contact" class="btn btn-primary">{{ __('skills.cta') }}</a>
             </div>
         </div>
     </section>
@@ -254,8 +244,8 @@
     <!-- Featured Works Section -->
     <section class="works" id="works">
         <div class="container">
-            <h2 class="section-title">Featured Works</h2>
-            <p class="section-subtitle">Curated list of professional projects and experiences.</p>
+            <h2 class="section-title">{{ __('works.title') }}</h2>
+            <p class="section-subtitle">{{ __('works.subtitle') }}</p>
             <div class="works-grid">
                 @foreach($featuredWorks ?? [] as $work)
                 <div class="work-card">
@@ -272,13 +262,13 @@
                     @if(!empty($work['live_url']) || !empty($work['github_url']))
                     <div class="work-links">
                         @if(!empty($work['live_url']))
-                        <a href="{{ $work['live_url'] }}" class="work-link work-link-demo" target="_blank" rel="noopener noreferrer" aria-label="Live Demo">
-                            <i class="fas fa-external-link-alt"></i> Live Demo
+                        <a href="{{ $work['live_url'] }}" class="work-link work-link-demo" target="_blank" rel="noopener noreferrer" aria-label="{{ __('works.live_demo') }}">
+                            <i class="fas fa-external-link-alt"></i> {{ __('works.live_demo') }}
                         </a>
                         @endif
                         @if(!empty($work['github_url']))
-                        <a href="{{ $work['github_url'] }}" class="work-link work-link-github" target="_blank" rel="noopener noreferrer" aria-label="GitHub Repository">
-                            <i class="fab fa-github"></i> GitHub
+                        <a href="{{ $work['github_url'] }}" class="work-link work-link-github" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+                            <i class="fab fa-github"></i> {{ __('works.github') }}
                         </a>
                         @endif
                     </div>
@@ -287,7 +277,7 @@
                 @endforeach
             </div>
             <div class="works-cta">
-                <a href="#" class="btn btn-outline">View All Works</a>
+                <a href="#" class="btn btn-outline">{{ __('works.view_all') }}</a>
             </div>
         </div>
     </section>
@@ -295,82 +285,82 @@
     <!-- Timeline Section -->
     <section class="timeline" id="timeline">
         <div class="container">
-            <h2 class="section-title">The path I've taken</h2>
-            <p class="section-subtitle">Experience and education timeline.</p>
+            <h2 class="section-title">{{ __('timeline.title') }}</h2>
+            <p class="section-subtitle">{{ __('timeline.subtitle') }}</p>
             <div class="timeline-items">
                 <div class="timeline-item">
-                    <div class="timeline-date">Present</div>
+                    <div class="timeline-date">{{ __('timeline.present') }}</div>
                     <div class="timeline-content">
-                        <h3>Pranata Komputer - Museum Penerangan</h3>
+                        <h3>{{ __('timeline.item_pranata') }}</h3>
                     </div>
                 </div>
                 <div class="timeline-item">
                     <div class="timeline-date">Sep 2024 - Jan 2025</div>
                     <div class="timeline-content">
-                        <h3>Assistant Lecturer - PSI, RPL, Indonesian Language</h3>
+                        <h3>{{ __('timeline.item_lecturer_psi') }}</h3>
                     </div>
                 </div>
                 <div class="timeline-item">
                     <div class="timeline-date">Feb 2024 - Jun 2024</div>
                     <div class="timeline-content">
-                        <h3>Student Codeless Data Science - MSIB Batch 6</h3>
+                        <h3>{{ __('timeline.item_codeless') }}</h3>
                     </div>
                 </div>
                 <div class="timeline-item">
                     <div class="timeline-date">Sep 2023 - Jul 2024</div>
                     <div class="timeline-content">
-                        <h3>Assistant Lecturer - English, Network, PPKN, DevOps</h3>
+                        <h3>{{ __('timeline.item_lecturer_devops') }}</h3>
                     </div>
                 </div>
                 <div class="timeline-item">
                     <div class="timeline-date">Aug 2023 - Dec 2023</div>
                     <div class="timeline-content">
-                        <h3>Student Web Development - MSIB Batch 5</h3>
+                        <h3>{{ __('timeline.item_webdev') }}</h3>
                     </div>
                 </div>
                 <div class="timeline-item">
                     <div class="timeline-date">Dec 2022 - Dec 2024</div>
                     <div class="timeline-content">
-                        <h3>Junior IT Support Freelancer - PT. Onexpert International</h3>
+                        <h3>{{ __('timeline.item_onexpert') }}</h3>
                     </div>
                 </div>
                 <div class="timeline-item">
-                    <div class="timeline-date">2022 - Present</div>
+                    <div class="timeline-date">2022 - {{ __('timeline.present') }}</div>
                     <div class="timeline-content">
-                        <h3>Public Relations - Karang Taruna RT & RW</h3>
+                        <h3>{{ __('timeline.item_karangtaruna') }}</h3>
                     </div>
                 </div>
                 <div class="timeline-item">
-                    <div class="timeline-date">2023 - Present</div>
+                    <div class="timeline-date">2023 - {{ __('timeline.present') }}</div>
                     <div class="timeline-content">
-                        <h3>Human Resource - Campus Student Association</h3>
+                        <h3>{{ __('timeline.item_hr') }}</h3>
                     </div>
                 </div>
                 <div class="timeline-item">
                     <div class="timeline-date">Oct 2019 - Mar 2020</div>
                     <div class="timeline-content">
-                        <h3>Trainee Engineering - The Mayflower</h3>
+                        <h3>{{ __('timeline.item_trainee') }}</h3>
                     </div>
                 </div>
                 <div class="timeline-item">
                     <div class="timeline-date">2021 - 2025</div>
                     <div class="timeline-content">
-                        <h3>Informatics Engineering - STT Terpadu Nurul Fikri</h3>
+                        <h3>{{ __('timeline.item_informatics') }}</h3>
                     </div>
                 </div>
             </div>
             <div class="achievements">
                 <div class="achievement-item">
                     <div class="achievement-number counter-number">3.86</div>
-                    <div class="achievement-label">GPA Score</div>
+                    <div class="achievement-label">{{ __('timeline.achievement_gpa') }}</div>
                 </div>
                 <div class="achievement-item">
                     <div class="achievement-number counter-number">4</div>
-                    <div class="achievement-label">Certifications</div>
+                    <div class="achievement-label">{{ __('timeline.achievement_certs') }}</div>
                 </div>
                 <div class="achievement-item">
                     <div class="achievement-number counter-number">2</div>
-                    <div class="achievement-label">Years Experience</div>
+                    <div class="achievement-label">{{ __('timeline.achievement_years') }}</div>
                 </div>
             </div>
         </div>
@@ -379,8 +369,8 @@
     <!-- Certifications Section -->
     <section class="certifications" id="certifications">
         <div class="container">
-            <h2 class="section-title">Certifications & Training</h2>
-            <p class="section-subtitle">My professional certifications and online training documents.</p>
+            <h2 class="section-title">{{ __('certs.title') }}</h2>
+            <p class="section-subtitle">{{ __('certs.subtitle') }}</p>
             <div class="certs-grid">
                 @foreach($certifications ?? [] as $category)
                 <div class="cert-category">
@@ -390,11 +380,11 @@
                         <div class="cert-item">
                             <span class="cert-name">{{ $item['name'] }}</span>
                             @if(!empty($item['url']))
-                            <a href="{{ $item['url'] }}" class="cert-credential-link" target="_blank" rel="noopener noreferrer" aria-label="View credential">
+                            <a href="{{ $item['url'] }}" class="cert-credential-link" target="_blank" rel="noopener noreferrer" aria-label="{{ __('certs.view_credential') }}">
                                 @if(str_ends_with(strtolower($item['url']), '.pdf'))
-                                <i class="fas fa-download"></i> Download
+                                <i class="fas fa-download"></i> {{ __('certs.download') }}
                                 @else
-                                <i class="fas fa-external-link-alt"></i> View credential
+                                <i class="fas fa-external-link-alt"></i> {{ __('certs.view_credential') }}
                                 @endif
                             </a>
                             @endif
@@ -410,69 +400,69 @@
     <!-- Contact Section -->
     <section class="contact" id="contact">
         <div class="container">
-            <h2 class="section-title">Let's work together</h2>
-            <p class="section-subtitle">Ready to bring your vision to life? Let's connect.</p>
+            <h2 class="section-title">{{ __('contact.title') }}</h2>
+            <p class="section-subtitle">{{ __('contact.subtitle') }}</p>
             <div class="contact-content">
                 <div class="contact-info">
                     <div class="contact-card">
                         <i class="fab fa-linkedin"></i>
                         <div>
-                            <strong>LinkedIn:</strong>
+                            <strong>{{ __('contact.linkedin') }}</strong>
                             <span><a href="https://www.linkedin.com/in/muzaki-abdullah-irsyad-893a98220/" target="_blank" style="color: var(--text-primary);">Muzaki Abdullah Irsyad</a></span>
                         </div>
                     </div>
                     <div class="contact-card">
                         <i class="fab fa-github"></i>
                         <div>
-                            <strong>GitHub:</strong>
+                            <strong>{{ __('contact.github') }}</strong>
                             <span><a href="https://github.com/Muzaki29" target="_blank" style="color: var(--text-primary);">Muzaki29</a></span>
                         </div>
                     </div>
                     <div class="contact-card">
                         <i class="fas fa-graduation-cap"></i>
                         <div>
-                            <strong>Education:</strong>
+                            <strong>{{ __('contact.education') }}</strong>
                             <span>STT Terpadu Nurul Fikri</span>
                         </div>
                     </div>
                     <div class="contact-card">
                         <i class="fas fa-map-marker-alt"></i>
                         <div>
-                            <strong>Location:</strong>
+                            <strong>{{ __('contact.location') }}</strong>
                             <span>Jakarta, Indonesia</span>
                         </div>
                     </div>
                     <div class="contact-card">
                         <i class="fas fa-star"></i>
                         <div>
-                            <strong>GPA:</strong>
+                            <strong>{{ __('contact.gpa') }}</strong>
                             <span>3.86/4.00</span>
                         </div>
                     </div>
                 </div>
                 <div class="contact-form-card">
-                    <h3>Send me a message</h3>
-                    <p>Feel free to reach out if you're looking for a fresh graduate with passion in software development and IT support, have a question, or just want to connect.</p>
+                    <h3>{{ __('contact.form_title') }}</h3>
+                    <p>{{ __('contact.form_desc') }}</p>
                     
                     <form id="contactForm" class="contact-form">
                         @csrf
                         <div class="form-group">
-                            <input type="text" id="name" name="name" placeholder="Your Name" required>
+                            <input type="text" id="name" name="name" placeholder="{{ __('contact.placeholder_name') }}" required>
                         </div>
                         <div class="form-group">
-                            <input type="email" id="email" name="email" placeholder="Your Email" required>
+                            <input type="email" id="email" name="email" placeholder="{{ __('contact.placeholder_email') }}" required>
                         </div>
                         <div class="form-group">
-                            <input type="text" id="subject" name="subject" placeholder="Subject" required>
+                            <input type="text" id="subject" name="subject" placeholder="{{ __('contact.placeholder_subject') }}" required>
                         </div>
                         <div class="form-group">
-                            <textarea id="message" name="message" rows="5" placeholder="Your Message" required></textarea>
+                            <textarea id="message" name="message" rows="5" placeholder="{{ __('contact.placeholder_message') }}" required></textarea>
                         </div>
                         <div class="form-group">
                             <button type="submit" class="btn btn-primary" id="submitBtn">
-                                <span id="submitText">Send Message</span>
+                                <span id="submitText">{{ __('contact.send') }}</span>
                                 <span id="submitLoading" style="display: none;">
-                                    <i class="fas fa-spinner fa-spin"></i> Sending...
+                                    <i class="fas fa-spinner fa-spin"></i> {{ __('contact.sending') }}
                                 </span>
                             </button>
                         </div>
@@ -489,14 +479,14 @@
             <div class="footer-content">
                 <div class="footer-brand">
                     <p>Muzaki Abdullah Irsyad</p>
-                    <p class="footer-copyright">© 2025 Muzaki Abdullah Irsyad. All rights reserved.</p>
+                    <p class="footer-copyright">© 2025 Muzaki Abdullah Irsyad. {{ __('footer.rights') }}</p>
                 </div>
                 <div class="footer-links">
                     <ul>
-                        <li><a href="#about">About</a></li>
-                        <li><a href="#works">Works</a></li>
-                        <li><a href="#contact">Contact</a></li>
-                        <li><a href="#certifications">Certifications</a></li>
+                        <li><a href="#about">{{ __('footer.about') }}</a></li>
+                        <li><a href="#works">{{ __('footer.works') }}</a></li>
+                        <li><a href="#contact">{{ __('footer.contact') }}</a></li>
+                        <li><a href="#certifications">{{ __('footer.certifications') }}</a></li>
                     </ul>
                     <div class="footer-social">
                         <a href="https://www.linkedin.com/in/muzaki-abdullah-irsyad-893a98220/" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>

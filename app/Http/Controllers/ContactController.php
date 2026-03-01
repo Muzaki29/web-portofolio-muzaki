@@ -38,14 +38,14 @@ class ContactController extends Controller
 
             return response()->json([
                 'success' => true,
-                'message' => 'Message sent successfully! Thank you for your message.'
+                'message' => __('contact.success_message')
             ]);
         } catch (\Exception $e) {
             \Log::error('Email sending failed: ' . $e->getMessage());
             
             return response()->json([
                 'success' => false,
-                'message' => 'An error occurred while sending the email: ' . $e->getMessage()
+                'message' => __('contact.error_message')
             ], 500);
         }
     }

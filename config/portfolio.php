@@ -6,55 +6,55 @@ return [
     |--------------------------------------------------------------------------
     | Featured Works
     |--------------------------------------------------------------------------
-    | Each work can have optional live_url (demo) and github_url (repository).
-    | Set to null if no link is available yet.
+    | Uses translation keys (title_key, description_key, tags_key) for locale.
+    | tags_key is comma-separated in lang files.
     */
 
     'featured_works' => [
         [
-            'title' => 'PT. Onexpert International - IT Support',
-            'description' => 'Junior IT Support Freelancer ensuring computer functionality and application maintenance for company operations.',
-            'tags' => ['IT Support', 'Computer Maintenance', 'Application Support'],
+            'title_key' => 'works.onexpert_title',
+            'description_key' => 'works.onexpert_desc',
+            'tags_key' => 'works.onexpert_tags',
             'icon' => 'fas fa-laptop-code',
             'live_url' => null,
             'github_url' => null,
         ],
         [
-            'title' => 'STT Terpadu Nurul Fikri - Teaching Assistant',
-            'description' => 'Assistant Lecturer for multiple courses including English, Computer Network, DevOps, and Software Engineering.',
-            'tags' => ['Teaching', 'Education', 'Mentoring'],
+            'title_key' => 'works.teaching_title',
+            'description_key' => 'works.teaching_desc',
+            'tags_key' => 'works.teaching_tags',
             'icon' => 'fas fa-graduation-cap',
             'live_url' => null,
             'github_url' => null,
         ],
         [
-            'title' => 'MSIB Batch 6 - Codeless Data Science',
-            'description' => 'Student at PT Nurul Fikri Cipta Inovasi learning data science and analytics without coding.',
-            'tags' => ['Data Science', 'Analytics', 'Codeless Tools'],
+            'title_key' => 'works.codeless_title',
+            'description_key' => 'works.codeless_desc',
+            'tags_key' => 'works.codeless_tags',
             'icon' => 'fas fa-cloud',
             'live_url' => null,
             'github_url' => null,
         ],
         [
-            'title' => 'MSIB Batch 5 - Web Development',
-            'description' => 'Student at Infinite Learning mastering web development technologies and frameworks.',
-            'tags' => ['Web Development', 'Frontend', 'Backend'],
+            'title_key' => 'works.webdev_title',
+            'description_key' => 'works.webdev_desc',
+            'tags_key' => 'works.webdev_tags',
             'icon' => 'fas fa-code',
             'live_url' => null,
             'github_url' => 'https://github.com/Muzaki29',
         ],
         [
-            'title' => 'The Mayflower - Electrical Engineering',
-            'description' => 'Trainee Engineering at Marriot Executive Apartements applying electrical equipment and K3 principles.',
-            'tags' => ['Electrical', 'Installation', 'K3'],
+            'title_key' => 'works.mayflower_title',
+            'description_key' => 'works.mayflower_desc',
+            'tags_key' => 'works.mayflower_tags',
             'icon' => 'fas fa-bolt',
             'live_url' => null,
             'github_url' => null,
         ],
         [
-            'title' => 'Karang Taruna & Campus Organization',
-            'description' => 'Public Relations and Human Resource roles in community and campus organizations.',
-            'tags' => ['Public Relations', 'HR Management', 'Community'],
+            'title_key' => 'works.org_title',
+            'description_key' => 'works.org_desc',
+            'tags_key' => 'works.org_tags',
             'icon' => 'fas fa-users',
             'live_url' => null,
             'github_url' => null,
@@ -65,36 +65,35 @@ return [
     |--------------------------------------------------------------------------
     | Certifications & Training
     |--------------------------------------------------------------------------
-    | Each item can have an optional url (credential page or PDF). Use null if
-    | no link is available. PDF links will show "Download" instead of "View credential".
+    | category_key and item name_key for translation. url stays as-is.
     */
 
     'certifications' => [
         [
-            'category' => 'NF Computer, STT Terpadu Nurul Fikri',
+            'category_key' => 'certs.nf_category',
             'items' => [
-                ['name' => 'Microsoft Office Professional', 'url' => null],
-                ['name' => 'Graphic Design', 'url' => null],
-                ['name' => 'Cloud & Web Instant', 'url' => null],
-                ['name' => 'Video Editing & Youtube', 'url' => null],
+                ['name_key' => 'certs.nf_item_1', 'url' => null],
+                ['name_key' => 'certs.nf_item_2', 'url' => null],
+                ['name_key' => 'certs.nf_item_3', 'url' => null],
+                ['name_key' => 'certs.nf_item_4', 'url' => null],
             ],
         ],
         [
-            'category' => 'Kampus Merdeka Programs',
+            'category_key' => 'certs.kampus_category',
             'items' => [
-                ['name' => 'MSIB Batch 6 - Codeless Data Science', 'url' => null],
-                ['name' => 'PT Nurul Fikri Cipta Inovasi', 'url' => null],
-                ['name' => 'MSIB Batch 5 - Web Development', 'url' => null],
-                ['name' => 'Infinite Learning', 'url' => null],
+                ['name_key' => 'certs.kampus_item_1', 'url' => null],
+                ['name_key' => 'certs.kampus_item_2', 'url' => null],
+                ['name_key' => 'certs.kampus_item_3', 'url' => null],
+                ['name_key' => 'certs.kampus_item_4', 'url' => null],
             ],
         ],
         [
-            'category' => 'Other Experiences',
+            'category_key' => 'certs.other_category',
             'items' => [
-                ['name' => 'Volunteer - Assistant Trainer Common Room', 'url' => null],
-                ['name' => 'Basic Network Education', 'url' => null],
-                ['name' => 'Digital Financial Literacy', 'url' => null],
-                ['name' => 'Network Device Installation', 'url' => null],
+                ['name_key' => 'certs.other_item_1', 'url' => null],
+                ['name_key' => 'certs.other_item_2', 'url' => null],
+                ['name_key' => 'certs.other_item_3', 'url' => null],
+                ['name_key' => 'certs.other_item_4', 'url' => null],
             ],
         ],
     ],

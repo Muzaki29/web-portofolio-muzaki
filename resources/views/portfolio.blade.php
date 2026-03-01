@@ -52,8 +52,8 @@
             <div class="hero-content">
                 <div class="hero-text">
                     <p class="hero-greeting">Hello, I'm</p>
-                    <h1 class="hero-name">Muzaki Abdullah Irsyad</h1>
-                    <p class="hero-title">Fresh Graduate Informatics Engineering | Software Development & IT Support</p>
+                    <h1 class="hero-name">Muzaki Abdullah <span class="hero-name-last">Irsyad</span></h1>
+                    <p class="hero-title">Fresh Graduate Informatics Engineering&nbsp;|<br>Software Development &amp; IT Support</p>
                     <div class="hero-buttons">
                         <a href="#contact" class="btn btn-primary">Hire Me</a>
                         <a href="#works" class="btn btn-outline">Review Portfolio</a>
@@ -257,78 +257,34 @@
             <h2 class="section-title">Featured Works</h2>
             <p class="section-subtitle">Curated list of professional projects and experiences.</p>
             <div class="works-grid">
+                @foreach($featuredWorks ?? [] as $work)
                 <div class="work-card">
                     <div class="work-icon">
-                        <i class="fas fa-laptop-code"></i>
+                        <i class="{{ $work['icon'] ?? 'fas fa-code' }}"></i>
                     </div>
-                    <h3>PT. Onexpert International - IT Support</h3>
-                    <p>Junior IT Support Freelancer ensuring computer functionality and application maintenance for company operations.</p>
+                    <h3>{{ $work['title'] }}</h3>
+                    <p>{{ $work['description'] }}</p>
                     <div class="work-tags">
-                        <span>IT Support</span>
-                        <span>Computer Maintenance</span>
-                        <span>Application Support</span>
+                        @foreach($work['tags'] ?? [] as $tag)
+                        <span>{{ $tag }}</span>
+                        @endforeach
                     </div>
+                    @if(!empty($work['live_url']) || !empty($work['github_url']))
+                    <div class="work-links">
+                        @if(!empty($work['live_url']))
+                        <a href="{{ $work['live_url'] }}" class="work-link work-link-demo" target="_blank" rel="noopener noreferrer" aria-label="Live Demo">
+                            <i class="fas fa-external-link-alt"></i> Live Demo
+                        </a>
+                        @endif
+                        @if(!empty($work['github_url']))
+                        <a href="{{ $work['github_url'] }}" class="work-link work-link-github" target="_blank" rel="noopener noreferrer" aria-label="GitHub Repository">
+                            <i class="fab fa-github"></i> GitHub
+                        </a>
+                        @endif
+                    </div>
+                    @endif
                 </div>
-                <div class="work-card">
-                    <div class="work-icon">
-                        <i class="fas fa-graduation-cap"></i>
-                    </div>
-                    <h3>STT Terpadu Nurul Fikri - Teaching Assistant</h3>
-                    <p>Assistant Lecturer for multiple courses including English, Computer Network, DevOps, and Software Engineering.</p>
-                    <div class="work-tags">
-                        <span>Teaching</span>
-                        <span>Education</span>
-                        <span>Mentoring</span>
-                    </div>
-                </div>
-                <div class="work-card">
-                    <div class="work-icon">
-                        <i class="fas fa-cloud"></i>
-                    </div>
-                    <h3>MSIB Batch 6 - Codeless Data Science</h3>
-                    <p>Student at PT Nurul Fikri Cipta Inovasi learning data science and analytics without coding.</p>
-                    <div class="work-tags">
-                        <span>Data Science</span>
-                        <span>Analytics</span>
-                        <span>Codeless Tools</span>
-                    </div>
-                </div>
-                <div class="work-card">
-                    <div class="work-icon">
-                        <i class="fas fa-code"></i>
-                    </div>
-                    <h3>MSIB Batch 5 - Web Development</h3>
-                    <p>Student at Infinite Learning mastering web development technologies and frameworks.</p>
-                    <div class="work-tags">
-                        <span>Web Development</span>
-                        <span>Frontend</span>
-                        <span>Backend</span>
-                    </div>
-                </div>
-                <div class="work-card">
-                    <div class="work-icon">
-                        <i class="fas fa-bolt"></i>
-                    </div>
-                    <h3>The Mayflower - Electrical Engineering</h3>
-                    <p>Trainee Engineering at Marriot Executive Apartements applying electrical equipment and K3 principles.</p>
-                    <div class="work-tags">
-                        <span>Electrical</span>
-                        <span>Installation</span>
-                        <span>K3</span>
-                    </div>
-                </div>
-                <div class="work-card">
-                    <div class="work-icon">
-                        <i class="fas fa-users"></i>
-                    </div>
-                    <h3>Karang Taruna & Campus Organization</h3>
-                    <p>Public Relations and Human Resource roles in community and campus organizations.</p>
-                    <div class="work-tags">
-                        <span>Public Relations</span>
-                        <span>HR Management</span>
-                        <span>Community</span>
-                    </div>
-                </div>
+                @endforeach
             </div>
             <div class="works-cta">
                 <a href="#" class="btn btn-outline">View All Works</a>
@@ -426,33 +382,27 @@
             <h2 class="section-title">Certifications & Training</h2>
             <p class="section-subtitle">My professional certifications and online training documents.</p>
             <div class="certs-grid">
+                @foreach($certifications ?? [] as $category)
                 <div class="cert-category">
-                    <h3>NF Computer, STT Terpadu Nurul Fikri</h3>
+                    <h3>{{ $category['category'] }}</h3>
                     <div class="cert-list">
-                        <div class="cert-item">Microsoft Office Professional</div>
-                        <div class="cert-item">Graphic Design</div>
-                        <div class="cert-item">Cloud & Web Instant</div>
-                        <div class="cert-item">Video Editing & Youtube</div>
+                        @foreach($category['items'] ?? [] as $item)
+                        <div class="cert-item">
+                            <span class="cert-name">{{ $item['name'] }}</span>
+                            @if(!empty($item['url']))
+                            <a href="{{ $item['url'] }}" class="cert-credential-link" target="_blank" rel="noopener noreferrer" aria-label="View credential">
+                                @if(str_ends_with(strtolower($item['url']), '.pdf'))
+                                <i class="fas fa-download"></i> Download
+                                @else
+                                <i class="fas fa-external-link-alt"></i> View credential
+                                @endif
+                            </a>
+                            @endif
+                        </div>
+                        @endforeach
                     </div>
                 </div>
-                <div class="cert-category">
-                    <h3>Kampus Merdeka Programs</h3>
-                    <div class="cert-list">
-                        <div class="cert-item">MSIB Batch 6 - Codeless Data Science</div>
-                        <div class="cert-item">PT Nurul Fikri Cipta Inovasi</div>
-                        <div class="cert-item">MSIB Batch 5 - Web Development</div>
-                        <div class="cert-item">Infinite Learning</div>
-                    </div>
-                </div>
-                <div class="cert-category">
-                    <h3>Other Experiences</h3>
-                    <div class="cert-list">
-                        <div class="cert-item">Volunteer - Assistant Trainer Common Room</div>
-                        <div class="cert-item">Basic Network Education</div>
-                        <div class="cert-item">Digital Financial Literacy</div>
-                        <div class="cert-item">Network Device Installation</div>
-                    </div>
-                </div>
+                @endforeach
             </div>
         </div>
     </section>

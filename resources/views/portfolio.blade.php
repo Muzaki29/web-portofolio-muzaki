@@ -466,7 +466,7 @@
                                 </span>
                             </button>
                         </div>
-                        <div id="formMessage" class="form-message" style="display: none;"></div>
+                        <div id="formMessage" class="form-message" style="display: none;" role="status" aria-live="polite" aria-atomic="true"></div>
                     </form>
                 </div>
             </div>
@@ -499,6 +499,15 @@
     </footer>
 
     <!-- Scripts -->
+    <script>
+        window.i18n = window.i18n || {};
+        window.i18n.contact = window.i18n.contact || {
+            successFallback: @json(__('contact.success_message')),
+            errorFallback: @json(__('contact.error_fallback')),
+            validationPrefix: @json(__('contact.validation_prefix')),
+            genericRetryLater: @json(__('contact.generic_retry_later')),
+        };
+    </script>
     <script src="{{ asset('js/portfolio.js') }}"></script>
 </body>
 </html>

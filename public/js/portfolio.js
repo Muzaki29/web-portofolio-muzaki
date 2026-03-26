@@ -4,6 +4,7 @@
 let cursor = null;
 let cursorTrails = [];
 const trailCount = 10;
+const prefersReducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 function initCustomCursor() {
     // Only enable on desktop (non-touch devices)
@@ -197,7 +198,7 @@ const observerOptions = {
 
 const observer = new IntersectionObserver((entries) => {
     entries.forEach((entry, index) => {
-        if (entry.isIntersecting) {
+        if (entry.isIntersecting && !prefersReducedMotion) {
             setTimeout(() => {
                 entry.target.style.opacity = '1';
                 entry.target.style.transform = 'translateY(0) scale(1)';
@@ -234,7 +235,7 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             const offsetTop = target.offsetTop - 80;
             window.scrollTo({
                 top: offsetTop,
-                behavior: 'smooth'
+                behavior: prefersReducedMotion ? 'auto' : 'smooth'
             });
         }
     });
@@ -341,6 +342,7 @@ document.querySelectorAll('.service-card').forEach(card => {
 // Add click animation for buttons
 document.querySelectorAll('.btn').forEach(btn => {
     btn.addEventListener('click', function(e) {
+        if (prefersReducedMotion) return;
         const ripple = document.createElement('span');
         const rect = this.getBoundingClientRect();
         const size = Math.max(rect.width, rect.height);
@@ -392,6 +394,7 @@ const submitBtn = document.getElementById('submitBtn');
 const submitText = document.getElementById('submitText');
 const submitLoading = document.getElementById('submitLoading');
 const formMessage = document.getElementById('formMessage');
+const contactI18n = (window.i18n && window.i18n.contact) ? window.i18n.contact : {};
 
 if (contactForm) {
     contactForm.addEventListener('submit', async function(e) {
@@ -421,19 +424,19 @@ if (contactForm) {
             if (data.success) {
                 formMessage.style.display = 'block';
                 formMessage.className = 'form-message success';
-                formMessage.textContent = data.message || 'Message sent successfully! Thank you.';
+                formMessage.textContent = data.message || contactI18n.successFallback || 'Message sent successfully! Thank you.';
                 contactForm.reset();
                 
                 // Scroll to message
-                formMessage.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                formMessage.scrollIntoView({ behavior: prefersReducedMotion ? 'auto' : 'smooth', block: 'nearest' });
             } else {
                 formMessage.style.display = 'block';
                 formMessage.className = 'form-message error';
-                formMessage.textContent = data.message || 'An error occurred. Please try again.';
+                formMessage.textContent = data.message || contactI18n.errorFallback || 'An error occurred. Please try again.';
                 
                 // Show validation errors if any
                 if (data.errors) {
-                    let errorText = data.message || 'Please fix the following errors:';
+                    let errorText = data.message || contactI18n.validationPrefix || 'Please fix the following errors:';
                     for (let field in data.errors) {
                         errorText += '\n- ' + data.errors[field][0];
                     }
@@ -443,7 +446,7 @@ if (contactForm) {
         } catch (error) {
             formMessage.style.display = 'block';
             formMessage.className = 'form-message error';
-            formMessage.textContent = 'An error occurred while sending the message. Please try again later.';
+            formMessage.textContent = contactI18n.genericRetryLater || 'An error occurred while sending the message. Please try again later.';
             console.error('Error:', error);
         } finally {
             // Re-enable submit button
@@ -504,12 +507,14 @@ document.addEventListener('DOMContentLoaded', () => {
     } else {
         console.error('Theme toggle button not found!');
     }
-    initCustomCursor();
-    initScrollProgress();
-    initBackToTop();
-    initTextReveal();
-    initCounters();
-    initParallax();
+    if (!prefersReducedMotion) {
+        initCustomCursor();
+        initScrollProgress();
+        initBackToTop();
+        initTextReveal();
+        initCounters();
+        initParallax();
+    }
     
     // Add stagger animation to cards
     document.querySelectorAll('.service-card, .work-card').forEach((card, index) => {

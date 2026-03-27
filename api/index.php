@@ -2,6 +2,30 @@
 
 declare(strict_types=1);
 
+if (getenv('VERCEL')) {
+    $cacheDir = '/tmp/bootstrap/cache';
+
+    if (!is_dir($cacheDir)) {
+        @mkdir($cacheDir, 0777, true);
+    }
+
+    if (!getenv('APP_PACKAGES_CACHE')) {
+        putenv('APP_PACKAGES_CACHE=' . $cacheDir . '/packages.php');
+    }
+    if (!getenv('APP_SERVICES_CACHE')) {
+        putenv('APP_SERVICES_CACHE=' . $cacheDir . '/services.php');
+    }
+    if (!getenv('APP_CONFIG_CACHE')) {
+        putenv('APP_CONFIG_CACHE=' . $cacheDir . '/config.php');
+    }
+    if (!getenv('APP_ROUTES_CACHE')) {
+        putenv('APP_ROUTES_CACHE=' . $cacheDir . '/routes.php');
+    }
+    if (!getenv('APP_EVENTS_CACHE')) {
+        putenv('APP_EVENTS_CACHE=' . $cacheDir . '/events.php');
+    }
+}
+
 try {
     require __DIR__ . '/../public/index.php';
 } catch (Throwable $e) {

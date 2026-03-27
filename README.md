@@ -1,3 +1,43 @@
+## Deploy Gratis ke Vercel (Public)
+
+Project ini sudah disiapkan dengan `vercel.json` untuk deploy Laravel ke Vercel.
+
+### 1) Push ke GitHub
+
+Pastikan branch terbaru sudah di-push ke repository GitHub.
+
+### 2) Import project di Vercel
+
+1. Login ke [Vercel](https://vercel.com/)
+2. Klik **Add New Project**
+3. Pilih repository ini
+4. Framework preset: biarkan otomatis (Other)
+5. Klik **Deploy**
+
+### 3) Set Environment Variables di Vercel
+
+Di menu Project Settings -> Environment Variables, tambahkan minimal:
+
+- `APP_NAME=Portfolio`
+- `APP_ENV=production`
+- `APP_DEBUG=false`
+- `APP_KEY=<isi dari APP_KEY di .env lokal>`
+- `APP_URL=https://<nama-project>.vercel.app`
+- `LOG_CHANNEL=stack`
+- `LOG_LEVEL=error`
+- `SESSION_DRIVER=cookie`
+- `CACHE_STORE=array`
+- `QUEUE_CONNECTION=sync`
+- `MAIL_MAILER=log`
+
+Catatan:
+- Untuk mode gratis yang simpel, contact form bisa tetap tampil tetapi pengiriman email perlu konfigurasi mail provider eksternal agar benar-benar terkirim.
+- Jika nanti ingin form aktif penuh, tambahkan kredensial SMTP atau layanan email API sebagai env vars.
+
+### 4) Redeploy setelah update
+
+Setiap push baru ke branch yang terhubung akan otomatis trigger deploy baru di Vercel.
+
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
 <p align="center">

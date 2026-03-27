@@ -24,6 +24,6 @@ return [
 
     'compiled' => env(
         'VIEW_COMPILED_PATH',
-        env('VERCEL') ? '/tmp/views' : realpath(storage_path('framework/views'))
+        env('VERCEL') ? '/tmp/views' : storage_path('framework/views')
     ),
 ];

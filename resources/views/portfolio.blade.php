@@ -64,7 +64,7 @@
                 </div>
                 <div class="hero-image parallax-element">
                     <div class="profile-circle float-animation">
-                        <img src="{{ asset('images/profile-placeholder.svg') }}" alt="Muzaki Abdullah Irsyad" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                        <img src="{{ asset('images/profil.png') }}" alt="Muzaki Abdullah Irsyad" width="300" height="300" loading="eager" decoding="async" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
                         <div class="profile-placeholder" style="display: none;">
                             <i class="fas fa-user"></i>
                         </div>

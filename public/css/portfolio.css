@@ -38,7 +38,9 @@ body {
     color: var(--text-primary);
     line-height: 1.6;
     scroll-behavior: smooth;
-    transition: background-color 0.3s ease, color 0.3s ease;
+    transition: background-color 0.5s cubic-bezier(0.4, 0, 0.2, 1), 
+                color 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+                border-color 0.5s cubic-bezier(0.4, 0, 0.2, 1);
     overflow-x: hidden;
     position: relative;
     min-height: 100vh;
@@ -268,7 +270,8 @@ body::before {
     min-width: 0;
 }
 
-.hero-name-last {
+.hero-name span, .hero-name-last {
+    display: inline-block;
     white-space: nowrap;
 }
 
@@ -317,7 +320,7 @@ body::before {
     border-radius: 8px;
     text-decoration: none;
     font-weight: 600;
-    transition: all 0.3s ease;
+    transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.3s ease, background-color 0.3s ease, color 0.3s ease;
     display: inline-block;
     border: 2px solid transparent;
 }
@@ -1476,7 +1479,7 @@ section {
     }
 
     .hero-name-last {
-        white-space: normal;
+        white-space: nowrap;
     }
 
     .hero-title {
@@ -1484,3 +1487,19 @@ section {
     }
 }
 
+/* Premium Scrollbar */
+::-webkit-scrollbar {
+    width: 10px;
+}
+::-webkit-scrollbar-track {
+    background: var(--bg-primary);
+}
+::-webkit-scrollbar-thumb {
+    background: var(--border-color);
+    border-radius: 5px;
+    border: 2px solid var(--bg-primary);
+    transition: background 0.3s ease;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: var(--blue-primary);
+}

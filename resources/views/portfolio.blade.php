@@ -55,7 +55,7 @@
             <div class="hero-content">
                 <div class="hero-text">
                     <p class="hero-greeting">{{ __('hero.greeting') }}</p>
-                    <h1 class="hero-name">Muzaki Abdullah <br><span class="hero-name-last">Irsyad</span></h1>
+                    <h1 class="hero-name"><span>Muzaki</span> <span>Abdullah</span> <br><span class="hero-name-last">Irsyad</span></h1>
                     <p class="hero-title">{{ __('hero.title_1') }}<br>{{ __('hero.title_2') }}</p>
                     <div class="hero-buttons">
                         <a href="#contact" class="btn btn-primary">{{ __('hero.hire_me') }}</a>
@@ -417,6 +417,13 @@
                         <div>
                             <strong>{{ __('contact.github') }}</strong>
                             <span><a href="https://github.com/Muzaki29" target="_blank" style="color: var(--text-primary);">Muzaki29</a></span>
+                        </div>
+                    </div>
+                    <div class="contact-card">
+                        <i class="fas fa-envelope"></i>
+                        <div>
+                            <strong>{{ __('contact.email') }}</strong>
+                            <span><a href="mailto:contact@muzakiabdullahirsyad.my.id" style="color: var(--text-primary);">contact@muzakiabdullahirsyad.my.id</a></span>
                         </div>
                     </div>
                     <div class="contact-card">

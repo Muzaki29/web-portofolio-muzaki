@@ -17,6 +17,7 @@ class ContactController extends Controller
             'email' => 'required|email|max:255',
             'subject' => 'required|string|max:255',
             'message' => 'required|string|max:5000',
+            'captcha' => 'required|integer',
         ]);
 
         if ($validator->fails()) {
@@ -26,8 +27,30 @@ class ContactController extends Controller
             ], 422);
         }
 
+        // Validate Captcha Answer
+        $expected = session('captcha_answer');
+        $generatedAt = session('captcha_generated_at');
+
+        // Captcha expires after 5 minutes
+        if (is_null($generatedAt) || (now()->timestamp - intval($generatedAt)) > 300) {
+            return response()->json([
+                'success' => false,
+                'message' => __('contact.captcha_failed')
+            ], 422);
+        }
+
+        if (is_null($expected) || intval($request->captcha) !== intval($expected)) {
+            return response()->json([
+                'success' => false,
+                'message' => __('contact.captcha_failed')
+            ], 422);
+        }
+
+        // Clear captcha session after success
+        session()->forget(['captcha_answer', 'captcha_generated_at']);
+
         try {
-            Mail::to('abdullahmuzaki2912@gmail.com')->send(
+            Mail::to(config('mail.from.address'))->send(
                 new ContactMail(
                     $request->name,
                     $request->email,

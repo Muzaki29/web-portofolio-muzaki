@@ -14,6 +14,13 @@ Route::get('/locale/{locale}', function (string $locale) {
 })->where('locale', 'id|en')->name('locale.switch');
 
 Route::get('/', function () {
+    // Generate secure dynamic Math CAPTCHA
+    $num1 = rand(1, 9);
+    $num2 = rand(1, 9);
+    Session::put('captcha_answer', $num1 + $num2);
+    Session::put('captcha_generated_at', now()->timestamp); // expiry check
+    $captchaQuestion = "$num1 + $num2";
+
     $worksConfig = config('portfolio.featured_works', []);
     $featuredWorks = collect($worksConfig)->map(function ($w) {
         $tags = isset($w['tags_key']) ? __($w['tags_key']) : '';
@@ -41,7 +48,12 @@ Route::get('/', function () {
     return view('portfolio', [
         'featuredWorks' => $featuredWorks,
         'certifications' => $certifications,
+        'captchaQuestion' => $captchaQuestion,
     ]);
 });
 
-Route::post('/contact', [ContactController::class, 'sendEmail'])->name('contact.send');
+// Max 5 attempts per minute per IP — prevents email flood/spam
+Route::post('/contact', [ContactController::class, 'sendEmail'])
+    ->name('contact.send')
+    ->middleware('throttle:5,1');
+

@@ -573,12 +573,37 @@
             // Show typing indicator
             showTypingIndicator();
 
-            // Match intent and respond
-            setTimeout(() => {
+            // Call backend API with RAG + strict role enforcement
+            const currentLang = document.documentElement.getAttribute('lang') || 'id';
+            const csrfToken = document.querySelector('meta[name="csrf-token"]')?.getAttribute('content');
+
+            fetch('/api/chatbot', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': csrfToken,
+                    'Accept': 'application/json',
+                },
+                body: JSON.stringify({
+                    message: msg,
+                    locale: currentLang,
+                }),
+            })
+            .then(res => res.json())
+            .then(data => {
                 removeTypingIndicator();
+                if (data.success) {
+                    showBotResponse(data.message);
+                } else {
+                    showBotResponse(data.message || i18nChat[currentLang].fallback);
+                }
+            })
+            .catch(() => {
+                removeTypingIndicator();
+                // Fallback to local keyword matching if API fails
                 const response = getBotAnswer(msg);
                 showBotResponse(response);
-            }, 1200);
+            });
         }
 
         function formatMarkdown(text) {

@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Session;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\ChatbotController;
 
 Route::get('/locale/{locale}', function (string $locale) {
     if (in_array($locale, ['id', 'en'], true)) {
@@ -56,4 +57,9 @@ Route::get('/', function () {
 Route::post('/contact', [ContactController::class, 'sendEmail'])
     ->name('contact.send')
     ->middleware('throttle:5,1');
+
+// AI Chatbot API — strict role, RAG context, rate-limited
+Route::post('/api/chatbot', [ChatbotController::class, 'chat'])
+    ->name('chatbot.chat')
+    ->middleware('throttle:15,1');
 

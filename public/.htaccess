@@ -5,6 +5,20 @@
 
     RewriteEngine On
 
+    # ── Block access to sensitive files ──
+    # Block .env, .git, .htaccess, composer files, etc.
+    RewriteRule ^\.env - [F,L]
+    RewriteRule ^\.git - [F,L]
+    RewriteRule ^\.editorconfig - [F,L]
+    RewriteRule ^composer\.(json|lock)$ - [F,L]
+    RewriteRule ^package(-lock)?\.json$ - [F,L]
+    RewriteRule ^artisan$ - [F,L]
+    RewriteRule ^phpunit\.xml$ - [F,L]
+    RewriteRule ^Procfile$ - [F,L]
+
+    # ── Block access to backup/config files ──
+    RewriteRule \.(sql|bak|log|ini|sh|conf)$ - [F,L]
+
     # Handle Authorization Header
     RewriteCond %{HTTP:Authorization} .
     RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
@@ -22,4 +36,23 @@
     RewriteCond %{REQUEST_FILENAME} !-d
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteRule ^ index.php [L]
+</IfModule>
+
+# ── Disable server signature ──
+ServerSignature Off
+
+# ── Block PHP execution in upload directories ──
+<IfModule mod_php.c>
+    <FilesMatch "\.ph(p[3457]?|t|tml)$">
+        Require all denied
+    </FilesMatch>
+</IfModule>
+
+# ── Prevent hotlinking of images (optional protection) ──
+<IfModule mod_rewrite.c>
+    RewriteCond %{HTTP_REFERER} !^$
+    RewriteCond %{HTTP_REFERER} !^https?://(www\.)?muzakiabdullahirsyad\.my\.id [NC]
+    RewriteCond %{HTTP_REFERER} !^https?://(www\.)?localhost [NC]
+    RewriteCond %{REQUEST_URI} \.(jpg|jpeg|png|gif|svg|webp|ico)$ [NC]
+    RewriteRule . - [F,L]
 </IfModule>

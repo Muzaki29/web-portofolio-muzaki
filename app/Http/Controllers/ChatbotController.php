@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\RateLimiter;
 
 class ChatbotController extends Controller
 {
@@ -177,22 +176,28 @@ KB;
             'locale' => 'required|string|in:id,en',
         ]);
 
-        // Rate limiting: 15 messages per minute per IP
-        $key = 'chatbot:' . $request->ip();
-        if (RateLimiter::tooManyAttempts($key, 15)) {
-            $retryAfter = RateLimiter::availableIn($key);
-            return response()->json([
-                'success' => false,
-                'message' => $validated['locale'] === 'en'
-                    ? "Too many requests. Please wait {$retryAfter} seconds."
-                    : "Terlalu banyak permintaan. Tunggu {$retryAfter} detik.",
-            ], 429);
-        }
-        RateLimiter::hit($key, 60);
-
-        // Input sanitization — strip potential prompt injection markers
         $userMessage = $this->sanitizeInput($validated['message']);
         $locale = $validated['locale'];
+
+        // Check if message is empty after sanitization
+        if (empty(trim($userMessage)) || strlen(trim($userMessage)) < 2) {
+            return response()->json([
+                'success' => false,
+                'message' => $locale === 'en'
+                    ? 'Please enter a valid question.'
+                    : 'Silakan masukkan pertanyaan yang valid.',
+            ], 422);
+        }
+
+        // Response caching — same question returns cached answer (saves API quota)
+        $cacheKey = 'chatbot:' . md5($locale . ':' . strtolower(trim($userMessage)));
+        $cached = cache($cacheKey);
+        if ($cached) {
+            return response()->json([
+                'success' => true,
+                'message' => $cached,
+            ]);
+        }
 
         // Build RAG context
         $knowledgeBase = $this->getKnowledgeBase($locale);
@@ -200,6 +205,9 @@ KB;
 
         try {
             $response = $this->callGeminiAPI($systemPrompt, $userMessage);
+
+            // Cache response for 1 hour
+            cache([$cacheKey => $response], now()->addHour());
 
             return response()->json([
                 'success' => true,

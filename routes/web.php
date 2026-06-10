@@ -53,13 +53,13 @@ Route::get('/', function () {
     ]);
 });
 
-// Max 5 attempts per minute per IP — prevents email flood/spam
+// Max 3 attempts per minute per IP — prevents email flood/spam
 Route::post('/contact', [ContactController::class, 'sendEmail'])
     ->name('contact.send')
-    ->middleware('throttle:5,1');
+    ->middleware('throttle:contact');
 
 // AI Chatbot API — strict role, RAG context, rate-limited
 Route::post('/api/chatbot', [ChatbotController::class, 'chat'])
     ->name('chatbot.chat')
-    ->middleware('throttle:15,1');
+    ->middleware('throttle:chatbot');
 

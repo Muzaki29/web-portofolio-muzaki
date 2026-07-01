@@ -427,142 +427,59 @@
 
         <div class="works-grid">
 
-            {{-- Project 1: SINAR --}}
+            @foreach(config('portfolio.works_projects', []) as $project)
             <div class="project-grid-card">
-                <div class="pgc-image pc-g1">
-                    <img src="{{ asset('images/project_presensi_magang.png') }}"
-                         alt="{{ __('works.sinar_title') }}"
-                         onerror="this.outerHTML='<div class=\'pc-img-placeholder\'><i class=\'fas fa-user-check\'></i><span>SINAR</span></div>'">
+                <div class="pgc-image {{ $project['gradient'] }}">
+                    <img src="{{ asset($project['image']) }}"
+                         alt="{{ __($project['title_key']) }}"
+                         onerror="this.outerHTML='<div class=\'pc-img-placeholder\'><i class=\'{{ $project['placeholder_icon'] }}\'></i><span>{{ $project['placeholder_label'] }}</span></div>'">
                 </div>
                 <div class="pgc-info">
                     <div class="pgc-header">
-                        <h3 class="pgc-name">{{ __('works.sinar_title') }}</h3>
-                        <a href="https://github.com/Muzaki29/website-presensi-magang-muspen" target="_blank" rel="noopener" class="pgc-visit" aria-label="Github Repo">
+                        <h3 class="pgc-name">{{ __($project['title_key']) }}</h3>
+                        @if(($project['link_type'] ?? '') === 'github' && !empty($project['github_url']))
+                        <a href="{{ $project['github_url'] }}" target="_blank" rel="noopener" class="pgc-visit" aria-label="Github Repo">
                             <i class="fab fa-github"></i>
                         </a>
-                    </div>
-                    <p class="pgc-short-desc">{{ __('works.sinar_short') }}</p>
-                    
-                    {{-- Hidden template for Modal --}}
-                    <div class="pgc-details-template" style="display:none">
-                        <div class="pm-detail-header">
-                            <h3 class="pm-detail-title">{{ __('works.sinar_title') }}</h3>
-                            <span class="pm-detail-tagline">Web Presensi Magang Terintegrasi</span>
-                        </div>
-                        <p class="pm-detail-desc">{{ __('works.sinar_desc') }}</p>
-                        <h4 class="pm-sub-heading"><i class="fas fa-star" style="color:var(--blue2)"></i> Fitur Utama & Keunggulan</h4>
-                        <ul class="pc-bullets">
-                            <li>{!! __('works.sinar_b1') !!}</li>
-                            <li>{!! __('works.sinar_b2') !!}</li>
-                            <li>{!! __('works.sinar_b3') !!}</li>
-                        </ul>
-                        <h4 class="pm-sub-heading"><i class="fas fa-tools" style="color:var(--blue2)"></i> {{ __('works.tech_stack') }}</h4>
-                        <div class="pc-tags">
-                            <span class="pc-tag"><i class="fab fa-laravel"></i> Laravel</span>
-                            <span class="pc-tag"><i class="fas fa-database"></i> SQLite</span>
-                            <span class="pc-tag"><i class="fas fa-key"></i> Passkeys</span>
-                            <span class="pc-tag"><i class="fab fa-bootstrap"></i> Bootstrap 5</span>
-                            <span class="pc-tag"><i class="fas fa-map-marker-alt"></i> Haversine</span>
-                        </div>
-                        <div class="pm-detail-footer">
-                            <a href="https://github.com/Muzaki29/website-presensi-magang-muspen" target="_blank" class="btn btn-primary btn-sm"><i class="fab fa-github"></i> Repository</a>
-                        </div>
-                    </div>
-
-                    <button class="btn btn-outline btn-sm btn-view-details" style="width:100%;margin-top:1rem;justify-content:center"><i class="fas fa-search-plus"></i> {{ __('works.view_details') }}</button>
-                </div>
-            </div>
-
-            {{-- Project 2: Pengelolaan Koleksi --}}
-            <div class="project-grid-card">
-                <div class="pgc-image pc-g4">
-                    <img src="{{ asset('images/project_pengelolaan_koleksi.png') }}"
-                         alt="{{ __('works.koleksi_title') }}"
-                         onerror="this.outerHTML='<div class=\'pc-img-placeholder\'><i class=\'fas fa-cubes\'></i><span>Koleksi</span></div>'">
-                </div>
-                <div class="pgc-info">
-                    <div class="pgc-header">
-                        <h3 class="pgc-name">{{ __('works.koleksi_title') }}</h3>
-                        <a href="https://github.com/Muzaki29/web-pengelolahan-koleksi" target="_blank" rel="noopener" class="pgc-visit" aria-label="Github Repo">
-                            <i class="fab fa-github"></i>
-                        </a>
-                    </div>
-                    <p class="pgc-short-desc">{{ __('works.koleksi_short') }}</p>
-                    
-                    {{-- Hidden template for Modal --}}
-                    <div class="pgc-details-template" style="display:none">
-                        <div class="pm-detail-header">
-                            <h3 class="pm-detail-title">{{ __('works.koleksi_title') }}</h3>
-                            <span class="pm-detail-tagline">Sistem Manajemen & Monitoring Artefak</span>
-                        </div>
-                        <p class="pm-detail-desc">{{ __('works.koleksi_desc') }}</p>
-                        <h4 class="pm-sub-heading"><i class="fas fa-star" style="color:var(--blue2)"></i> Fitur Utama & Keunggulan</h4>
-                        <ul class="pc-bullets">
-                            <li>{!! __('works.koleksi_b1') !!}</li>
-                            <li>{!! __('works.koleksi_b2') !!}</li>
-                            <li>{!! __('works.koleksi_b3') !!}</li>
-                        </ul>
-                        <h4 class="pm-sub-heading"><i class="fas fa-tools" style="color:var(--blue2)"></i> {{ __('works.tech_stack') }}</h4>
-                        <div class="pc-tags">
-                            <span class="pc-tag"><i class="fab fa-laravel"></i> Laravel 11</span>
-                            <span class="pc-tag"><i class="fas fa-wind"></i> Tailwind CSS</span>
-                            <span class="pc-tag"><i class="fas fa-chart-line"></i> Chart.js</span>
-                            <span class="pc-tag"><i class="fas fa-search"></i> Fuzzy Search</span>
-                            <span class="pc-tag"><i class="fas fa-microphone"></i> Speech API</span>
-                        </div>
-                        <div class="pm-detail-footer">
-                            <a href="https://github.com/Muzaki29/web-pengelolahan-koleksi" target="_blank" class="btn btn-primary btn-sm"><i class="fab fa-github"></i> Repository</a>
-                        </div>
-                    </div>
-
-                    <button class="btn btn-outline btn-sm btn-view-details" style="width:100%;margin-top:1rem;justify-content:center"><i class="fas fa-search-plus"></i> {{ __('works.view_details') }}</button>
-                </div>
-            </div>
-
-            {{-- Project 3: Museum Penerangan Portal --}}
-            <div class="project-grid-card">
-                <div class="pgc-image pc-g2">
-                    <img src="{{ asset('images/project_museum_penerangan.png') }}"
-                         alt="{{ __('works.muspen_title') }}"
-                         onerror="this.outerHTML='<div class=\'pc-img-placeholder\'><i class=\'fas fa-museum\'></i><span>Portal Resmi</span></div>'">
-                </div>
-                <div class="pgc-info">
-                    <div class="pgc-header">
-                        <h3 class="pgc-name">{{ __('works.muspen_title') }}</h3>
-                        <a href="https://muspen.komdigi.go.id/" target="_blank" rel="noopener" class="pgc-visit" aria-label="Official Site">
+                        @elseif(($project['link_type'] ?? '') === 'live' && !empty($project['live_url']))
+                        <a href="{{ $project['live_url'] }}" target="_blank" rel="noopener" class="pgc-visit" aria-label="Live Site">
                             <i class="fas fa-globe"></i>
                         </a>
+                        @endif
                     </div>
-                    <p class="pgc-short-desc">{{ __('works.muspen_short') }}</p>
-                    
-                    {{-- Hidden template for Modal --}}
+                    <p class="pgc-short-desc">{{ __($project['short_key']) }}</p>
+
                     <div class="pgc-details-template" style="display:none">
                         <div class="pm-detail-header">
-                            <h3 class="pm-detail-title">{{ __('works.muspen_title') }}</h3>
-                            <span class="pm-detail-tagline">Official Government Museum Website</span>
+                            <h3 class="pm-detail-title">{{ __($project['title_key']) }}</h3>
+                            <span class="pm-detail-tagline">{{ __($project['tagline_key']) }}</span>
                         </div>
-                        <p class="pm-detail-desc">{{ __('works.muspen_desc') }}</p>
-                        <h4 class="pm-sub-heading"><i class="fas fa-star" style="color:var(--blue2)"></i> Fitur Utama & Keunggulan</h4>
+                        <p class="pm-detail-desc">{{ __($project['desc_key']) }}</p>
+                        <h4 class="pm-sub-heading"><i class="fas fa-star" style="color:var(--blue2)"></i> {{ __('works.features_heading') }}</h4>
                         <ul class="pc-bullets">
-                            <li>{!! __('works.muspen_b1') !!}</li>
-                            <li>{!! __('works.muspen_b2') !!}</li>
-                            <li>{!! __('works.muspen_b3') !!}</li>
+                            @foreach($project['bullets'] ?? [] as $bulletKey)
+                            <li>{!! __($bulletKey) !!}</li>
+                            @endforeach
                         </ul>
                         <h4 class="pm-sub-heading"><i class="fas fa-tools" style="color:var(--blue2)"></i> {{ __('works.tech_stack') }}</h4>
                         <div class="pc-tags">
-                            <span class="pc-tag"><i class="fas fa-globe"></i> Official Portal</span>
-                            <span class="pc-tag"><i class="fas fa-vr-cardboard"></i> Virtual Tour 360°</span>
-                            <span class="pc-tag"><i class="fas fa-calendar-check"></i> Online Booking</span>
-                            <span class="pc-tag"><i class="fas fa-university"></i> Komdigi</span>
+                            @foreach($project['tags'] ?? [] as $tag)
+                            <span class="pc-tag"><i class="{{ $tag['icon'] }}"></i> {{ $tag['label'] }}</span>
+                            @endforeach
                         </div>
                         <div class="pm-detail-footer">
-                            <a href="https://muspen.komdigi.go.id/" target="_blank" class="btn btn-primary btn-sm"><i class="fas fa-globe"></i> Website Resmi</a>
+                            @if(!empty($project['github_url']))
+                            <a href="{{ $project['github_url'] }}" target="_blank" rel="noopener" class="btn btn-primary btn-sm"><i class="fab fa-github"></i> Repository</a>
+                            @elseif(!empty($project['live_url']))
+                            <a href="{{ $project['live_url'] }}" target="_blank" rel="noopener" class="btn btn-primary btn-sm"><i class="fas fa-globe"></i> {{ __('works.live_demo') }}</a>
+                            @endif
                         </div>
                     </div>
 
                     <button class="btn btn-outline btn-sm btn-view-details" style="width:100%;margin-top:1rem;justify-content:center"><i class="fas fa-search-plus"></i> {{ __('works.view_details') }}</button>
                 </div>
             </div>
+            @endforeach
 
         </div>
 
@@ -965,6 +882,6 @@ window.i18n = {
     }
 };
 </script>
-<script src="{{ asset('js/portfolio.js') }}?v=1.6"></script>
+<script src="{{ asset('js/portfolio.js') }}?v=1.7"></script>
 </body>
 </html>

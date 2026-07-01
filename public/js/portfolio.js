@@ -675,14 +675,13 @@
                     return "Muzaki has developed several featured projects:<br><br>" +
                            "1. **PMO Merch**: Official e-commerce for Pancarona Merch with 3D preview, Midtrans QRIS & Filament admin.<br>" +
                            "2. **SyahduLab**: Premium digital agency site with price calculator, MDX blog & Supabase CMS.<br>" +
-                           "3. **MES Depok**: Sharia economic organization portal with online membership & admin panel.<br>" +
-                           "4. **Jagad Property**: Property listing platform with filters, WhatsApp leads & super-admin.<br>" +
-                           "5. **Cumo Cuci Motor**: Motorcycle wash booking site with service packages & order tracking.<br>" +
-                           "6. **SuratRT**: Digital RT management — online letters, dues, forum & PDF generation.<br>" +
-                           "7. **SDN Makasar 08**: School portal with Vue 3 SPA & Laravel admin CMS.<br>" +
-                           "8. **SINAR**: GPS internship presence with 100m radius & Passkey WebAuthn.<br>" +
-                           "9. **Collections System**: Museum artifact monitoring with AI voice chatbot & Chart.js.<br>" +
-                           "10. **Museum Penerangan Portal**: Official Komdigi visit reservation with 360° virtual tour.";
+                           "3. **Jagad Property**: Property listing platform with filters, WhatsApp leads & super-admin.<br>" +
+                           "4. **Cumo Cuci Motor**: Motorcycle wash booking site with service packages & order tracking.<br>" +
+                           "5. **SuratRT**: Digital RT management — online letters, dues, forum & PDF generation.<br>" +
+                           "6. **SDN Makasar 08**: School portal with Vue 3 SPA & Laravel admin CMS.<br>" +
+                           "7. **SINAR**: GPS internship presence with 100m radius & Passkey WebAuthn.<br>" +
+                           "8. **Collections System**: Museum artifact monitoring with AI voice chatbot & Chart.js.<br>" +
+                           "9. **Museum Penerangan Portal**: Official Komdigi visit reservation with 360° virtual tour.";
                 }
                 if (q.includes('work') || q.includes('experience') || q.includes('intern') || q.includes('career') || q.includes('pranata') || q.includes('onexpert') || q.includes('lecturer')) {
                     return "Muzaki has a solid work experience portfolio:<br><br>" +
@@ -727,14 +726,13 @@
                     return "Muzaki telah mendevelop beberapa proyek unggulan:<br><br>" +
                            "1. **PMO Merch**: E-commerce merchandise resmi Pancarona Merch dengan preview 3D, QRIS Midtrans & admin Filament.<br>" +
                            "2. **SyahduLab**: Website agensi digital premium dengan kalkulator harga, blog MDX & CMS Supabase.<br>" +
-                           "3. **MES Depok**: Portal organisasi ekonomi syariah dengan keanggotaan online & panel admin.<br>" +
-                           "4. **Jagad Property**: Platform listing properti dengan filter, WhatsApp & super-admin.<br>" +
-                           "5. **Cumo Cuci Motor**: Booking cuci motor online dengan paket layanan & lacak status.<br>" +
-                           "6. **SuratRT**: Manajemen RT digital — surat online, iuran, forum & generate PDF.<br>" +
-                           "7. **SDN Makasar 08**: Portal sekolah dengan SPA Vue 3 & CMS admin Laravel.<br>" +
-                           "8. **SINAR**: Presensi magang GPS radius 100m & login biometrik Passkey WebAuthn.<br>" +
-                           "9. **Sistem Informasi Koleksi**: Monitoring artefak museum dengan chatbot AI suara & Chart.js.<br>" +
-                           "10. **Portal Museum Penerangan**: Reservasi kunjungan resmi Komdigi dengan Tour Virtual 360°.";
+                           "3. **Jagad Property**: Platform listing properti dengan filter, WhatsApp & super-admin.<br>" +
+                           "4. **Cumo Cuci Motor**: Booking cuci motor online dengan paket layanan & lacak status.<br>" +
+                           "5. **SuratRT**: Manajemen RT digital — surat online, iuran, forum & generate PDF.<br>" +
+                           "6. **SDN Makasar 08**: Portal sekolah dengan SPA Vue 3 & CMS admin Laravel.<br>" +
+                           "7. **SINAR**: Presensi magang GPS radius 100m & login biometrik Passkey WebAuthn.<br>" +
+                           "8. **Sistem Informasi Koleksi**: Monitoring artefak museum dengan chatbot AI suara & Chart.js.<br>" +
+                           "9. **Portal Museum Penerangan**: Reservasi kunjungan resmi Komdigi dengan Tour Virtual 360°.";
                 }
                 if (q.includes('kerja') || q.includes('pengalaman') || q.includes('experience') || q.includes('magang') || q.includes('intern') || q.includes('pranata') || q.includes('onexpert') || q.includes('lecturer')) {
                     return "Muzaki memiliki portofolio pengalaman kerja yang solid:<br><br>" +

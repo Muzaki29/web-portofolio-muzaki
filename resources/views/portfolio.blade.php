@@ -882,6 +882,6 @@ window.i18n = {
     }
 };
 </script>
-<script src="{{ asset('js/portfolio.js') }}?v=1.8"></script>
+<script src="{{ asset('js/portfolio.js') }}?v=2.2"></script>
 </body>
 </html>

@@ -679,7 +679,10 @@
                            "4. **Jagad Property**: Property listing platform with filters, WhatsApp leads & super-admin.<br>" +
                            "5. **Cumo Cuci Motor**: Motorcycle wash booking site with service packages & order tracking.<br>" +
                            "6. **SuratRT**: Digital RT management — online letters, dues, forum & PDF generation.<br>" +
-                           "7. **SDN Makasar 08**: School portal with Vue 3 SPA & Laravel admin CMS.";
+                           "7. **SDN Makasar 08**: School portal with Vue 3 SPA & Laravel admin CMS.<br>" +
+                           "8. **SINAR**: GPS internship presence with 100m radius & Passkey WebAuthn.<br>" +
+                           "9. **Collections System**: Museum artifact monitoring with AI voice chatbot & Chart.js.<br>" +
+                           "10. **Museum Penerangan Portal**: Official Komdigi visit reservation with 360° virtual tour.";
                 }
                 if (q.includes('work') || q.includes('experience') || q.includes('intern') || q.includes('career') || q.includes('pranata') || q.includes('onexpert') || q.includes('lecturer')) {
                     return "Muzaki has a solid work experience portfolio:<br><br>" +
@@ -728,7 +731,10 @@
                            "4. **Jagad Property**: Platform listing properti dengan filter, WhatsApp & super-admin.<br>" +
                            "5. **Cumo Cuci Motor**: Booking cuci motor online dengan paket layanan & lacak status.<br>" +
                            "6. **SuratRT**: Manajemen RT digital — surat online, iuran, forum & generate PDF.<br>" +
-                           "7. **SDN Makasar 08**: Portal sekolah dengan SPA Vue 3 & CMS admin Laravel.";
+                           "7. **SDN Makasar 08**: Portal sekolah dengan SPA Vue 3 & CMS admin Laravel.<br>" +
+                           "8. **SINAR**: Presensi magang GPS radius 100m & login biometrik Passkey WebAuthn.<br>" +
+                           "9. **Sistem Informasi Koleksi**: Monitoring artefak museum dengan chatbot AI suara & Chart.js.<br>" +
+                           "10. **Portal Museum Penerangan**: Reservasi kunjungan resmi Komdigi dengan Tour Virtual 360°.";
                 }
                 if (q.includes('kerja') || q.includes('pengalaman') || q.includes('experience') || q.includes('magang') || q.includes('intern') || q.includes('pranata') || q.includes('onexpert') || q.includes('lecturer')) {
                     return "Muzaki memiliki portofolio pengalaman kerja yang solid:<br><br>" +

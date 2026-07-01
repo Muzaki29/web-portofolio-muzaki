@@ -13,7 +13,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-    <link rel="stylesheet" href="{{ asset('css/portfolio.css') }}?v=1.7">
+    <link rel="stylesheet" href="{{ asset('css/portfolio.css') }}?v=1.8">
 
     <script>
         (function(){
@@ -471,7 +471,7 @@
                             @if(!empty($project['github_url']))
                             <a href="{{ $project['github_url'] }}" target="_blank" rel="noopener" class="btn btn-primary btn-sm"><i class="fab fa-github"></i> Repository</a>
                             @elseif(!empty($project['live_url']))
-                            <a href="{{ $project['live_url'] }}" target="_blank" rel="noopener" class="btn btn-primary btn-sm"><i class="fas fa-globe"></i> {{ __('works.live_demo') }}</a>
+                            <a href="{{ $project['live_url'] }}" target="_blank" rel="noopener" class="btn btn-primary btn-sm"><i class="fas fa-globe"></i> {{ __($project['footer_label_key'] ?? 'works.live_demo') }}</a>
                             @endif
                         </div>
                     </div>
@@ -882,6 +882,6 @@ window.i18n = {
     }
 };
 </script>
-<script src="{{ asset('js/portfolio.js') }}?v=1.7"></script>
+<script src="{{ asset('js/portfolio.js') }}?v=1.8"></script>
 </body>
 </html>

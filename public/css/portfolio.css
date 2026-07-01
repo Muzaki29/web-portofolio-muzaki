@@ -425,6 +425,9 @@ section { padding: 100px 0; }
 .pc-g5 { background: radial-gradient(circle at 40% 50%, #4a1942, #120510); }
 .pc-g6 { background: radial-gradient(circle at 40% 50%, #1a3a1a, #030f03); }
 .pc-g7 { background: radial-gradient(circle at 40% 50%, #1a4a6b, #031018); }
+.pc-g8 { background: radial-gradient(circle at 40% 50%, #4a2fbf, #14235c); }
+.pc-g9 { background: radial-gradient(circle at 40% 50%, #1e3a5f, #030d1a); }
+.pc-g10 { background: radial-gradient(circle at 40% 50%, #1a6b3c, #0a2318); }
 
 .pgc-info {
     padding: 1.5rem 1.5rem 1.25rem;

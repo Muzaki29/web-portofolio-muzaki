@@ -862,10 +862,10 @@ window.i18n = {
 };
 window.portfolioExport = @json($portfolioExport);
 </script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js" defer></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.2/jspdf.umd.min.js" defer></script>
-<script src="https://cdn.jsdelivr.net/npm/pptxgenjs@3.12.0/dist/pptxgen.bundle.js" defer></script>
-<script src="{{ asset('js/portfolio.js') }}?v=3.6"></script>
-<script src="{{ asset('js/portfolio-export.js') }}?v=1.2"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js" defer crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.2/jspdf.umd.min.js" defer crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/pptxgenjs@3.12.0/dist/pptxgen.bundle.js" defer crossorigin="anonymous"></script>
+<script src="{{ asset('js/portfolio.js') }}?v=3.6" defer></script>
+<script src="{{ asset('js/portfolio-export.js') }}?v=1.3" defer></script>
 </body>
 </html>

@@ -52,8 +52,8 @@
                 ctx.beginPath();
                 ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
                 ctx.fillStyle = isDark
-                    ? `rgba(96,165,250,${p.a})`
-                    : `rgba(37,99,235,${p.a * 0.5})`;
+                    ? `rgba(163,29,29,${p.a * 0.45})`
+                    : `rgba(254,249,225,${p.a * 0.22})`;
                 ctx.fill();
             });
             requestAnimationFrame(drawParticles);
@@ -155,11 +155,11 @@
     const twEl = $('#tw-text');
     if (twEl) {
         const words = [
-            'Full-Stack Web Developer',
+            'Full Stack Developer',
+            'Freelancer',
+            'Content Creator',
             'Laravel Engineer',
-            'IT Support Specialist',
-            'DevOps Enthusiast',
-            'Informatics Student',
+            'Web Developer',
         ];
         let wi = 0, ci = 0, deleting = false;
 
@@ -449,24 +449,34 @@
     });
 
     /* ─────────────────────────────────────
-       14. EXPERIENCE CERTIFICATE TRIGGER
+       14. CERTIFICATE TRIGGERS (experience + journey)
     ───────────────────────────────────── */
-    const expCertBtns = $$('.exp-btn-cert');
-    expCertBtns.forEach(btn => {
+    function openCertByKey(certKey) {
+        if (!certKey) return;
+        const targetCard = $$('.cert-card').find(card => {
+            const img = card.getAttribute('data-cert-img') || '';
+            const title = card.getAttribute('data-cert-title') || '';
+            return img.toLowerCase().includes(certKey) || title.toLowerCase().includes(certKey);
+        });
+        if (targetCard) targetCard.click();
+    }
+
+    $$('[data-open-cert]').forEach(el => {
+        const trigger = e => {
+            if (e.type === 'keydown' && e.key !== 'Enter' && e.key !== ' ') return;
+            if (e.type === 'keydown') e.preventDefault();
+            e.stopPropagation();
+            openCertByKey(el.getAttribute('data-open-cert'));
+        };
+        el.addEventListener('click', trigger);
+        el.addEventListener('keydown', trigger);
+    });
+
+    $$('.exp-btn-cert').forEach(btn => {
         btn.addEventListener('click', e => {
             e.preventDefault();
             e.stopPropagation();
-            const certKey = btn.getAttribute('data-open-cert');
-            if (certKey) {
-                const targetCard = $$('.cert-card').find(card => {
-                    const img = card.getAttribute('data-cert-img') || '';
-                    const title = card.getAttribute('data-cert-title') || '';
-                    return img.toLowerCase().includes(certKey) || title.toLowerCase().includes(certKey);
-                });
-                if (targetCard) {
-                    targetCard.click();
-                }
-            }
+            openCertByKey(btn.getAttribute('data-open-cert'));
         });
     });
 
@@ -804,6 +814,42 @@
                 closeProjModal();
             }
         });
+    }
+
+    /* ─────────────────────────────────────
+       17. SCROLL REVEAL (Refero motion L2)
+    ───────────────────────────────────── */
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    if (!prefersReducedMotion) {
+        $$('section:not(#hero) .container').forEach(sectionContainer => {
+            [...sectionContainer.children].forEach((el, i) => {
+                if (el.matches('.works-grid, .skills-panel, .timeline-experience, .certs-visual-grid, .contact-grid, .details-grid, .edu-wrap, .skills-tabs')) {
+                    return;
+                }
+                el.classList.add('reveal');
+                el.style.setProperty('--reveal-delay', `${Math.min(i * 0.07, 0.28)}s`);
+            });
+        });
+
+        $$('.project-grid-card, .exp-topic, .cert-card, .sk-item, .det-row, .tl-item').forEach((el, i) => {
+            el.classList.add('reveal');
+            el.style.setProperty('--reveal-delay', `${(i % 4) * 0.08}s`);
+        });
+
+        const revealObserver = new IntersectionObserver(
+            entries => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                        revealObserver.unobserve(entry.target);
+                    }
+                });
+            },
+            { threshold: 0.12, rootMargin: '0px 0px -40px 0px' }
+        );
+
+        $$('.reveal').forEach(el => revealObserver.observe(el));
     }
 
 })();

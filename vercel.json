@@ -28,6 +28,18 @@
       "destination": "/public/favicon.ico"
     },
     {
+      "source": "/favicon.svg",
+      "destination": "/public/favicon.svg"
+    },
+    {
+      "source": "/favicon-:size.png",
+      "destination": "/public/favicon-:size.png"
+    },
+    {
+      "source": "/apple-touch-icon.png",
+      "destination": "/public/apple-touch-icon.png"
+    },
+    {
       "source": "/robots.txt",
       "destination": "/public/robots.txt"
     },

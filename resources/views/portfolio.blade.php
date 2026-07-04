@@ -3,17 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Muzaki Abdullah Irsyad — Informatics Engineer, Full-Stack Web Developer & IT Support. Building modern web experiences from Jakarta, Indonesia.">
+    <meta name="description" content="Muzaki Abdullah Irsyad — Full Stack Developer, Freelancer & Content Creator. Building modern web experiences from Jakarta, Indonesia.">
     <meta name="author" content="Muzaki Abdullah Irsyad">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <link rel="icon" type="image/svg+xml" href="{{ asset('favicon.svg') }}">
+    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}?v=2">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('favicon-32.png') }}?v=2">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('favicon-16.png') }}?v=2">
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('apple-touch-icon.png') }}?v=2">
+    <link rel="icon" type="image/svg+xml" href="{{ asset('favicon.svg') }}?v=2">
     <title>Muzaki Abdullah Irsyad — Portfolio</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Syne:wght@700;800&family=Fira+Code:wght@400;500&family=Playfair+Display:ital,wght@0,500;0,700;1,500;1,700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-    <link rel="stylesheet" href="{{ asset('css/portfolio.css') }}?v=2.1">
+    <link rel="stylesheet" href="{{ asset('css/portfolio.css') }}?v=3.10">
 
     <script>
         (function(){
@@ -32,7 +36,7 @@
 {{-- ── NAVBAR ── --}}
 <nav class="navbar" id="navbar">
     <div class="container">
-        <div class="nav-brand" onclick="window.scrollTo({top:0,behavior:'smooth'})">Muzaki.dev</div>
+        <div class="nav-brand" onclick="window.scrollTo({top:0,behavior:'smooth'})">MUZAKI</div>
 
         <ul class="nav-pill" id="navMenu">
             <li><a href="#about"          class="nav-link">{{ __('nav.about') }}</a></li>
@@ -60,102 +64,94 @@
     </div>
 </nav>
 
-{{-- ── HERO ── --}}
-<section class="hero" id="hero">
-    <div class="container">
-        <div class="hero-grid">
+<div id="portfolio-export" class="portfolio-export-root">
 
-            {{-- Left: Text --}}
-            <div>
-                <div class="hero-badge">
-                    <span class="pulse-dot"></span> Available for work
-                </div>
-                <p class="hero-greeting">{{ __('hero.greeting') }}</p>
-                <h1 class="hero-name">Muzaki <span class="hl">Abdullah</span><br>Irsyad</h1>
-                <div class="tw-wrap">
-                    <span id="tw-prefix">I am a </span><span class="tw-text" id="tw-text"></span><span class="tw-cursor"></span>
-                </div>
-                <p class="hero-desc">
-                    {{ __('hero.title_1') }} — {{ __('hero.title_2') }}.
-                    Building practical, high-quality digital solutions.
+{{-- ── HERO (Raymond-style — wajah tengah, copy minimal) ── --}}
+<section class="hero hero-full hero-raymond" id="hero">
+    <div class="hero-media" aria-hidden="true">
+        <img src="{{ asset('images/profil_hero_face.png') }}?v=3"
+             alt="Muzaki Abdullah Irsyad"
+             width="1600" height="1000">
+        <div class="hero-media-overlay hero-raymond-overlay"></div>
+    </div>
+
+    <div class="hero-chrome container">
+        <p class="hero-scroll-hint hero-scroll-top"><span class="hero-scroll-dot"></span> {{ __('hero.scroll_hint') }}</p>
+        <a href="#contact" class="hero-work-cta">{{ __('hero.work_with') }} <i class="fas fa-arrow-right"></i></a>
+    </div>
+
+    <div class="hero-dock container">
+        <div class="hero-dock-left">
+            <h1 class="sr-only">Muzaki Abdullah Irsyad — Portfolio</h1>
+            <p class="hero-kicker">{{ __('hero.kicker') }}</p>
+            <div class="hero-headline">
+                <p class="hero-role-line">
+                    <span class="tw-text" id="tw-text"></span><span class="tw-cursor" aria-hidden="true"></span>
                 </p>
-                <div class="hero-btns">
-                    <a href="#contact" class="btn btn-primary">
-                        <i class="fas fa-paper-plane"></i> {{ __('hero.hire_me') }}
-                    </a>
-                    <a href="{{ asset('cv/muzaki-abdullah-irsyad.pdf') }}" class="btn btn-outline" download>
-                        <i class="fas fa-download"></i> Download CV
-                    </a>
-                </div>
-                <div class="hero-socials">
-                    <a href="https://github.com/Muzaki29" target="_blank" rel="noopener" class="soc-ic" aria-label="GitHub">
-                        <i class="fab fa-github"></i>
-                    </a>
-                    <a href="https://www.linkedin.com/in/muzaki-abdullah-irsyad-893a98220/" target="_blank" rel="noopener" class="soc-ic" aria-label="LinkedIn">
-                        <i class="fab fa-linkedin-in"></i>
-                    </a>
-                    <a href="mailto:contact@muzakiabdullahirsyad.my.id" class="soc-ic" aria-label="Email">
-                        <i class="fas fa-envelope"></i>
-                    </a>
-                </div>
             </div>
-
-            {{-- Right: Profile --}}
-            <div class="profile-image-wrap">
-                <div class="profile-wrap">
-                    <div class="profile-glow"></div>
-                    <div class="profile-ring"></div>
-                    <div class="profile-circle">
-                        <img src="{{ asset('images/profil.png') }}"
-                             alt="Muzaki Abdullah Irsyad"
-                             onerror="this.parentElement.innerHTML='<div class=\'profile-ph\'><i class=\'fas fa-user\'></i></div>'">
-                    </div>
-                </div>
+            <p class="hero-desc-brief">{{ __('hero.tagline_short') }}</p>
+            <div class="hero-actions">
+                <a href="#contact" class="btn btn-primary">
+                    <i class="fas fa-paper-plane"></i> {{ __('hero.hire_me') }}
+                </a>
+                <a href="{{ asset('cv/muzaki-abdullah-irsyad.pdf') }}" class="btn btn-outline" download>
+                    <i class="fas fa-download"></i> {{ __('about.download_cv') }}
+                </a>
             </div>
         </div>
 
-        {{-- Service Cards --}}
-        <div class="hero-services">
-            <div class="svc-card">
-                <i class="fas fa-code"></i>
-                <h3>{{ __('hero.service_software') }}</h3>
+        <div class="hero-dock-right">
+            <div class="hero-stat">
+                <span class="hero-stat-num">{{ __('hero.years_value') }}</span>
+                <span class="hero-stat-lbl">{{ __('timeline.achievement_years') }}</span>
             </div>
-            <div class="svc-card">
-                <i class="fas fa-server"></i>
-                <h3>{{ __('hero.service_it') }}</h3>
+            <div class="hero-stat">
+                <span class="hero-stat-num">9+</span>
+                <span class="hero-stat-lbl">{{ __('hero.stat_projects') }}</span>
             </div>
-            <div class="svc-card">
-                <i class="fas fa-graduation-cap"></i>
-                <h3>{{ __('hero.service_teaching') }}</h3>
+            <div class="hero-stat">
+                <span class="hero-stat-num">3</span>
+                <span class="hero-stat-lbl">{{ __('hero.stat_roles') }}</span>
             </div>
         </div>
     </div>
 </section>
 
+<div class="name-marquee" aria-hidden="true">
+    <div class="marquee-track">
+        @for ($i = 0; $i < 10; $i++)
+        <span>FULL STACK · FREELANCER · CONTENT CREATOR • </span>
+        @endfor
+    </div>
+</div>
+
+<div class="hero-services-wrap">
+    <div class="container">
+        <div class="hero-services">
+            <div class="svc-card">
+                <i class="fas fa-layer-group"></i>
+                <h3>{{ __('hero.role_fullstack') }}</h3>
+            </div>
+            <div class="svc-card">
+                <i class="fas fa-briefcase"></i>
+                <h3>{{ __('hero.role_freelancer') }}</h3>
+            </div>
+            <div class="svc-card">
+                <i class="fas fa-video"></i>
+                <h3>{{ __('hero.role_creator') }}</h3>
+            </div>
+        </div>
+    </div>
+</div>
+
 {{-- ── ABOUT ── --}}
 <section class="about-section" id="about">
     <div class="container">
-        <div style="text-align:center"><span class="sec-label">Who I Am</span></div>
+        <div style="text-align:center"><span class="sec-label">About</span></div>
         <h2 class="section-title">{{ __('about.title') }}</h2>
         <p class="about-desc">{{ __('about.description') }}</p>
 
-        <div class="details-grid">
-            <div class="det-row">
-                <span class="det-lbl"><i class="fas fa-briefcase" style="color:var(--blue2);margin-right:.4rem"></i>{{ __('about.experience') }}</span>
-                <span class="det-val">{{ __('about.experience_value') }}</span>
-            </div>
-            <div class="det-row">
-                <span class="det-lbl"><i class="fas fa-tools" style="color:var(--blue2);margin-right:.4rem"></i>{{ __('about.specialty') }}</span>
-                <span class="det-val">{{ __('about.specialty_value') }}</span>
-            </div>
-            <div class="det-row">
-                <span class="det-lbl"><i class="fas fa-graduation-cap" style="color:var(--blue2);margin-right:.4rem"></i>{{ __('about.education') }}</span>
-                <span class="det-val">STT Terpadu Nurul Fikri</span>
-            </div>
-            <div class="det-row">
-                <span class="det-lbl"><i class="fas fa-star" style="color:var(--blue2);margin-right:.4rem"></i>{{ __('about.gpa') }}</span>
-                <span class="det-val">3.86 / 4.00</span>
-            </div>
+        <div class="details-grid details-grid-minimal">
             <div class="det-row">
                 <span class="det-lbl"><i class="fas fa-map-marker-alt" style="color:var(--blue2);margin-right:.4rem"></i>{{ __('about.location') }}</span>
                 <span class="det-val">Jakarta, Indonesia</span>
@@ -168,148 +164,82 @@
             </div>
         </div>
 
-        <div class="edu-wrap">
-            <h3 class="edu-title"><i class="fas fa-university" style="margin-right:.5rem"></i>{{ __('about.education_section') }}</h3>
-            <div class="edu-grid">
-                <div class="edu-item">
-                    <span class="edu-year">2021 – 2025</span>
-                    <h4>{{ __('about.edu_nf') }}</h4>
-                    <p>{{ __('about.edu_nf_desc') }}</p>
-                    <p style="color:var(--blue2);font-size:.8rem;margin-top:.3rem">{{ __('about.edu_nf_detail') }}</p>
-                </div>
-                <div class="edu-item">
-                    <span class="edu-year">Feb – Jun 2024</span>
-                    <h4>{{ __('about.edu_cipta') }}</h4>
-                    <p>{{ __('about.edu_cipta_desc') }}</p>
-                </div>
-                <div class="edu-item">
-                    <span class="edu-year">Aug – Dec 2023</span>
-                    <h4>{{ __('about.edu_infinite') }}</h4>
-                    <p>{{ __('about.edu_infinite_desc') }}</p>
-                </div>
-                <div class="edu-item">
-                    <span class="edu-year">Graduated</span>
-                    <h4>{{ __('about.edu_smkn') }}</h4>
-                    <p>{{ __('about.edu_smkn_desc') }}</p>
+        <div class="resume-showcase resume-showcase-compact">
+            <div class="resume-studio-art">
+                <img src="{{ asset('images/resume-studio.png') }}?v=1"
+                     alt="Muzaki Abdullah Irsyad — Full Stack Developer"
+                     width="771" height="1024" loading="lazy">
+            </div>
+            <div class="resume-copy">
+                <span class="sec-label">{{ __('about.resume_label') }}</span>
+                <h3>{{ __('about.resume_title') }}</h3>
+                <p>{{ __('about.resume_desc') }}</p>
+                <div class="resume-actions">
+                    <a href="{{ asset('cv/muzaki-abdullah-irsyad.pdf') }}" class="btn btn-primary" download>
+                        <i class="fas fa-file-pdf"></i> {{ __('about.download_cv') }}
+                    </a>
+                    <div class="resume-export-actions">
+                        <button type="button" class="btn btn-outline btn-sm" id="exportPortfolioPdf" aria-label="{{ __('footer.export_pdf') }}">
+                            <i class="fas fa-file-export"></i> {{ __('footer.export_pdf') }}
+                        </button>
+                        <button type="button" class="btn btn-outline btn-sm" id="exportPortfolioPpt" aria-label="{{ __('footer.export_ppt') }}">
+                            <i class="fas fa-file-powerpoint"></i> {{ __('footer.export_ppt') }}
+                        </button>
+                    </div>
                 </div>
             </div>
-        </div>
-
-        <div style="text-align:center;margin-top:2.5rem">
-            <a href="{{ asset('cv/muzaki-abdullah-irsyad.pdf') }}" class="btn btn-primary" download>
-                <i class="fas fa-download"></i> {{ __('about.download_cv') }}
-            </a>
         </div>
     </div>
 </section>
 
-{{-- ── WORK EXPERIENCE (Alternating Timeline) ── --}}
-<section class="experience-section" id="experience">
+{{-- ── WORK EXPERIENCE (Raymond-style topics) ── --}}
+<section class="experience-section exp-raymond-section" id="experience">
     <div class="container">
-        <div style="text-align:center"><span class="sec-label">{{ __('experience.sec_label') }}</span></div>
-        <h2 class="section-title">{{ __('experience.title') }}</h2>
-        <p class="section-subtitle">{{ __('experience.subtitle') }}</p>
-
-        <div class="timeline-experience">
-            <div class="exp-line"></div>
-
-            {{-- Experience Item 1: Pranata Komputer --}}
-            <div class="exp-timeline-item left">
-                <div class="exp-dot-pulsing"></div>
-                <div class="exp-card">
-                    <div class="exp-header">
-                        <div class="exp-icon-circle"><i class="fas fa-briefcase"></i></div>
-                        <div class="exp-title-info">
-                            <h3>{{ __('experience.role_pranata') }}</h3>
-                            <p class="exp-company">{{ __('experience.comp_pranata') }}</p>
-                        </div>
-                    </div>
-                    <div class="exp-body">
-                        <p class="exp-desc-text">{{ __('experience.desc_pranata') }}</p>
-                        <ul class="exp-bullets-list">
-                            <li>{!! __('experience.bullet_pranata_1') !!}</li>
-                            <li>{!! __('experience.bullet_pranata_2') !!}</li>
-                            <li>{!! __('experience.bullet_pranata_3') !!}</li>
-                            <li>{!! __('experience.bullet_pranata_4') !!}</li>
-                            <li>{!! __('experience.bullet_pranata_5') !!}</li>
-                            <li>{!! __('experience.bullet_pranata_6') !!}</li>
-                        </ul>
-                    </div>
-                    <div class="exp-footer">
-                        <span class="exp-year-badge">{{ __('experience.date_pranata') }}</span>
-                        <div class="exp-actions">
-                            <button class="exp-btn-cert" data-open-cert="maganghub"><i class="fas fa-certificate"></i> {{ __('experience.cert_btn') }}</button>
-                            <a href="https://github.com/Muzaki29/website-presensi-magang-muspen" target="_blank" class="exp-btn-work">{{ __('experience.work_btn') }} <i class="fas fa-arrow-up-right-from-square"></i></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            {{-- Experience Item 2: OneXpert --}}
-            <div class="exp-timeline-item right">
-                <div class="exp-dot-pulsing"></div>
-                <div class="exp-card">
-                    <div class="exp-header">
-                        <div class="exp-icon-circle"><i class="fas fa-briefcase"></i></div>
-                        <div class="exp-title-info">
-                            <h3>{{ __('experience.role_onexpert') }}</h3>
-                            <p class="exp-company">{{ __('experience.comp_onexpert') }}</p>
-                        </div>
-                    </div>
-                    <div class="exp-body">
-                        <p class="exp-desc-text">{{ __('experience.desc_onexpert') }}</p>
-                        <ul class="exp-bullets-list">
-                            <li>{{ __('experience.bullet_onexpert_1') }}</li>
-                            <li>{{ __('experience.bullet_onexpert_2') }}</li>
-                            <li>{{ __('experience.bullet_onexpert_3') }}</li>
-                        </ul>
-                    </div>
-                    <div class="exp-footer">
-                        <span class="exp-year-badge">{{ __('experience.date_onexpert') }}</span>
-                        <div class="exp-actions">
-                            <a href="https://github.com/Muzaki29" target="_blank" class="exp-btn-work">{{ __('experience.work_btn') }} <i class="fas fa-arrow-up-right-from-square"></i></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            {{-- Experience Item 3: Assistant Lecturer --}}
-            <div class="exp-timeline-item left">
-                <div class="exp-dot-pulsing"></div>
-                <div class="exp-card">
-                    <div class="exp-header">
-                        <div class="exp-icon-circle"><i class="fas fa-briefcase"></i></div>
-                        <div class="exp-title-info">
-                            <h3>{{ __('experience.role_lecturer') }}</h3>
-                            <p class="exp-company">{{ __('experience.comp_lecturer') }}</p>
-                        </div>
-                    </div>
-                    <div class="exp-body">
-                        <p class="exp-desc-text">{{ __('experience.desc_lecturer') }}</p>
-                        <ul class="exp-bullets-list">
-                            <li>{{ __('experience.bullet_lecturer_1') }}</li>
-                            <li>{{ __('experience.bullet_lecturer_2') }}</li>
-                            <li>{{ __('experience.bullet_lecturer_3') }}</li>
-                        </ul>
-                    </div>
-                    <div class="exp-footer">
-                        <span class="exp-year-badge">{{ __('experience.date_lecturer') }}</span>
-                        <div class="exp-actions">
-                            <button class="exp-btn-cert" data-open-cert="asdos_devops"><i class="fas fa-certificate"></i> {{ __('experience.cert_btn') }}</button>
-                            <a href="https://github.com/Muzaki29/web-mes-depok" target="_blank" class="exp-btn-work">{{ __('experience.work_btn') }} <i class="fas fa-arrow-up-right-from-square"></i></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
+        <div class="exp-raymond-head">
+            <span class="sec-label">{{ __('experience.sec_label') }}</span>
+            <h2 class="section-title exp-raymond-title">{{ __('experience.title') }}<span class="exp-raymond-accent">.</span></h2>
+            <p class="exp-raymond-lead">{{ __('experience.subtitle') }}</p>
         </div>
+
+        <div class="exp-topics-grid">
+            <article class="exp-topic">
+                <span class="exp-topic-marker" aria-hidden="true"></span>
+                <span class="exp-topic-num">01</span>
+                <h3 class="exp-topic-title exp-topic-title-serif">{{ __('experience.role_pranata') }}</h3>
+                <p class="exp-topic-meta">{{ __('experience.comp_pranata') }} · {{ __('experience.date_pranata') }}</p>
+                <p class="exp-topic-desc">{{ __('experience.desc_pranata_short') }}</p>
+                <div class="exp-topic-actions">
+                    <a href="https://github.com/Muzaki29/website-presensi-magang-muspen" target="_blank" rel="noopener" class="exp-topic-link">{{ __('experience.work_btn') }} <i class="fas fa-arrow-up-right-from-square"></i></a>
+                </div>
+            </article>
+
+            <article class="exp-topic">
+                <span class="exp-topic-marker" aria-hidden="true"></span>
+                <span class="exp-topic-num">02</span>
+                <h3 class="exp-topic-title exp-topic-title-serif">{{ __('experience.role_onexpert') }}</h3>
+                <p class="exp-topic-meta">{{ __('experience.comp_onexpert') }} · {{ __('experience.date_onexpert') }}</p>
+                <p class="exp-topic-desc">{{ __('experience.desc_onexpert_short') }}</p>
+                <div class="exp-topic-actions">
+                    <a href="https://github.com/Muzaki29" target="_blank" rel="noopener" class="exp-topic-link">{{ __('experience.work_btn') }} <i class="fas fa-arrow-up-right-from-square"></i></a>
+                </div>
+            </article>
+
+            <article class="exp-topic exp-topic-interactive exp-topic-minimal" role="button" tabindex="0" data-open-cert="asdos_devops" aria-label="{{ __('experience.lecturer_cert_hint') }}">
+                <span class="exp-topic-marker" aria-hidden="true"></span>
+                <span class="exp-topic-num">03</span>
+                <h3 class="exp-topic-title exp-topic-title-serif">{{ __('experience.role_lecturer_short') }}</h3>
+                <span class="exp-topic-cert-hint"><i class="fas fa-certificate"></i> {{ __('experience.lecturer_cert_hint') }}</span>
+            </article>
+        </div>
+
+        <p class="exp-topics-counter" aria-live="polite">3 / 3 {{ __('experience.topics_label') }}</p>
     </div>
 </section>
 
 {{-- ── SKILLS ── --}}
 <section class="skills-section" id="skills">
     <div class="container">
-        <div style="text-align:center"><span class="sec-label">What I Know</span></div>
+        <div style="text-align:center"><span class="sec-label">Skills</span></div>
         <h2 class="section-title">{{ __('skills.title') }}</h2>
         <p class="section-subtitle">Teknologi yang paling sering saya gunakan untuk membangun sistem handal</p>
 
@@ -428,12 +358,7 @@
         <div class="works-grid">
 
             @foreach(config('portfolio.works_projects', []) as $project)
-            <div class="project-grid-card">
-                <div class="pgc-image {{ $project['gradient'] }}">
-                    <img src="{{ asset($project['image']) }}"
-                         alt="{{ __($project['title_key']) }}"
-                         onerror="this.outerHTML='<div class=\'pc-img-placeholder\'><i class=\'{{ $project['placeholder_icon'] }}\'></i><span>{{ $project['placeholder_label'] }}</span></div>'">
-                </div>
+            <div class="project-grid-card project-card-text-only">
                 <div class="pgc-info">
                     <div class="pgc-header">
                         <h3 class="pgc-name">{{ __($project['title_key']) }}</h3>
@@ -494,29 +419,35 @@
 
 
 
-{{-- ── TIMELINE ── --}}
+{{-- ── TIMELINE / JOURNEY ── --}}
 <section class="timeline-section" id="timeline">
     <div class="container">
         <div style="text-align:center"><span class="sec-label">Journey</span></div>
         <h2 class="section-title">{{ __('timeline.title') }}</h2>
-        <p class="section-subtitle">{{ __('timeline.subtitle') }}</p>
+        <p class="section-subtitle timeline-intro-sub">{{ __('timeline.subtitle') }}</p>
 
-        <div class="tl-items">
+        <div class="timeline-journey-layout">
+            <div class="timeline-story-art">
+                <img src="{{ asset('images/journey-story.png') }}"
+                     alt="{{ __('timeline.story_alt') }}"
+                     loading="lazy"
+                     width="900" height="1200">
+            </div>
+
+            <div class="tl-items tl-items-compact">
             <div class="tl-item">
                 <div class="tl-date">24 Nov 2025 – 24 Mei 2026</div>
                 <div class="tl-content"><h3>{{ __('timeline.item_pranata') }}</h3></div>
             </div>
-            <div class="tl-item">
-                <div class="tl-date">Sep 2024 – Jan 2025</div>
-                <div class="tl-content"><h3>{{ __('timeline.item_lecturer_psi') }}</h3></div>
+            <div class="tl-item tl-item-cert" role="button" tabindex="0" data-open-cert="asdos_devops" aria-label="{{ __('experience.lecturer_cert_hint') }}">
+                <div class="tl-date">Sep 2023 – Jan 2025</div>
+                <div class="tl-content">
+                    <h3>{{ __('timeline.item_lecturer_short') }}</h3>
+                </div>
             </div>
             <div class="tl-item">
                 <div class="tl-date">Feb 2024 – Jun 2024</div>
                 <div class="tl-content"><h3>{{ __('timeline.item_codeless') }}</h3></div>
-            </div>
-            <div class="tl-item">
-                <div class="tl-date">Sep 2023 – Jul 2024</div>
-                <div class="tl-content"><h3>{{ __('timeline.item_lecturer_devops') }}</h3></div>
             </div>
             <div class="tl-item">
                 <div class="tl-date">Aug 2023 – Dec 2023</div>
@@ -538,19 +469,20 @@
                 <div class="tl-date">2021 – 2025</div>
                 <div class="tl-content"><h3>{{ __('timeline.item_informatics') }}</h3></div>
             </div>
+            </div>
         </div>
 
         <div class="achievements">
             <div class="ach-item">
-                <span class="ach-num" id="counter-gpa">3.86</span>
-                <div class="ach-lbl">{{ __('timeline.achievement_gpa') }}</div>
+                <span class="ach-num" id="counter-projects">9+</span>
+                <div class="ach-lbl">{{ __('hero.stat_projects') }}</div>
             </div>
             <div class="ach-item">
                 <span class="ach-num" id="counter-certs">4</span>
                 <div class="ach-lbl">{{ __('timeline.achievement_certs') }}</div>
             </div>
             <div class="ach-item">
-                <span class="ach-num" id="counter-years">2+</span>
+                <span class="ach-num" id="counter-years">{{ __('hero.years_value') }}</span>
                 <div class="ach-lbl">{{ __('timeline.achievement_years') }}</div>
             </div>
         </div>
@@ -762,32 +694,30 @@
 {{-- ── CONTACT ── --}}
 <section class="contact-section" id="contact">
     <div class="container">
-        <div style="text-align:center"><span class="sec-label">Get In Touch</span></div>
+        <div style="text-align:center"><span class="sec-label">Contact</span></div>
         <h2 class="section-title">{{ __('contact.title') }}</h2>
         <p class="section-subtitle">{{ __('contact.subtitle') }}</p>
 
-        <div class="contact-grid">
-            <div class="contact-cards">
-                <div class="ct-card"><i class="fab fa-linkedin"></i><div><strong>{{ __('contact.linkedin') }}</strong><span><a href="https://www.linkedin.com/in/muzaki-abdullah-irsyad-893a98220/" target="_blank">Muzaki Abdullah Irsyad</a></span></div></div>
-                <div class="ct-card"><i class="fab fa-github"></i><div><strong>{{ __('contact.github') }}</strong><span><a href="https://github.com/Muzaki29" target="_blank">@Muzaki29</a></span></div></div>
-                <div class="ct-card"><i class="fas fa-envelope"></i><div><strong>{{ __('contact.email') }}</strong><span><a href="mailto:contact@muzakiabdullahirsyad.my.id">contact@muzakiabdullahirsyad.my.id</a></span></div></div>
-                <div class="ct-card"><i class="fas fa-graduation-cap"></i><div><strong>{{ __('contact.education') }}</strong><span>STT Terpadu Nurul Fikri</span></div></div>
-                <div class="ct-card"><i class="fas fa-map-marker-alt"></i><div><strong>{{ __('contact.location') }}</strong><span>Jakarta, Indonesia</span></div></div>
-                <div class="ct-card"><i class="fas fa-star"></i><div><strong>{{ __('contact.gpa') }}</strong><span>3.86 / 4.00</span></div></div>
+        <div class="contact-layout">
+            <div class="contact-visual-panel">
+                <img src="{{ asset('images/contact-lets-talk.png') }}"
+                     alt="{{ __('contact.visual_alt') }}"
+                     loading="lazy"
+                     width="800" height="1200">
             </div>
 
-            <div class="form-split-card">
-                <div class="form-visual-side">
-                    <div class="form-visual-overlay"></div>
-                    <img src="{{ asset('images/cta_invitation_banner.png') }}?v=1.6" alt="Muzaki Abdullah Irsyad" onerror="this.src='{{ asset('images/profil.jpg.jpg') }}'">
-                    <div class="form-visual-content">
-                        <p class="form-visual-tag"><i class="fas fa-paper-plane"></i> {{ __('contact.visual_tag') }}</p>
-                        <p class="form-visual-text">{{ __('contact.form_desc') }}</p>
-                    </div>
+            <div class="contact-main-panel">
+                <div class="contact-cards contact-cards-minimal">
+                    <div class="ct-card"><i class="fab fa-linkedin"></i><div><strong>{{ __('contact.linkedin') }}</strong><span><a href="https://www.linkedin.com/in/muzaki-abdullah-irsyad-893a98220/" target="_blank">LinkedIn</a></span></div></div>
+                    <div class="ct-card"><i class="fab fa-github"></i><div><strong>{{ __('contact.github') }}</strong><span><a href="https://github.com/Muzaki29" target="_blank">@Muzaki29</a></span></div></div>
+                    <div class="ct-card"><i class="fas fa-envelope"></i><div><strong>{{ __('contact.email') }}</strong><span><a href="mailto:contact@muzakiabdullahirsyad.my.id">contact@muzakiabdullahirsyad.my.id</a></span></div></div>
+                    <div class="ct-card"><i class="fas fa-map-marker-alt"></i><div><strong>{{ __('contact.location') }}</strong><span>Jakarta, Indonesia</span></div></div>
                 </div>
-                <div class="form-input-side">
-                    <h3>{{ __('contact.form_title') }}</h3>
-                    <form id="contactForm" class="contact-form">
+
+                <div class="form-card form-card-minimal">
+                <h3>{{ __('contact.form_title') }}</h3>
+                <p class="form-card-lead">{{ __('contact.form_desc') }}</p>
+                <form id="contactForm" class="contact-form">
                         @csrf
                         <input type="text"  name="name"    placeholder="{{ __('contact.placeholder_name') }}"    required>
                         <input type="email" name="email"   placeholder="{{ __('contact.placeholder_email') }}"   required>
@@ -814,27 +744,39 @@
     </div>
 </section>
 
+</div>{{-- /#portfolio-export --}}
+
 {{-- ── FOOTER ── --}}
-<footer>
+<footer class="footer-clean">
     <div class="container">
-        <div class="footer-inner">
-            <div class="footer-brand">
-                <p>Muzaki Abdullah Irsyad</p>
-                <p class="footer-copy">© {{ date('Y') }} Muzaki Abdullah Irsyad. {{ __('footer.rights') }}</p>
+        <div class="footer-clean-top">
+            <div class="footer-clean-brand">
+                <span class="footer-logo">MUZAKI</span>
+                <p>{{ __('footer.tagline') }}</p>
             </div>
-            <div class="footer-nav">
-                <ul>
-                    <li><a href="#about">{{ __('footer.about') }}</a></li>
-                    <li><a href="#works">{{ __('footer.works') }}</a></li>
-                    <li><a href="#certifications">{{ __('footer.certifications') }}</a></li>
-                    <li><a href="#contact">{{ __('footer.contact') }}</a></li>
-                </ul>
-                <div class="footer-soc">
-                    <a href="https://www.linkedin.com/in/muzaki-abdullah-irsyad-893a98220/" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
-                    <a href="https://github.com/Muzaki29" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
-                    <a href="mailto:contact@muzakiabdullahirsyad.my.id" aria-label="Email"><i class="fas fa-envelope"></i></a>
-                </div>
+            <nav class="footer-clean-nav" aria-label="Footer">
+                <a href="#about">{{ __('footer.about') }}</a>
+                <a href="#works">{{ __('footer.works') }}</a>
+                <a href="#certifications">{{ __('footer.certifications') }}</a>
+                <a href="#contact">{{ __('footer.contact') }}</a>
+            </nav>
+            <div class="footer-soc footer-soc-clean">
+                <a href="https://www.linkedin.com/in/muzaki-abdullah-irsyad-893a98220/" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                <a href="https://github.com/Muzaki29" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                <a href="mailto:contact@muzakiabdullahirsyad.my.id" aria-label="Email"><i class="fas fa-envelope"></i></a>
             </div>
+        </div>
+        <div class="footer-export-bar">
+            <span class="footer-export-label">{{ __('footer.export_label') }}</span>
+            <button type="button" class="btn btn-outline btn-sm footer-export-btn" id="exportPortfolioPdfFooter">
+                <i class="fas fa-file-pdf"></i> {{ __('footer.export_pdf') }}
+            </button>
+            <button type="button" class="btn btn-outline btn-sm footer-export-btn" id="exportPortfolioPptFooter">
+                <i class="fas fa-file-powerpoint"></i> {{ __('footer.export_ppt') }}
+            </button>
+        </div>
+        <div class="footer-clean-bottom">
+            <p>© {{ date('Y') }} Muzaki Abdullah Irsyad. {{ __('footer.rights') }}</p>
         </div>
     </div>
 </footer>
@@ -844,13 +786,13 @@
 {{-- ── AI CHATBOT WIDGET ── --}}
 <div class="ai-chat-widget" id="aiChatWidget">
     <button class="ai-chat-bubble" id="aiChatBubble" aria-label="{{ __('chatbot.header_title') }}">
-        <img src="{{ asset('images/profil.png') }}" alt="Muzaki Abdullah Irsyad" class="ai-bubble-avatar">
+        <i class="fas fa-robot ai-bubble-icon" aria-hidden="true"></i>
         <span class="ai-badge">AI</span>
     </button>
     <div class="ai-chat-window" id="aiChatWindow">
         <div class="ai-chat-header">
-            <div class="ai-avatar">
-                <img src="{{ asset('images/profil.png') }}" alt="Muzaki Abdullah Irsyad" class="ai-header-avatar">
+            <div class="ai-avatar ai-avatar-icon">
+                <i class="fas fa-robot" aria-hidden="true"></i>
                 <span class="online-indicator"></span>
             </div>
             <div class="ai-header-info">
@@ -872,6 +814,43 @@
     </div>
 </div>
 
+@php
+    $exportProjects = collect(config('portfolio.works_projects', []))
+        ->map(fn ($p) => __($p['title_key'] ?? ''))
+        ->filter()
+        ->values()
+        ->all();
+    $exportExperience = [
+        ['role' => __('experience.role_pranata'), 'meta' => __('experience.comp_pranata') . ' · ' . __('experience.date_pranata'), 'desc' => __('experience.desc_pranata_short')],
+        ['role' => __('experience.role_onexpert'), 'meta' => __('experience.comp_onexpert') . ' · ' . __('experience.date_onexpert'), 'desc' => __('experience.desc_onexpert_short')],
+        ['role' => __('experience.role_lecturer_short'), 'meta' => __('experience.comp_lecturer') . ' · ' . __('experience.date_lecturer'), 'desc' => __('experience.desc_lecturer_short')],
+    ];
+    $portfolioExport = [
+        'name' => 'Muzaki Abdullah Irsyad',
+        'tagline' => __('hero.tagline'),
+        'taglineShort' => __('hero.tagline_short'),
+        'about' => __('about.description'),
+        'years' => __('hero.years_value'),
+        'projectsLabel' => __('hero.stat_projects'),
+        'rolesLabel' => __('hero.stat_roles'),
+        'yearsLabel' => __('timeline.achievement_years'),
+        'experienceTitle' => __('experience.title'),
+        'experience' => $exportExperience,
+        'skillsTitle' => __('skills.title'),
+        'skills' => ['PHP', 'JavaScript', 'Python', 'Laravel', 'React', 'Next.js', 'Node.js', 'MySQL', 'PostgreSQL', 'Docker', 'Git', 'Linux'],
+        'projectsTitle' => __('works.title'),
+        'projects' => $exportProjects,
+        'contactTitle' => __('contact.title'),
+        'contactEmail' => 'contact@muzakiabdullahirsyad.my.id',
+        'contactLinkedIn' => 'linkedin.com/in/muzaki-abdullah-irsyad-893a98220',
+        'contactGithub' => 'github.com/Muzaki29',
+        'website' => 'muzakiabdullahirsyad.my.id',
+        'exportPdf' => __('footer.export_pdf'),
+        'exportPpt' => __('footer.export_ppt'),
+        'exportLoading' => __('footer.export_loading'),
+        'exportError' => __('footer.export_error'),
+    ];
+@endphp
 <script>
 window.i18n = {
     contact: {
@@ -881,7 +860,12 @@ window.i18n = {
         genericRetryLater: @json(__('contact.generic_retry_later')),
     }
 };
+window.portfolioExport = @json($portfolioExport);
 </script>
-<script src="{{ asset('js/portfolio.js') }}?v=2.2"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.2/jspdf.umd.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/pptxgenjs@3.12.0/dist/pptxgen.bundle.js" defer></script>
+<script src="{{ asset('js/portfolio.js') }}?v=3.6"></script>
+<script src="{{ asset('js/portfolio-export.js') }}?v=1.2"></script>
 </body>
 </html>

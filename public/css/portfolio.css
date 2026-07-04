@@ -3607,16 +3607,17 @@ body.is-exporting .exp-raymond-section,
         min-height: 100dvh;
         display: block;
         padding: 0;
+        overflow: hidden;
     }
 
     .hero-raymond .hero-media img {
-        object-position: 42% 28%;
+        object-position: 42% 22%;
         transform: scale(1.05);
     }
 
     .hero-raymond-overlay {
         background:
-            linear-gradient(180deg, rgba(0, 0, 0, 0.78) 0%, rgba(0, 0, 0, 0.28) 18%, transparent 44%, rgba(0, 0, 0, 0.68) 70%, rgba(0, 0, 0, 0.98) 100%);
+            linear-gradient(180deg, rgba(0, 0, 0, 0.72) 0%, rgba(0, 0, 0, 0.22) 20%, transparent 46%, rgba(0, 0, 0, 0.62) 68%, rgba(0, 0, 0, 0.97) 100%);
     }
 
     .hero-chrome {
@@ -3625,103 +3626,143 @@ body.is-exporting .exp-raymond-section,
 
     .hero-dock {
         position: absolute;
+        top: calc(3.75rem + env(safe-area-inset-top, 0px));
         left: 0;
         right: 0;
         bottom: 0;
         z-index: 5;
+        display: flex;
         flex-direction: column;
         justify-content: flex-end;
         align-items: stretch;
-        gap: 1rem;
+        gap: .75rem;
         width: 100%;
         max-width: none;
         margin: 0;
-        padding: 1.5rem 1.25rem max(5.25rem, calc(env(safe-area-inset-bottom, 0px) + 4.75rem));
-        background: linear-gradient(180deg, transparent 0%, rgba(0, 0, 0, 0.72) 14%, rgba(0, 0, 0, 0.94) 100%);
+        padding: 0 1.25rem max(4.75rem, calc(env(safe-area-inset-bottom, 0px) + 4.25rem));
+        background: linear-gradient(180deg, transparent 0%, rgba(0, 0, 0, 0.55) 10%, rgba(0, 0, 0, 0.92) 100%);
+        pointer-events: none;
+    }
+
+    .hero-dock > * {
+        pointer-events: auto;
     }
 
     .hero-dock-left {
         max-width: none;
         text-align: left;
-        order: 1;
+        flex-shrink: 0;
     }
 
     .hero-dock-left .hero-kicker {
-        font-size: .65rem;
+        display: block;
+        font-size: .62rem;
         letter-spacing: .12em;
-        margin-bottom: .5rem;
-        opacity: .9;
+        margin-bottom: .45rem;
+        opacity: .95;
+        color: var(--maroon);
     }
 
     .hero-dock-left .hero-headline {
-        margin-bottom: .45rem;
+        margin-bottom: .4rem;
     }
 
     .hero-dock-left .hero-role-line {
         white-space: normal;
-        font-size: clamp(1.45rem, 7vw, 2rem);
+        font-size: clamp(1.35rem, 6.8vw, 1.85rem);
         line-height: 1.15;
     }
 
     .hero-dock-left .hero-desc-brief {
+        display: block !important;
         max-width: none;
-        margin: 0 0 1rem;
-        font-size: .84rem;
-        line-height: 1.6;
-        display: block;
+        margin: 0 0 .85rem;
+        font-size: .82rem;
+        line-height: 1.55;
         overflow: visible;
-        -webkit-line-clamp: unset;
-        opacity: .92;
+        opacity: .95;
+        color: var(--blush);
     }
 
     .hero-dock-left .hero-actions {
-        flex-direction: column;
+        flex-direction: row;
+        flex-wrap: wrap;
         align-items: stretch;
-        gap: .6rem;
+        gap: .5rem;
         margin-bottom: 0;
     }
 
     .hero-dock-left .hero-actions .btn {
-        width: 100%;
+        flex: 1 1 calc(50% - .25rem);
+        min-width: 0;
+        width: auto;
         justify-content: center;
-        padding: .78rem 1rem;
-        font-size: .88rem;
+        padding: .7rem .55rem;
+        font-size: .78rem;
+        white-space: nowrap;
     }
 
     .hero-dock-right {
         display: grid;
-        grid-template-columns: 1fr;
-        gap: .55rem;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: .45rem;
         min-width: 0;
         width: 100%;
-        order: 2;
+        flex-shrink: 0;
     }
 
     .hero-dock-right .hero-stat {
         display: flex;
+        flex-direction: column;
         align-items: center;
-        justify-content: space-between;
-        gap: 1rem;
-        min-height: 3.25rem;
-        padding: .75rem 1rem;
-        text-align: left;
+        justify-content: center;
+        gap: .2rem;
+        min-height: 4.25rem;
+        padding: .55rem .3rem;
+        text-align: center;
         border-radius: var(--r);
     }
 
     .hero-dock-right .hero-stat-num {
-        flex-shrink: 0;
-        font-size: 1.45rem;
+        font-size: 1.15rem;
         line-height: 1;
-        min-width: 2.5rem;
     }
 
     .hero-dock-right .hero-stat-lbl {
-        flex: 1;
-        font-size: .76rem;
-        line-height: 1.35;
+        font-size: .58rem;
+        line-height: 1.25;
         margin-top: 0;
-        text-align: right;
-        letter-spacing: .02em;
+        text-align: center;
+        letter-spacing: .01em;
+        word-break: break-word;
+        hyphens: auto;
+    }
+
+    .navbar .container {
+        gap: .5rem;
+    }
+
+    .nav-actions {
+        gap: .35rem;
+        flex-shrink: 0;
+    }
+
+    .lang-toggle {
+        padding: .12rem .15rem;
+    }
+
+    .lang-option {
+        padding: .22rem .38rem;
+        font-size: .68rem;
+    }
+
+    .theme-btn {
+        padding: .38rem .48rem;
+        font-size: .85rem;
+    }
+
+    .hamburger {
+        padding: .2rem;
     }
 
     .exp-raymond-section {
@@ -3773,35 +3814,47 @@ body.is-exporting .exp-raymond-section,
     }
 
     .nav-brand {
-        font-size: .82rem;
-        letter-spacing: .06em;
-    }
-
-    .hero-dock-left .hero-kicker {
-        display: none;
-    }
-
-    .hero-dock-left .hero-role-line {
-        font-size: clamp(1.3rem, 7.5vw, 1.7rem);
+        font-size: .8rem;
+        letter-spacing: .05em;
     }
 
     .hero-dock {
-        gap: .85rem;
-        padding: 1.25rem 1rem max(5rem, calc(env(safe-area-inset-bottom, 0px) + 4.5rem));
+        top: calc(3.5rem + env(safe-area-inset-top, 0px));
+        padding: 0 1rem max(4.5rem, calc(env(safe-area-inset-bottom, 0px) + 4rem));
+        gap: .65rem;
+    }
+
+    .hero-dock-left .hero-role-line {
+        font-size: clamp(1.25rem, 7vw, 1.6rem);
+    }
+
+    .hero-dock-left .hero-desc-brief {
+        font-size: .78rem;
+        margin-bottom: .75rem;
+    }
+
+    .hero-dock-left .hero-actions {
+        flex-direction: column;
+    }
+
+    .hero-dock-left .hero-actions .btn {
+        flex: 1 1 100%;
+        width: 100%;
+        font-size: .82rem;
+        padding: .72rem .85rem;
     }
 
     .hero-dock-right .hero-stat {
-        min-height: 3rem;
-        padding: .68rem .9rem;
+        min-height: 3.85rem;
+        padding: .5rem .25rem;
     }
 
     .hero-dock-right .hero-stat-num {
-        font-size: 1.3rem;
-        min-width: 2.25rem;
+        font-size: 1.05rem;
     }
 
     .hero-dock-right .hero-stat-lbl {
-        font-size: .72rem;
+        font-size: .54rem;
     }
 
     .ai-chat-widget {

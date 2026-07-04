@@ -88,7 +88,7 @@ body {
 ══════════════════════════════════════════ */
 .navbar {
     position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
-    padding: 1.25rem 0;
+    padding: max(1.25rem, env(safe-area-inset-top, 0px)) 0 1.25rem;
     background: transparent;
     backdrop-filter: none;
     -webkit-backdrop-filter: none;
@@ -3603,44 +3603,143 @@ body.is-exporting .exp-raymond-section,
 }
 
 @media (max-width: 768px) {
-    .hero-dock {
-        flex-direction: column;
-        align-items: stretch;
-        padding-bottom: 1.75rem;
+    .hero-raymond {
+        min-height: 100dvh;
     }
+
+    .hero-raymond .hero-media img {
+        object-position: center 22%;
+        transform: scale(1.06);
+    }
+
+    .hero-raymond-overlay {
+        background:
+            linear-gradient(180deg, rgba(0, 0, 0, 0.72) 0%, rgba(0, 0, 0, 0.18) 16%, transparent 38%, rgba(0, 0, 0, 0.55) 68%, rgba(0, 0, 0, 0.98) 100%);
+    }
+
+    .hero-chrome {
+        display: none;
+    }
+
+    .hero-dock {
+        flex-direction: column-reverse;
+        align-items: stretch;
+        gap: .85rem;
+        padding: 0 1.25rem max(5.25rem, calc(env(safe-area-inset-bottom, 0px) + 4.75rem));
+    }
+
     .hero-dock-left {
         max-width: none;
         text-align: center;
     }
+
+    .hero-dock-left .hero-kicker {
+        font-size: .62rem;
+        letter-spacing: .1em;
+        margin-bottom: .4rem;
+    }
+
     .hero-dock-left .hero-role-line {
         white-space: normal;
-        font-size: clamp(1.5rem, 7vw, 2.1rem);
+        font-size: clamp(1.35rem, 6.5vw, 1.85rem);
+        line-height: 1.2;
     }
+
     .hero-dock-left .hero-desc-brief {
         max-width: none;
-        margin-left: auto;
-        margin-right: auto;
+        margin: .45rem auto .85rem;
+        font-size: .8rem;
+        line-height: 1.55;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
     }
+
     .hero-dock-left .hero-actions {
-        justify-content: center;
+        flex-direction: column;
+        align-items: stretch;
+        gap: .55rem;
+        margin-bottom: 0;
     }
+
+    .hero-dock-left .hero-actions .btn {
+        width: 100%;
+        justify-content: center;
+        padding: .72rem 1rem;
+    }
+
     .hero-dock-right {
         flex-direction: row;
         min-width: 0;
         width: 100%;
+        gap: .45rem;
     }
+
     .hero-dock-right .hero-stat {
         flex: 1;
+        min-width: 0;
         text-align: center;
-        padding: .75rem .5rem;
+        padding: .62rem .35rem;
     }
-    .hero-raymond .hero-media img {
-        object-position: center 38%;
+
+    .hero-dock-right .hero-stat-num {
+        font-size: 1.15rem;
     }
-    .hero-chrome {
-        top: 5rem;
+
+    .hero-dock-right .hero-stat-lbl {
+        font-size: .58rem;
+        line-height: 1.25;
     }
-    .hero-chrome .hero-scroll-top {
+}
+
+@media (max-width: 480px) {
+    .navbar {
+        padding-top: max(.65rem, env(safe-area-inset-top, 0px));
+        padding-bottom: .65rem;
+    }
+
+    .navbar .container {
+        padding: 0 1rem;
+    }
+
+    .nav-brand {
+        font-size: .82rem;
+        letter-spacing: .06em;
+    }
+
+    .hero-dock-left .hero-kicker {
         display: none;
+    }
+
+    .hero-dock-left .hero-role-line {
+        font-size: clamp(1.25rem, 7.5vw, 1.65rem);
+    }
+
+    .hero-dock {
+        gap: .7rem;
+        padding-bottom: max(4.85rem, calc(env(safe-area-inset-bottom, 0px) + 4.35rem));
+    }
+
+    .hero-dock-right .hero-stat {
+        padding: .55rem .25rem;
+    }
+
+    .hero-dock-right .hero-stat-num {
+        font-size: 1rem;
+    }
+
+    .hero-dock-right .hero-stat-lbl {
+        font-size: .52rem;
+    }
+
+    .ai-chat-widget {
+        bottom: max(14px, env(safe-area-inset-bottom, 14px));
+        right: max(14px, env(safe-area-inset-right, 14px));
+    }
+
+    .back-top {
+        bottom: max(78px, calc(env(safe-area-inset-bottom, 14px) + 64px));
+        right: max(14px, env(safe-area-inset-right, 14px));
     }
 }

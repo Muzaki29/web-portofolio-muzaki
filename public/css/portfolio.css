@@ -3291,29 +3291,11 @@ body.is-exporting .exp-raymond-section,
 
 .hero-raymond-overlay {
     background:
-        radial-gradient(ellipse 55% 50% at 38% 48%, transparent 0%, rgba(0, 0, 0, 0.12) 55%, rgba(0, 0, 0, 0.55) 100%),
-        linear-gradient(180deg, rgba(0, 0, 0, 0.38) 0%, transparent 24%, transparent 54%, rgba(0, 0, 0, 0.92) 100%);
+        linear-gradient(180deg, rgba(0, 0, 0, 0.32) 0%, transparent 30%, transparent 55%, rgba(0, 0, 0, 0.9) 100%);
 }
 
 .hero-headline {
-    margin-bottom: .65rem;
-}
-
-.hero-chrome {
-    position: absolute;
-    top: 5.5rem;
-    left: 0;
-    right: 0;
-    z-index: 4;
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    pointer-events: none;
-}
-.hero-chrome .hero-scroll-top,
-.hero-chrome .hero-work-cta {
-    position: static;
-    pointer-events: auto;
+    margin-bottom: 1.25rem;
 }
 
 .hero-dock {
@@ -3323,53 +3305,41 @@ body.is-exporting .exp-raymond-section,
     bottom: 0;
     z-index: 4;
     display: flex;
-    justify-content: space-between;
     align-items: flex-end;
-    gap: 2rem 3rem;
-    padding: 0 2rem 2.25rem;
+    padding: 0 2rem 2.5rem;
 }
 
 .hero-dock-left {
-    flex: 0 1 560px;
-    min-width: min(100%, 320px);
-    max-width: 560px;
+    flex: 0 1 640px;
+    max-width: 640px;
     text-shadow: 0 2px 20px rgba(0, 0, 0, 0.65);
 }
 
 .hero-dock-left .hero-kicker {
-    margin-bottom: .55rem;
-    letter-spacing: .14em;
+    margin-bottom: .75rem;
+    letter-spacing: .16em;
+    font-family: var(--mono);
+    font-size: .68rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    color: var(--maroon);
 }
 
 .hero-dock-left .hero-role-line {
-    font-size: clamp(1.65rem, 3.2vw, 2.5rem);
+    font-size: clamp(1.85rem, 3.8vw, 2.75rem);
     font-weight: 800;
     color: var(--cream);
-    line-height: 1.15;
+    line-height: 1.1;
     margin-bottom: 0;
-    min-height: 1.2em;
+    min-height: 1.15em;
+    letter-spacing: -.02em;
 }
 
-.hero-dock-left .hero-desc-brief {
-    font-size: .88rem;
-    line-height: 1.65;
-    max-width: 420px;
-    color: var(--blush);
-    margin-bottom: 1.15rem;
-    opacity: .92;
-}
-
-.hero-dock-right {
+.hero-dock-left .hero-actions {
     display: flex;
-    flex-direction: column;
+    flex-wrap: wrap;
     gap: .65rem;
-    min-width: 200px;
-    flex-shrink: 0;
-}
-
-.hero-dock-right .hero-stat {
-    text-align: left;
-    padding: .95rem 1.1rem;
+    margin-bottom: 0;
 }
 
 /* CV / brand compact */
@@ -3603,112 +3573,41 @@ body.is-exporting .exp-raymond-section,
 }
 
 @media (max-width: 768px) {
-    .hero-raymond {
-        min-height: 100dvh;
-        display: block;
-        padding: 0;
-        overflow: hidden;
-    }
-
     .hero-raymond .hero-media img {
-        object-position: 50% 18%;
-        transform: scale(1.02);
+        object-position: 50% 16%;
     }
 
     .hero-raymond-overlay {
         background:
-            linear-gradient(180deg, rgba(0, 0, 0, 0.35) 0%, transparent 28%, transparent 50%, rgba(0, 0, 0, 0.88) 100%);
-    }
-
-    .hero-chrome {
-        display: none;
+            linear-gradient(180deg, rgba(0, 0, 0, 0.28) 0%, transparent 32%, transparent 52%, rgba(0, 0, 0, 0.9) 100%);
     }
 
     .hero-dock {
-        position: absolute;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        top: auto;
-        z-index: 5;
-        display: flex;
-        flex-direction: column;
-        justify-content: flex-end;
-        align-items: stretch;
-        gap: 0;
-        width: 100%;
-        max-width: none;
-        margin: 0;
-        padding: 0 1.35rem max(2.75rem, calc(env(safe-area-inset-bottom, 0px) + 2.25rem));
-        background: linear-gradient(180deg, transparent 0%, rgba(0, 0, 0, 0.72) 42%, rgba(0, 0, 0, 0.96) 100%);
-        pointer-events: none;
-    }
-
-    .hero-dock > * {
-        pointer-events: auto;
+        padding: 0 1.35rem max(2.5rem, calc(env(safe-area-inset-bottom, 0px) + 2rem));
+        background: linear-gradient(180deg, transparent 0%, rgba(0, 0, 0, 0.75) 45%, rgba(0, 0, 0, 0.96) 100%);
     }
 
     .hero-dock-left {
         max-width: none;
-        text-align: left;
-        flex-shrink: 0;
     }
 
     .hero-dock-left .hero-kicker {
-        display: block;
-        font-family: var(--mono);
-        font-size: .58rem;
-        font-weight: 600;
-        letter-spacing: .16em;
-        text-transform: uppercase;
-        margin-bottom: .85rem;
-        opacity: 1;
-        color: var(--maroon);
+        font-size: .56rem;
+        margin-bottom: .75rem;
     }
 
     .hero-dock-left .hero-headline {
-        margin-bottom: 1.35rem;
+        margin-bottom: 1.15rem;
     }
 
     .hero-dock-left .hero-role-line {
-        white-space: normal;
-        font-family: var(--display);
-        font-size: clamp(1.85rem, 8.5vw, 2.45rem);
-        font-weight: 800;
-        line-height: 1.08;
-        letter-spacing: -.02em;
-        color: var(--cream);
-    }
-
-    /* Penjelasan disembunyikan di mobile — hero clean ala Raymond */
-    .hero-dock-left .hero-desc-brief {
-        display: none !important;
-    }
-
-    .hero-dock-left .hero-actions {
-        flex-direction: row;
-        flex-wrap: nowrap;
-        align-items: stretch;
-        gap: .55rem;
-        margin-bottom: 0;
+        font-size: clamp(1.75rem, 8.5vw, 2.35rem);
     }
 
     .hero-dock-left .hero-actions .btn {
-        flex: 1 1 0;
-        min-width: 0;
-        width: auto;
-        justify-content: center;
-        padding: .72rem .5rem;
+        flex: 1 1 calc(50% - .3rem);
         font-size: .76rem;
-    }
-
-    .hero-dock-left .hero-actions .btn i {
-        font-size: .72rem;
-    }
-
-    /* Statistik dipindah ke section bawah — hero tetap minimal */
-    .hero-dock-right {
-        display: none;
+        padding: .72rem .5rem;
     }
 
     .navbar .container {

@@ -17,7 +17,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Syne:wght@700;800&family=Fira+Code:wght@400;500&family=Playfair+Display:ital,wght@0,500;0,700;1,500;1,700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-    <link rel="stylesheet" href="{{ asset('css/portfolio.css') }}?v=3.16">
+    <link rel="stylesheet" href="{{ asset('css/portfolio.css') }}?v=3.17">
 
     <script>
         (function(){
@@ -66,18 +66,13 @@
 
 <div id="portfolio-export" class="portfolio-export-root">
 
-{{-- ── HERO (Raymond-style — wajah tengah, copy minimal) ── --}}
+{{-- ── HERO (minimal — foto + kicker + headline + CTA) ── --}}
 <section class="hero hero-full hero-raymond" id="hero">
     <div class="hero-media" aria-hidden="true">
         <img src="{{ asset('images/profil_hero_studio.png') }}?v=1"
              alt="Muzaki Abdullah Irsyad"
              width="1920" height="1080">
         <div class="hero-media-overlay hero-raymond-overlay"></div>
-    </div>
-
-    <div class="hero-chrome container">
-        <p class="hero-scroll-hint hero-scroll-top"><span class="hero-scroll-dot"></span> {{ __('hero.scroll_hint') }}</p>
-        <a href="#contact" class="hero-work-cta">{{ __('hero.work_with') }} <i class="fas fa-arrow-right"></i></a>
     </div>
 
     <div class="hero-dock container">
@@ -89,7 +84,6 @@
                     <span class="tw-text" id="tw-text"></span><span class="tw-cursor" aria-hidden="true"></span>
                 </p>
             </div>
-            <p class="hero-desc-brief">{{ __('hero.tagline_short') }}</p>
             <div class="hero-actions">
                 <a href="#contact" class="btn btn-primary">
                     <i class="fas fa-paper-plane"></i> {{ __('hero.hire_me') }}
@@ -97,21 +91,6 @@
                 <a href="{{ asset('cv/muzaki-abdullah-irsyad.pdf') }}" class="btn btn-outline" download>
                     <i class="fas fa-download"></i> {{ __('about.download_cv') }}
                 </a>
-            </div>
-        </div>
-
-        <div class="hero-dock-right">
-            <div class="hero-stat">
-                <span class="hero-stat-num">{{ __('hero.years_value') }}</span>
-                <span class="hero-stat-lbl">{{ __('timeline.achievement_years') }}</span>
-            </div>
-            <div class="hero-stat">
-                <span class="hero-stat-num">9+</span>
-                <span class="hero-stat-lbl">{{ __('hero.stat_projects') }}</span>
-            </div>
-            <div class="hero-stat">
-                <span class="hero-stat-num">3</span>
-                <span class="hero-stat-lbl">{{ __('hero.stat_roles') }}</span>
             </div>
         </div>
     </div>

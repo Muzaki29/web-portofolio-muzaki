@@ -3283,7 +3283,7 @@ body.is-exporting .exp-raymond-section,
 
 .hero-raymond .hero-media img {
     object-fit: cover;
-    object-position: center 42%;
+    object-position: 38% center;
     transform: scale(1.02);
     width: 100%;
     height: 100%;
@@ -3291,8 +3291,8 @@ body.is-exporting .exp-raymond-section,
 
 .hero-raymond-overlay {
     background:
-        radial-gradient(ellipse 48% 42% at 50% 42%, transparent 0%, rgba(0, 0, 0, 0.08) 50%, rgba(0, 0, 0, 0.5) 100%),
-        linear-gradient(180deg, rgba(0, 0, 0, 0.42) 0%, transparent 22%, transparent 52%, rgba(0, 0, 0, 0.92) 100%);
+        radial-gradient(ellipse 55% 50% at 38% 48%, transparent 0%, rgba(0, 0, 0, 0.12) 55%, rgba(0, 0, 0, 0.55) 100%),
+        linear-gradient(180deg, rgba(0, 0, 0, 0.38) 0%, transparent 24%, transparent 54%, rgba(0, 0, 0, 0.92) 100%);
 }
 
 .hero-headline {
@@ -3613,8 +3613,8 @@ body.is-exporting .exp-raymond-section,
     }
 
     .hero-raymond .hero-media img {
-        object-position: center 28%;
-        transform: scale(1.04);
+        object-position: 42% 32%;
+        transform: scale(1.05);
     }
 
     .hero-raymond-overlay {

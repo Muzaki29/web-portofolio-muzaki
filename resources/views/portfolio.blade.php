@@ -17,7 +17,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Syne:wght@700;800&family=Fira+Code:wght@400;500&family=Playfair+Display:ital,wght@0,500;0,700;1,500;1,700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-    <link rel="stylesheet" href="{{ asset('css/portfolio.css') }}?v=3.12">
+    <link rel="stylesheet" href="{{ asset('css/portfolio.css') }}?v=3.13">
 
     <script>
         (function(){
@@ -69,9 +69,9 @@
 {{-- ── HERO (Raymond-style — wajah tengah, copy minimal) ── --}}
 <section class="hero hero-full hero-raymond" id="hero">
     <div class="hero-media" aria-hidden="true">
-        <img src="{{ asset('images/profil_hero_face.png') }}?v=3"
+        <img src="{{ asset('images/profil_hero_studio.png') }}?v=1"
              alt="Muzaki Abdullah Irsyad"
-             width="1600" height="1000">
+             width="1920" height="1080">
         <div class="hero-media-overlay hero-raymond-overlay"></div>
     </div>
 

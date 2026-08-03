@@ -22,3 +22,19 @@
 Homestead.json
 Homestead.yaml
 Thumbs.db
+
+# Automated backup ignore rules
+node_modules/
+vendor/
+.next/
+dist/
+build/
+out/
+*.mp4
+*.zip
+*.rar
+*.tar.gz
+.env.local
+storage/*.link
+db.sqlite
+*.db

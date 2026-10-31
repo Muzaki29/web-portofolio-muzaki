@@ -17,6 +17,32 @@ jobs:
     - name: Checkout Code
       uses: actions/checkout@v4
 
+    - name: Verify SSH connection
+      uses: appleboy/ssh-action@v1.0.3
+      with:
+        host: ${{ secrets.SSH_HOST }}
+        username: ${{ secrets.SSH_USERNAME }}
+        key: ${{ secrets.SSH_KEY }}
+        port: 22
+        script: "true"
+
+    - name: Verify production runtime
+      uses: appleboy/ssh-action@v1.0.3
+      with:
+        host: ${{ secrets.SSH_HOST }}
+        username: ${{ secrets.SSH_USERNAME }}
+        key: ${{ secrets.SSH_KEY }}
+        port: 22
+        script: |
+          set -eu
+          cd /var/www/portofolio
+          test -f .env
+          command -v php >/dev/null
+          command -v npm >/dev/null
+          command -v composer >/dev/null
+          command -v curl >/dev/null
+          node -e 'const [major,minor]=process.versions.node.split(".").map(Number); if (!(major===20&&minor>=19 || major===22&&minor>=12 || major>22)) process.exit(1)'
+
     - name: Execute remote SSH deployment commands
       uses: appleboy/ssh-action@v1.0.3
       with:
@@ -36,7 +62,7 @@ jobs:
           git fetch origin
           previous_revision=$(git rev-parse HEAD)
           umask 077
-          backup_dir="/var/www/portfolio-releases/$(date -u +%Y%m%dT%H%M%SZ)-${previous_revision}"
+          backup_dir="$HOME/.local/state/muzaki-portfolio/releases/$(date -u +%Y%m%dT%H%M%SZ)-${previous_revision}"
           mkdir -p "$backup_dir"
           tar --exclude=./.git --exclude=./storage --exclude=./node_modules --exclude=./.env -czf "$backup_dir/release.tar.gz" .
           printf '%s\n' "$previous_revision" > "$backup_dir/revision"

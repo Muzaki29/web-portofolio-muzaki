@@ -2,7 +2,7 @@ name: Deploy Portfolio Website
 
 on:
   push:
-    branches: [ main ]
+    branches: [main]
 
 concurrency:
   group: portfolio-production
@@ -12,88 +12,30 @@ jobs:
   deploy:
     name: Deploy to VPS
     runs-on: ubuntu-latest
-
     steps:
-    - name: Checkout Code
-      uses: actions/checkout@v4
+      - name: Verify SSH connection
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USERNAME }}
+          key: ${{ secrets.SSH_KEY }}
+          port: 22
+          script: "true"
 
-    - name: Verify SSH connection
-      uses: appleboy/ssh-action@v1.0.3
-      with:
-        host: ${{ secrets.SSH_HOST }}
-        username: ${{ secrets.SSH_USERNAME }}
-        key: ${{ secrets.SSH_KEY }}
-        port: 22
-        script: "true"
-
-    - name: Verify production runtime
-      uses: appleboy/ssh-action@v1.0.3
-      with:
-        host: ${{ secrets.SSH_HOST }}
-        username: ${{ secrets.SSH_USERNAME }}
-        key: ${{ secrets.SSH_KEY }}
-        port: 22
-        script: |
-          set -eu
-          cd /var/www/portofolio
-          test -f .env
-          command -v php >/dev/null
-          command -v npm >/dev/null
-          command -v composer >/dev/null
-          command -v curl >/dev/null
-          node -e 'const [major,minor]=process.versions.node.split(".").map(Number); if (!(major===20&&minor>=19 || major===22&&minor>=12 || major>22)) process.exit(1)'
-
-    - name: Execute remote SSH deployment commands
-      uses: appleboy/ssh-action@v1.0.3
-      with:
-        host: ${{ secrets.SSH_HOST }}
-        username: ${{ secrets.SSH_USERNAME }}
-        key: ${{ secrets.SSH_KEY }}
-        port: 22
-        script: |
-          set -eu
-          cd /var/www/portofolio
-          test -f .env
-          command -v npm >/dev/null
-          command -v composer >/dev/null
-          command -v curl >/dev/null
-          node -e 'const [major,minor]=process.versions.node.split(".").map(Number); if (!(major===20&&minor>=19 || major===22&&minor>=12 || major>22)) process.exit(1)'
-          git config --global --add safe.directory /var/www/portofolio
-          git fetch origin
-          previous_revision=$(git rev-parse HEAD)
-          umask 077
-          backup_dir="$HOME/.local/state/muzaki-portfolio/releases/$(date -u +%Y%m%dT%H%M%SZ)-${previous_revision}"
-          mkdir -p "$backup_dir"
-          tar --exclude=./.git --exclude=./storage --exclude=./node_modules --exclude=./.env -czf "$backup_dir/release.tar.gz" .
-          printf '%s\n' "$previous_revision" > "$backup_dir/revision"
-          rollback() {
-            result=$?
-            trap - EXIT
-            set +e
-            if [ "$result" -ne 0 ]; then
-              if [ -f "$backup_dir/maintenance.php" ]; then
-                cp "$backup_dir/maintenance.php" storage/framework/maintenance.php
-              fi
-              git reset --hard "$previous_revision"
-              tar -xzf "$backup_dir/release.tar.gz" -C /var/www/portofolio
-              php artisan up
-            fi
-            exit "$result"
-          }
-          trap rollback EXIT
-          php artisan down --render=errors::503 --retry=60
-          cp storage/framework/maintenance.php "$backup_dir/maintenance.php"
-          git reset --hard origin/main
-          composer install --no-interaction --prefer-dist --optimize-autoloader --no-dev
-          npm ci --include=dev
-          npm run build
-          php artisan config:cache
-          php artisan route:cache
-          php artisan view:cache
-          chown -R www-data:www-data /var/www/portofolio
-          chmod 640 .env
-          php artisan about --only=environment
-          php artisan up
-          curl --fail --silent --show-error --retry 2 --max-time 20 https://muzakiabdullahirsyad.my.id/ --output "$backup_dir/health.html"
-          grep -q 'hero-cinematic' "$backup_dir/health.html"
-          trap - EXIT
+      - name: Deploy reviewed source artifact
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USERNAME }}
+          key: ${{ secrets.SSH_KEY }}
+          port: 22
+          command_timeout: 15m
+          script: |
+            set -eu
+            umask 077
+            incoming="$HOME/portfolio-incoming/${{ github.sha }}"
+            mkdir -p "$incoming/source"
+            curl --fail --location --retry 3 --connect-timeout 10 --max-time 180 "https://api.github.com/repos/Muzaki29/web-portofolio-muzaki/tarball/${{ github.sha }}" --output "$incoming/source.tar.gz"
+            tar -xzf "$incoming/source.tar.gz" --strip-components=1 -C "$incoming/source"
+            tar -cf "$incoming/release.tar" -C "$incoming/source" app bootstrap config database lang public resources routes scripts artisan composer.json composer.lock package.json package-lock.json vite.config.js
+            bash "$incoming/source/scripts/deploy-production.sh" "$incoming/release.tar" '${{ github.sha }}'

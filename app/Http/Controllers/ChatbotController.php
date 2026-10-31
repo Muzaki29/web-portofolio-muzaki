@@ -214,7 +214,7 @@ KB;
                 'message' => $response,
             ]);
         } catch (\Exception $e) {
-            Log::error('Chatbot API Error: ' . $e->getMessage());
+            Log::error('Chatbot provider request failed', ['exception' => $e::class]);
 
             return response()->json([
                 'success' => false,
@@ -261,8 +261,9 @@ KB;
             throw new \RuntimeException('Gemini API key not configured');
         }
 
-        $response = Http::timeout(15)->post(
-            "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key={$apiKey}",
+        $model = config('services.gemini.model');
+        $response = Http::timeout(15)->withHeaders(['x-goog-api-key' => $apiKey])->post(
+            "https://generativelanguage.googleapis.com/v1beta/models/{$model}:generateContent",
             [
                 'system_instruction' => [
                     'parts' => [
@@ -278,10 +279,8 @@ KB;
                     ],
                 ],
                 'generationConfig' => [
-                    'temperature' => 0.3,
-                    'topP' => 0.8,
-                    'topK' => 40,
-                    'maxOutputTokens' => 300,
+                    'thinkingConfig' => ['thinkingLevel' => 'minimal'],
+                    'maxOutputTokens' => 1024,
                 ],
                 'safetySettings' => [
                     ['category' => 'HARM_CATEGORY_HARASSMENT', 'threshold' => 'BLOCK_MEDIUM_AND_ABOVE'],
@@ -299,7 +298,7 @@ KB;
         $data = $response->json();
         $text = $data['candidates'][0]['content']['parts'][0]['text'] ?? null;
 
-        if (empty($text)) {
+        if (! is_string($text) || trim($text) === '') {
             throw new \RuntimeException('Empty response from Gemini API');
         }
 

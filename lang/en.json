@@ -161,7 +161,7 @@
     "contact.error_fallback": "An error occurred. Please try again.",
     "contact.generic_retry_later": "An error occurred while sending the message. Please try again later.",
     "contact.captcha_label": "Security Verification (Not a Robot)",
-    "contact.placeholder_captcha": "Result of {question}",
+    "contact.placeholder_captcha": "CAPTCHA answer",
     "contact.captcha_failed": "Robot verification failed. Your math answer is incorrect.",
     "footer.tagline": "Full Stack Developer · Freelancer · Jakarta",
     "footer.rights": "All rights reserved.",
@@ -290,5 +290,12 @@
     "works.muspen_desc": "Official web portal under the Ministry of Communication and Digital of the Republic of Indonesia (Komdigi) as a center for education, communication history publication, and museum service reservations.",
     "works.muspen_b1": "<strong>360° Interactive Virtual Tour:</strong> Interactive exploration of the entire museum area, communication history, and physical collections virtually.",
     "works.muspen_b2": "<strong>Online Visit Reservation:</strong> Online registration for groups and individuals integrated with daily quota scheduling.",
-    "works.muspen_b3": "<strong>Educational Gallery Catalog:</strong> Interactive digital gallery featuring 450+ historical collections (si Unyil, transmitter stations, vintage radios)."
+    "works.muspen_b3": "<strong>Educational Gallery Catalog:</strong> Interactive digital gallery featuring 450+ historical collections (si Unyil, transmitter stations, vintage radios).",
+    "motion.skip": "Skip to content",
+    "motion.menu": "Open navigation",
+    "motion.discipline": "Creative engineering",
+    "motion.explore": "Explore the portfolio",
+    "motion.preview": "project preview",
+    "motion.featured": "Featured project",
+    "motion.close": "Close dialog"
 }

@@ -203,7 +203,8 @@ return [
         ],
         [
             'gradient' => 'pc-g8',
-            'image' => 'images/project_presensi_magang.png',
+            // Existing filenames differ from the actual screenshot content.
+            'image' => 'images/project_pengelolaan_koleksi.png',
             'placeholder_icon' => 'fas fa-user-check',
             'placeholder_label' => 'SINAR',
             'title_key' => 'works.sinar_title',
@@ -224,7 +225,7 @@ return [
         ],
         [
             'gradient' => 'pc-g9',
-            'image' => 'images/project_pengelolaan_koleksi.png',
+            'image' => 'images/project_museum_penerangan.png',
             'placeholder_icon' => 'fas fa-cubes',
             'placeholder_label' => 'Koleksi',
             'title_key' => 'works.koleksi_title',
@@ -245,7 +246,7 @@ return [
         ],
         [
             'gradient' => 'pc-g10',
-            'image' => 'images/project_museum_penerangan.png',
+            'image' => 'images/project_presensi_magang.png',
             'placeholder_icon' => 'fas fa-museum',
             'placeholder_label' => 'Portal Resmi',
             'title_key' => 'works.muspen_title',

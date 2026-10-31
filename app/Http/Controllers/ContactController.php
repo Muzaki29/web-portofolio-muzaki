@@ -46,9 +46,6 @@ class ContactController extends Controller
             ], 422);
         }
 
-        // Clear captcha session after success
-        session()->forget(['captcha_answer', 'captcha_generated_at']);
-
         try {
             Mail::to(config('mail.from.address'))->send(
                 new ContactMail(
@@ -59,12 +56,14 @@ class ContactController extends Controller
                 )
             );
 
+            session()->forget(['captcha_answer', 'captcha_generated_at']);
+
             return response()->json([
                 'success' => true,
                 'message' => __('contact.success_message')
             ]);
         } catch (\Exception $e) {
-            \Log::error('Email sending failed: ' . $e->getMessage());
+            Log::error('Contact email delivery failed', ['exception' => $e::class]);
             
             return response()->json([
                 'success' => false,

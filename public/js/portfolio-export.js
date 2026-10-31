@@ -6,7 +6,7 @@
     const pdfBtns = ['exportPortfolioPdf', 'exportPortfolioPdfFooter'];
     const pptBtns = ['exportPortfolioPpt', 'exportPortfolioPptFooter'];
     const VENDOR = {
-        jspdf: 'https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.2/jspdf.umd.min.js',
+        jspdf: 'https://cdn.jsdelivr.net/npm/jspdf@4.2.1/dist/jspdf.umd.min.js',
         pptxgen: 'https://cdn.jsdelivr.net/npm/pptxgenjs@3.12.0/dist/pptxgen.bundle.js',
     };
 
@@ -51,13 +51,22 @@
                 return;
             }
             const script = document.createElement('script');
+            const timer = setTimeout(() => {
+                script.remove();
+                reject(new Error('export library timeout'));
+            }, 15000);
             script.src = src;
             script.async = true;
             script.onload = () => {
+                clearTimeout(timer);
                 script.dataset.loaded = '1';
                 resolve();
             };
-            script.onerror = () => reject(new Error('script error: ' + src));
+            script.onerror = () => {
+                clearTimeout(timer);
+                script.remove();
+                reject(new Error('script error: ' + src));
+            };
             document.head.appendChild(script);
         });
     }
@@ -82,7 +91,7 @@
             pdfReady = (async () => {
                 if (!getJsPDF()) await loadScript(VENDOR.jspdf);
                 await waitFor(() => getJsPDF(), 10000);
-            })();
+            })().catch(error => { pdfReady = null; throw error; });
         }
         return pdfReady;
     }
@@ -92,14 +101,9 @@
             pptReady = (async () => {
                 if (typeof PptxGenJS === 'undefined') await loadScript(VENDOR.pptxgen);
                 await waitFor(() => typeof PptxGenJS !== 'undefined', 10000);
-            })();
+            })().catch(error => { pptReady = null; throw error; });
         }
         return pptReady;
-    }
-
-    function preloadLibs() {
-        ensurePdfLibs().catch(() => { pdfReady = null; });
-        ensurePptLibs().catch(() => { pptReady = null; });
     }
 
     function downloadBlob(blob, fileName) {
@@ -329,11 +333,6 @@
     function init() {
         pdfBtns.forEach(id => bind(id, exportPdf));
         pptBtns.forEach(id => bind(id, exportPpt));
-        if ('requestIdleCallback' in window) {
-            requestIdleCallback(preloadLibs, { timeout: 2500 });
-        } else {
-            setTimeout(preloadLibs, 1500);
-        }
     }
 
     if (document.readyState === 'loading') {

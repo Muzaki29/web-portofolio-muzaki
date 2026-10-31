@@ -163,7 +163,7 @@ body {
 /* ══════════════════════════════════════════
    HERO (legacy — hidden; DevSync block at file end)
 ══════════════════════════════════════════ */
-.hero-grid, .hero-badge, .hero-greeting, .hero-name, .tw-wrap, .hero-desc,
+.hero-grid, .hero-badge, .hero-greeting, .tw-wrap, .hero-desc,
 .hero-btns, .hero-socials, .profile-image-wrap, .profile-wrap { display: none !important; }
 
 .pulse-dot {
@@ -210,7 +210,7 @@ body {
 .svc-card:hover::before { left: 100%; }
 .svc-card:hover { border-color: var(--border2); transform: translateY(-6px); box-shadow: 0 14px 36px var(--blue-glow); }
 .svc-card i { font-size: 1.9rem; color: var(--blue2); margin-bottom: .85rem; display: block; }
-.svc-card h3 { color: var(--txt); font-size: .9rem; font-weight: 600; }
+.svc-card .svc-title { color: var(--txt); font-size: .9rem; font-weight: 600; }
 
 /* ── Buttons ── */
 .btn {
@@ -1719,7 +1719,7 @@ footer { background: var(--bg2); border-top: 1px solid var(--border); padding: 3
     0%, 100% { opacity: 1; }
     50% { opacity: 0.5; }
 }
-.ai-header-info h4 {
+.ai-header-info h2 {
     font-size: 0.88rem;
     font-weight: 700;
     color: var(--txt);
@@ -3650,7 +3650,7 @@ body.is-exporting .exp-raymond-section,
         padding: 1rem .9rem;
     }
 
-    .svc-card h3 {
+    .svc-card .svc-title {
         font-size: .88rem;
         line-height: 1.3;
     }

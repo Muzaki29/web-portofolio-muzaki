@@ -5,38 +5,62 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Muzaki Abdullah Irsyad — Full Stack Developer, Freelancer & Content Creator. Building modern web experiences from Jakarta, Indonesia.">
     <meta name="author" content="Muzaki Abdullah Irsyad">
+    <link rel="canonical" href="{{ url('/') }}">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Muzaki Abdullah Irsyad">
+    <meta property="og:title" content="Muzaki Abdullah Irsyad — Portfolio">
+    <meta property="og:description" content="Full Stack Developer, Freelancer & Content Creator — Jakarta, Indonesia.">
+    <meta property="og:url" content="{{ url('/') }}">
+    <meta property="og:image" content="{{ asset('images/mai-social.png') }}">
+    <meta property="og:image:width" content="1536">
+    <meta property="og:image:height" content="1024">
+    <meta property="og:image:alt" content="MAI — Muzaki Abdullah Irsyad monogram logo">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Muzaki Abdullah Irsyad — Portfolio">
+    <meta name="twitter:description" content="Full Stack Developer, Freelancer & Content Creator — Jakarta, Indonesia.">
+    <meta name="twitter:image" content="{{ asset('images/mai-social.png') }}">
+    <meta name="twitter:image:alt" content="MAI — Muzaki Abdullah Irsyad monogram logo">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}?v=2">
-    <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('favicon-32.png') }}?v=2">
-    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('favicon-16.png') }}?v=2">
-    <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('apple-touch-icon.png') }}?v=2">
-    <link rel="icon" type="image/svg+xml" href="{{ asset('favicon.svg') }}?v=2">
+    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}?v=mai-1">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('favicon-32.png') }}?v=mai-1">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('favicon-16.png') }}?v=mai-1">
+    <link rel="icon" type="image/png" sizes="192x192" href="{{ asset('favicon-192.png') }}?v=mai-1">
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('apple-touch-icon.png') }}?v=mai-1">
     <title>Muzaki Abdullah Irsyad — Portfolio</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Syne:wght@700;800&family=Fira+Code:wght@400;500&family=Playfair+Display:ital,wght@0,500;0,700;1,500;1,700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-    <link rel="stylesheet" href="{{ asset('css/portfolio.css') }}?v=3.17">
+    <link rel="stylesheet" href="{{ asset('css/portfolio.css') }}?v=4.0">
+    @vite('resources/js/motion/index.js')
+    <noscript><style>
+        .skills-panel { display: block !important; margin-bottom: 2rem; }
+        .pgc-details-template { display: block !important; }
+        .btn-view-details, .skills-tabs, .hamburger, .ai-chat-widget { display: none !important; }
+        @media (max-width: 768px) { .nav-pill { display: flex !important; position: static !important; flex-wrap: wrap; flex-direction: row !important; } .navbar { position: relative !important; } .navbar .container { flex-wrap: wrap; } }
+    </style></noscript>
 
     <script>
         (function(){
-            var t = localStorage.getItem('theme') || 'dark';
+            var t = 'dark';
+            try { t = localStorage.getItem('theme') || t; } catch (e) {}
             document.documentElement.setAttribute('data-theme', t);
         })();
     </script>
 </head>
 <body>
+<a class="skip-link" href="#about">{{ __('motion.skip') }}</a>
 
-<canvas id="bg-canvas"></canvas>
-<div id="scroll-bar"></div>
-<div class="cursor" id="cursor"></div>
-<div class="cursor-dot" id="cursorDot"></div>
+<canvas id="bg-canvas" aria-hidden="true"></canvas>
+<div id="scroll-bar" aria-hidden="true"></div>
+<div class="cursor" id="cursor" aria-hidden="true"></div>
+<div class="cursor-dot" id="cursorDot" aria-hidden="true"></div>
 
 {{-- ── NAVBAR ── --}}
 <nav class="navbar" id="navbar">
     <div class="container">
-        <div class="nav-brand" onclick="window.scrollTo({top:0,behavior:'smooth'})">MUZAKI</div>
+        <a class="nav-brand" href="#hero" aria-label="MAI — Muzaki Home">MAI<span class="brand-dot">.</span></a>
 
         <ul class="nav-pill" id="navMenu">
             <li><a href="#about"          class="nav-link">{{ __('nav.about') }}</a></li>
@@ -60,28 +84,33 @@
             </button>
         </div>
 
-        <div class="hamburger" id="ham"><span></span><span></span><span></span></div>
+        <button type="button" class="hamburger" id="ham" aria-label="{{ __('motion.menu') }}" aria-controls="navMenu" aria-expanded="false"><span></span><span></span><span></span></button>
     </div>
 </nav>
 
-<div id="portfolio-export" class="portfolio-export-root">
+<main id="portfolio-export" class="portfolio-export-root">
 
 {{-- ── HERO (minimal — foto + kicker + headline + CTA) ── --}}
-<section class="hero hero-full hero-raymond" id="hero">
+<section class="hero hero-full hero-raymond hero-cinematic" id="hero">
+    <div class="hero-atmosphere" aria-hidden="true"></div>
     <div class="hero-media" aria-hidden="true">
-        <img src="{{ asset('images/profil_hero_studio.png') }}?v=1"
+        <img src="{{ asset('images/hero-studio.webp') }}"
              alt="Muzaki Abdullah Irsyad"
-             width="1920" height="1080">
+             width="1920" height="1080" fetchpriority="high" decoding="async">
         <div class="hero-media-overlay hero-raymond-overlay"></div>
     </div>
 
     <div class="hero-dock container">
         <div class="hero-dock-left">
-            <h1 class="sr-only">Muzaki Abdullah Irsyad — Portfolio</h1>
             <p class="hero-kicker">{{ __('hero.kicker') }}</p>
+            <h1 class="hero-name" aria-label="Muzaki Abdullah Irsyad">
+                <span class="hero-line"><span>Muzaki</span></span>
+                <span class="hero-line hero-name-outline"><span>Abdullah</span></span>
+                <span class="hero-line"><span>Irsyad<span class="hero-period" aria-hidden="true">.</span></span></span>
+            </h1>
             <div class="hero-headline">
                 <p class="hero-role-line">
-                    <span class="tw-text" id="tw-text"></span><span class="tw-cursor" aria-hidden="true"></span>
+                    <span class="sr-only">Full Stack Developer</span><span class="tw-text" id="tw-text" aria-hidden="true">Full Stack Developer</span><span class="tw-cursor" aria-hidden="true"></span>
                 </p>
             </div>
             <div class="hero-actions">
@@ -94,6 +123,7 @@
             </div>
         </div>
     </div>
+    <div class="hero-footnote container"><span>Jakarta, Indonesia · {{ __('motion.discipline') }}</span><a href="#about">{{ __('motion.explore') }} <span aria-hidden="true">↘</span></a></div>
 </section>
 
 <div class="name-marquee" aria-hidden="true">
@@ -109,22 +139,22 @@
         <div class="hero-services">
             <div class="svc-card">
                 <i class="fas fa-layer-group"></i>
-                <h3>{{ __('hero.role_fullstack') }}</h3>
+                <p class="svc-title">{{ __('hero.role_fullstack') }}</p>
             </div>
             <div class="svc-card">
                 <i class="fas fa-briefcase"></i>
-                <h3>{{ __('hero.role_freelancer') }}</h3>
+                <p class="svc-title">{{ __('hero.role_freelancer') }}</p>
             </div>
             <div class="svc-card">
                 <i class="fas fa-video"></i>
-                <h3>{{ __('hero.role_creator') }}</h3>
+                <p class="svc-title">{{ __('hero.role_creator') }}</p>
             </div>
         </div>
     </div>
 </div>
 
 {{-- ── ABOUT ── --}}
-<section class="about-section" id="about">
+<section class="about-section" id="about" tabindex="-1">
     <div class="container">
         <div style="text-align:center"><span class="sec-label">About</span></div>
         <h2 class="section-title">{{ __('about.title') }}</h2>
@@ -145,7 +175,7 @@
 
         <div class="resume-showcase resume-showcase-compact">
             <div class="resume-studio-art">
-                <img src="{{ asset('images/resume-studio.png') }}?v=1"
+                <img src="{{ asset('images/resume-studio.webp') }}?v=1"
                      alt="Muzaki Abdullah Irsyad — Full Stack Developer"
                      width="771" height="1024" loading="lazy">
             </div>
@@ -203,7 +233,7 @@
                 </div>
             </article>
 
-            <article class="exp-topic exp-topic-interactive exp-topic-minimal" role="button" tabindex="0" data-open-cert="asdos_devops" aria-label="{{ __('experience.lecturer_cert_hint') }}">
+            <article class="exp-topic exp-topic-interactive exp-topic-minimal" role="button" tabindex="0" data-open-cert="asdos_devops">
                 <span class="exp-topic-marker" aria-hidden="true"></span>
                 <span class="exp-topic-num">03</span>
                 <h3 class="exp-topic-title exp-topic-title-serif">{{ __('experience.role_lecturer_short') }}</h3>
@@ -337,8 +367,14 @@
         <div class="works-grid">
 
             @foreach(config('portfolio.works_projects', []) as $project)
-            <div class="project-grid-card project-card-text-only">
+            <article class="project-grid-card {{ $loop->first ? 'project-featured' : '' }}">
+                <div class="pgc-image {{ $project['gradient'] ?? '' }}">
+                    <img src="{{ asset(preg_replace('/\.png$/', '.webp', $project['image'])) }}"
+                         alt="{{ __($project['title_key']) }} — {{ __('motion.preview') }}" width="960" height="600" loading="lazy" decoding="async">
+                    <span class="project-index" aria-hidden="true">{{ str_pad($loop->iteration, 2, '0', STR_PAD_LEFT) }} / {{ str_pad($loop->count, 2, '0', STR_PAD_LEFT) }}</span>
+                </div>
                 <div class="pgc-info">
+                    @if($loop->first)<span class="sec-label">{{ __('motion.featured') }}</span>@endif
                     <div class="pgc-header">
                         <h3 class="pgc-name">{{ __($project['title_key']) }}</h3>
                         @if(($project['link_type'] ?? '') === 'github' && !empty($project['github_url']))
@@ -352,6 +388,7 @@
                         @endif
                     </div>
                     <p class="pgc-short-desc">{{ __($project['short_key']) }}</p>
+                    <div class="project-stack">@foreach(array_slice($project['tags'] ?? [], 0, 3) as $tag)<span>{{ $tag['label'] }}</span>@endforeach</div>
 
                     <div class="pgc-details-template" style="display:none">
                         <div class="pm-detail-header">
@@ -382,7 +419,7 @@
 
                     <button class="btn btn-outline btn-sm btn-view-details" style="width:100%;margin-top:1rem;justify-content:center"><i class="fas fa-search-plus"></i> {{ __('works.view_details') }}</button>
                 </div>
-            </div>
+            </article>
             @endforeach
 
         </div>
@@ -407,7 +444,7 @@
 
         <div class="timeline-journey-layout">
             <div class="timeline-story-art">
-                <img src="{{ asset('images/journey-story.png') }}"
+                <img src="{{ asset('images/journey-story.webp') }}"
                      alt="{{ __('timeline.story_alt') }}"
                      loading="lazy"
                      width="900" height="1200">
@@ -418,7 +455,7 @@
                 <div class="tl-date">24 Nov 2025 – 24 Mei 2026</div>
                 <div class="tl-content"><h3>{{ __('timeline.item_pranata') }}</h3></div>
             </div>
-            <div class="tl-item tl-item-cert" role="button" tabindex="0" data-open-cert="asdos_devops" aria-label="{{ __('experience.lecturer_cert_hint') }}">
+            <div class="tl-item tl-item-cert" role="button" tabindex="0" data-open-cert="asdos_devops">
                 <div class="tl-date">Sep 2023 – Jan 2025</div>
                 <div class="tl-content">
                     <h3>{{ __('timeline.item_lecturer_short') }}</h3>
@@ -482,10 +519,10 @@
                 <div class="cert-img-wrap cert-slider-wrap">
                     <div class="cert-slides">
                         <div class="cert-slide active" data-img-url="{{ asset('images/certificates/msib_batch_6_page1.jpg') }}">
-                            <img src="{{ asset('images/certificates/msib_batch_6_page1.jpg') }}" alt="Sertifikat MSIB Batch 6 Page 1">
+                            <img width="960" height="679" loading="lazy" decoding="async" src="{{ asset('images/certificates/previews/msib_batch_6_page1.webp') }}" alt="Sertifikat MSIB Batch 6 Page 1">
                         </div>
                         <div class="cert-slide" data-img-url="{{ asset('images/certificates/msib_batch_6_page2.jpg') }}">
-                            <img src="{{ asset('images/certificates/msib_batch_6_page2.jpg') }}" alt="Sertifikat MSIB Batch 6 Page 2">
+                            <img width="960" height="679" loading="lazy" decoding="async" src="{{ asset('images/certificates/previews/msib_batch_6_page2.webp') }}" alt="Sertifikat MSIB Batch 6 Page 2">
                         </div>
                     </div>
                     
@@ -516,16 +553,16 @@
                 <div class="cert-img-wrap cert-slider-wrap">
                     <div class="cert-slides">
                         <div class="cert-slide active" data-img-url="{{ asset('images/certificates/msib_batch_5_page1.jpg') }}">
-                            <img src="{{ asset('images/certificates/msib_batch_5_page1.jpg') }}" alt="Sertifikat MSIB Batch 5 Page 1">
+                            <img width="960" height="678" loading="lazy" decoding="async" src="{{ asset('images/certificates/previews/msib_batch_5_page1.webp') }}" alt="Sertifikat MSIB Batch 5 Page 1">
                         </div>
                         <div class="cert-slide" data-img-url="{{ asset('images/certificates/msib_batch_5_page2.jpg') }}">
-                            <img src="{{ asset('images/certificates/msib_batch_5_page2.jpg') }}" alt="Sertifikat MSIB Batch 5 Page 2">
+                            <img width="960" height="678" loading="lazy" decoding="async" src="{{ asset('images/certificates/previews/msib_batch_5_page2.webp') }}" alt="Sertifikat MSIB Batch 5 Page 2">
                         </div>
                         <div class="cert-slide" data-img-url="{{ asset('images/certificates/msib_batch_5_page3.jpg') }}">
-                            <img src="{{ asset('images/certificates/msib_batch_5_page3.jpg') }}" alt="Sertifikat MSIB Batch 5 Page 3">
+                            <img width="960" height="678" loading="lazy" decoding="async" src="{{ asset('images/certificates/previews/msib_batch_5_page3.webp') }}" alt="Sertifikat MSIB Batch 5 Page 3">
                         </div>
                         <div class="cert-slide" data-img-url="{{ asset('images/certificates/msib_batch_5_page4.jpg') }}">
-                            <img src="{{ asset('images/certificates/msib_batch_5_page4.jpg') }}" alt="Sertifikat MSIB Batch 5 Page 4">
+                            <img width="960" height="678" loading="lazy" decoding="async" src="{{ asset('images/certificates/previews/msib_batch_5_page4.webp') }}" alt="Sertifikat MSIB Batch 5 Page 4">
                         </div>
                     </div>
                     
@@ -556,7 +593,7 @@
             {{-- Cert 3: Magenta BUMN --}}
             <div class="cert-card" data-cert-img="{{ asset('images/certificates/magenta.png') }}" data-cert-title="Sertifikat Magang Magenta BUMN" data-cert-issuer="Kementerian BUMN / Forum Human Capital Indonesia (FHCI)">
                 <div class="cert-img-wrap">
-                    <img src="{{ asset('images/certificates/magenta.png') }}" alt="Sertifikat Magenta BUMN">
+                    <img width="960" height="671" loading="lazy" decoding="async" src="{{ asset('images/certificates/previews/magenta.webp') }}" alt="Sertifikat Magenta BUMN">
                     <div class="cert-hover-overlay">
                         <i class="fas fa-search-plus"></i>
                         <span>{{ __('certs.view_credential') }}</span>
@@ -573,7 +610,7 @@
             {{-- Cert 4: Maganghub Batch 2 --}}
             <div class="cert-card" data-cert-img="{{ asset('images/certificates/maganghub_batch_2.png') }}" data-cert-title="Sertifikat Maganghub Batch 2" data-cert-issuer="Maganghub Indonesia">
                 <div class="cert-img-wrap">
-                    <img src="{{ asset('images/certificates/maganghub_batch_2.png') }}" alt="Sertifikat Maganghub Batch 2">
+                    <img width="960" height="676" loading="lazy" decoding="async" src="{{ asset('images/certificates/previews/maganghub_batch_2.webp') }}" alt="Sertifikat Maganghub Batch 2">
                     <div class="cert-hover-overlay">
                         <i class="fas fa-search-plus"></i>
                         <span>{{ __('certs.view_credential') }}</span>
@@ -590,7 +627,7 @@
             {{-- Cert 5: NETS 2023 --}}
             <div class="cert-card" data-cert-img="{{ asset('images/certificates/nets_2023.jpg') }}" data-cert-title="Sertifikat Seminar Nasional (NETS) 2023" data-cert-issuer="National Education and Technology Seminar">
                 <div class="cert-img-wrap">
-                    <img src="{{ asset('images/certificates/nets_2023.jpg') }}" alt="Sertifikat NETS 2023">
+                    <img width="960" height="679" loading="lazy" decoding="async" src="{{ asset('images/certificates/previews/nets_2023.webp') }}" alt="Sertifikat NETS 2023">
                     <div class="cert-hover-overlay">
                         <i class="fas fa-search-plus"></i>
                         <span>{{ __('certs.view_credential') }}</span>
@@ -607,7 +644,7 @@
             {{-- Cert 6: HMPSTI --}}
             <div class="cert-card" data-cert-img="{{ asset('images/certificates/hmpsti.png') }}" data-cert-title="Sertifikat Pengurus HMPSTI STT NF" data-cert-issuer="Himpunan Mahasiswa Program Studi Teknologi Informasi">
                 <div class="cert-img-wrap">
-                    <img src="{{ asset('images/certificates/hmpsti.png') }}" alt="Sertifikat HMPSTI">
+                    <img width="960" height="678" loading="lazy" decoding="async" src="{{ asset('images/certificates/previews/hmpsti.webp') }}" alt="Sertifikat HMPSTI">
                     <div class="cert-hover-overlay">
                         <i class="fas fa-search-plus"></i>
                         <span>{{ __('certs.view_credential') }}</span>
@@ -624,7 +661,7 @@
             {{-- Cert 7: DevOps Assistant Praktikum --}}
             <div class="cert-card" data-cert-img="{{ asset('images/certificates/asdos_devops.png') }}" data-cert-title="Sertifikat Asisten Praktikum DevOps 2023/2024" data-cert-issuer="STT Terpadu Nurul Fikri">
                 <div class="cert-img-wrap">
-                    <img src="{{ asset('images/certificates/asdos_devops.png') }}" alt="Sertifikat Asisten Praktikum DevOps">
+                    <img width="960" height="678" loading="lazy" decoding="async" src="{{ asset('images/certificates/previews/asdos_devops.webp') }}" alt="Sertifikat Asisten Praktikum DevOps">
                     <div class="cert-hover-overlay">
                         <i class="fas fa-search-plus"></i>
                         <span>{{ __('certs.view_credential') }}</span>
@@ -642,8 +679,8 @@
     </div>
 
     {{-- Lightbox Modal --}}
-    <div class="cert-lightbox" id="certLightbox" role="dialog" aria-hidden="true">
-        <span class="lightbox-close" id="lightboxClose">&times;</span>
+    <div class="cert-lightbox" id="certLightbox" role="dialog" aria-hidden="true" aria-modal="true" aria-labelledby="lightboxTitle" inert>
+        <button type="button" class="lightbox-close" id="lightboxClose" aria-label="{{ __('motion.close') }}">&times;</button>
         
         {{-- Lightbox Slide Navigation --}}
         <button class="lightbox-btn prev-btn" id="lightboxPrev" aria-label="Previous Slide"><i class="fas fa-chevron-left"></i></button>
@@ -659,10 +696,10 @@
     </div>
 
     {{-- Project Details Modal --}}
-    <div class="project-modal" id="projectModal" role="dialog" aria-hidden="true">
+    <div class="project-modal" id="projectModal" role="dialog" aria-hidden="true" aria-modal="true" aria-label="{{ __('works.view_details') }}" inert>
         <div class="pm-backdrop" id="pmBackdrop"></div>
         <div class="pm-content">
-            <span class="pm-close" id="pmCloseBtn">&times;</span>
+            <button type="button" class="pm-close" id="pmCloseBtn" aria-label="{{ __('motion.close') }}">&times;</button>
             <div class="pm-body" id="pmModalBody">
                 {{-- Filled dynamically by JS --}}
             </div>
@@ -679,7 +716,7 @@
 
         <div class="contact-layout">
             <div class="contact-visual-panel">
-                <img src="{{ asset('images/contact-lets-talk.png') }}"
+                <img src="{{ asset('images/contact-lets-talk.webp') }}"
                      alt="{{ __('contact.visual_alt') }}"
                      loading="lazy"
                      width="800" height="1200">
@@ -696,19 +733,24 @@
                 <div class="form-card form-card-minimal">
                 <h3>{{ __('contact.form_title') }}</h3>
                 <p class="form-card-lead">{{ __('contact.form_desc') }}</p>
-                <form id="contactForm" class="contact-form">
+                <form id="contactForm" class="contact-form" action="{{ route('contact.send') }}" method="POST">
                         @csrf
-                        <input type="text"  name="name"    placeholder="{{ __('contact.placeholder_name') }}"    required>
-                        <input type="email" name="email"   placeholder="{{ __('contact.placeholder_email') }}"   required>
-                        <input type="text"  name="subject" placeholder="{{ __('contact.placeholder_subject') }}"  required>
-                        <textarea name="message" rows="4"  placeholder="{{ __('contact.placeholder_message') }}" required></textarea>
+                        <label class="sr-only" for="contactName">{{ __('contact.placeholder_name') }}</label>
+                        <input id="contactName" type="text" name="name" autocomplete="name" maxlength="255" placeholder="{{ __('contact.placeholder_name') }}" required>
+                        <label class="sr-only" for="contactEmail">{{ __('contact.placeholder_email') }}</label>
+                        <input id="contactEmail" type="email" name="email" autocomplete="email" maxlength="255" placeholder="{{ __('contact.placeholder_email') }}" required>
+                        <label class="sr-only" for="contactSubject">{{ __('contact.placeholder_subject') }}</label>
+                        <input id="contactSubject" type="text" name="subject" maxlength="255" placeholder="{{ __('contact.placeholder_subject') }}" required>
+                        <label class="sr-only" for="contactMessage">{{ __('contact.placeholder_message') }}</label>
+                        <textarea id="contactMessage" name="message" rows="4" maxlength="5000" placeholder="{{ __('contact.placeholder_message') }}" required></textarea>
                         
                         {{-- Premium Math CAPTCHA --}}
                         <div class="captcha-row" style="display: flex; gap: 0.8rem; align-items: center; margin-top: 0.2rem;">
                             <div class="captcha-question" style="background: var(--blue-dim); border: 1px solid var(--border2); color: var(--blue2); padding: 0.8rem 1.1rem; border-radius: var(--r); font-weight: 700; font-family: 'Fira Code', monospace; font-size: 0.95rem; white-space: nowrap; user-select: none;">
                                 {{ $captchaQuestion }} = ?
                             </div>
-                            <input type="number" name="captcha" placeholder="{{ __('contact.placeholder_captcha', ['question' => '']) }}" required style="margin: 0; flex: 1;">
+                            <label class="sr-only" for="contactCaptcha">{{ $captchaQuestion }} = ?</label>
+                            <input id="contactCaptcha" type="number" name="captcha" placeholder="{{ __('contact.placeholder_captcha', ['question' => '']) }}" required style="margin: 0; flex: 1;">
                         </div>
 
                         <button type="submit" class="btn btn-primary" id="submitBtn" style="width:100%;justify-content:center">
@@ -723,7 +765,7 @@
     </div>
 </section>
 
-</div>{{-- /#portfolio-export --}}
+</main>{{-- /#portfolio-export --}}
 
 {{-- ── FOOTER ── --}}
 <footer class="footer-clean">
@@ -764,18 +806,18 @@
 
 {{-- ── AI CHATBOT WIDGET ── --}}
 <div class="ai-chat-widget" id="aiChatWidget">
-    <button class="ai-chat-bubble" id="aiChatBubble" aria-label="{{ __('chatbot.header_title') }}">
+    <button class="ai-chat-bubble" id="aiChatBubble" aria-label="{{ __('chatbot.header_title') }}" aria-controls="aiChatWindow" aria-expanded="false">
         <i class="fas fa-robot ai-bubble-icon" aria-hidden="true"></i>
         <span class="ai-badge">AI</span>
     </button>
-    <div class="ai-chat-window" id="aiChatWindow">
+    <div class="ai-chat-window" id="aiChatWindow" role="region" aria-labelledby="chatTitle" aria-hidden="true" inert>
         <div class="ai-chat-header">
             <div class="ai-avatar ai-avatar-icon">
                 <i class="fas fa-robot" aria-hidden="true"></i>
                 <span class="online-indicator"></span>
             </div>
             <div class="ai-header-info">
-                <h4>{{ __('chatbot.header_title') }}</h4>
+                <h2 id="chatTitle">{{ __('chatbot.header_title') }}</h2>
                 <span>{{ __('chatbot.header_status') }}</span>
             </div>
             <button class="ai-close-btn" id="aiCloseBtn" aria-label="Tutup Chat">&times;</button>
@@ -787,6 +829,7 @@
             {{-- Dynamic Quick Replies --}}
         </div>
         <form class="ai-chat-input-area" id="aiChatForm">
+            <label class="sr-only" for="aiChatInput">{{ __('chatbot.input_placeholder') }}</label>
             <input type="text" id="aiChatInput" placeholder="{{ __('chatbot.input_placeholder') }}" autocomplete="off" required>
             <button type="submit" id="aiSendBtn" aria-label="Kirim"><i class="fas fa-paper-plane"></i></button>
         </form>
@@ -841,11 +884,7 @@ window.i18n = {
 };
 window.portfolioExport = @json($portfolioExport);
 </script>
-<link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.2/jspdf.umd.min.js" as="script" crossorigin="anonymous">
-<link rel="preload" href="https://cdn.jsdelivr.net/npm/pptxgenjs@3.12.0/dist/pptxgen.bundle.js" as="script" crossorigin="anonymous">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.2/jspdf.umd.min.js" defer crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/pptxgenjs@3.12.0/dist/pptxgen.bundle.js" defer crossorigin="anonymous"></script>
-<script src="{{ asset('js/portfolio.js') }}?v=3.6" defer></script>
-<script src="{{ asset('js/portfolio-export.js') }}?v=1.4" defer></script>
+<script src="{{ asset('js/portfolio.js') }}?v=4.0" defer></script>
+<script src="{{ asset('js/portfolio-export.js') }}?v=2.0" defer></script>
 </body>
 </html>

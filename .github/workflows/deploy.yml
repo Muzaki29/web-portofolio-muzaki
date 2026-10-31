@@ -4,6 +4,10 @@ on:
   push:
     branches: [ main ]
 
+concurrency:
+  group: portfolio-production
+  cancel-in-progress: false
+
 jobs:
   deploy:
     name: Deploy to VPS
@@ -21,14 +25,49 @@ jobs:
         key: ${{ secrets.SSH_KEY }}
         port: 22
         script: |
+          set -eu
           cd /var/www/portofolio
+          test -f .env
+          command -v npm >/dev/null
+          command -v composer >/dev/null
+          command -v curl >/dev/null
+          node -e 'const [major,minor]=process.versions.node.split(".").map(Number); if (!(major===20&&minor>=19 || major===22&&minor>=12 || major>22)) process.exit(1)'
           git config --global --add safe.directory /var/www/portofolio
           git fetch origin
+          previous_revision=$(git rev-parse HEAD)
+          umask 077
+          backup_dir="/var/www/portfolio-releases/$(date -u +%Y%m%dT%H%M%SZ)-${previous_revision}"
+          mkdir -p "$backup_dir"
+          tar --exclude=./.git --exclude=./storage --exclude=./node_modules --exclude=./.env -czf "$backup_dir/release.tar.gz" .
+          printf '%s\n' "$previous_revision" > "$backup_dir/revision"
+          rollback() {
+            result=$?
+            trap - EXIT
+            set +e
+            if [ "$result" -ne 0 ]; then
+              if [ -f "$backup_dir/maintenance.php" ]; then
+                cp "$backup_dir/maintenance.php" storage/framework/maintenance.php
+              fi
+              git reset --hard "$previous_revision"
+              tar -xzf "$backup_dir/release.tar.gz" -C /var/www/portofolio
+              php artisan up
+            fi
+            exit "$result"
+          }
+          trap rollback EXIT
+          php artisan down --render=errors::503 --retry=60
+          cp storage/framework/maintenance.php "$backup_dir/maintenance.php"
           git reset --hard origin/main
           composer install --no-interaction --prefer-dist --optimize-autoloader --no-dev
-          php artisan migrate --force
+          npm ci --include=dev
+          npm run build
           php artisan config:cache
           php artisan route:cache
           php artisan view:cache
           chown -R www-data:www-data /var/www/portofolio
           chmod 640 .env
+          php artisan about --only=environment
+          php artisan up
+          curl --fail --silent --show-error --retry 2 --max-time 20 https://muzakiabdullahirsyad.my.id/ --output "$backup_dir/health.html"
+          grep -q 'hero-cinematic' "$backup_dir/health.html"
+          trap - EXIT

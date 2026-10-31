@@ -1,0 +1,285 @@
+{
+  "date": "2026-10-30",
+  "repositories": [
+    {
+      "repo": "greensock/gsap-skills",
+      "branch": "main",
+      "pushed_at": "2026-07-29T17:36:08Z",
+      "archived": false,
+      "license": "MIT",
+      "skills": [
+        "skills/gsap-core/SKILL.md",
+        "skills/gsap-frameworks/SKILL.md",
+        "skills/gsap-performance/SKILL.md",
+        "skills/gsap-plugins/SKILL.md",
+        "skills/gsap-react/SKILL.md",
+        "skills/gsap-scrolltrigger/SKILL.md",
+        "skills/gsap-timeline/SKILL.md",
+        "skills/gsap-utils/SKILL.md"
+      ]
+    },
+    {
+      "repo": "johnpolacek/animaxxing-skills",
+      "branch": "main",
+      "pushed_at": "2026-10-28T21:49:20Z",
+      "archived": false,
+      "license": "MIT",
+      "skills": [
+        "skills/animaxxing-webgl/SKILL.md",
+        "skills/animaxxing/SKILL.md",
+        "skills/gsap-astro/SKILL.md",
+        "skills/gsap-nextjs/SKILL.md",
+        "skills/gsap-nuxt/SKILL.md",
+        "skills/gsap-react-router/SKILL.md",
+        "skills/gsap-sveltekit/SKILL.md",
+        "skills/gsap-tanstack-router/SKILL.md",
+        "skills/gsap-vanilla/SKILL.md",
+        "skills/style-animaxxing/SKILL.md"
+      ]
+    },
+    {
+      "repo": "nextlevelbuilder/ui-ux-pro-max-skill",
+      "branch": "main",
+      "pushed_at": "2026-10-26T10:07:28Z",
+      "archived": false,
+      "license": "MIT",
+      "skills": [
+        ".claude/skills/banner-design/SKILL.md",
+        ".claude/skills/brand/SKILL.md",
+        ".claude/skills/design-system/SKILL.md",
+        ".claude/skills/design/SKILL.md",
+        ".claude/skills/slides/SKILL.md",
+        ".claude/skills/ui-styling/SKILL.md",
+        ".claude/skills/ui-ux-pro-max/SKILL.md",
+        "cli/assets/skills/banner-design/SKILL.md",
+        "cli/assets/skills/brand/SKILL.md",
+        "cli/assets/skills/design-system/SKILL.md",
+        "cli/assets/skills/design/SKILL.md",
+        "cli/assets/skills/slides/SKILL.md",
+        "cli/assets/skills/ui-styling/SKILL.md"
+      ]
+    },
+    {
+      "repo": "vercel-labs/agent-skills",
+      "branch": "main",
+      "pushed_at": "2026-10-28T19:17:28Z",
+      "archived": false,
+      "license": null,
+      "skills": [
+        "skills/composition-patterns/SKILL.md",
+        "skills/deploy-to-vercel/SKILL.md",
+        "skills/react-best-practices/SKILL.md",
+        "skills/react-native-skills/SKILL.md",
+        "skills/react-view-transitions/SKILL.md",
+        "skills/vercel-cli-with-tokens/SKILL.md",
+        "skills/vercel-optimize/SKILL.md",
+        "skills/web-design-guidelines/SKILL.md",
+        "skills/writing-guidelines/SKILL.md"
+      ]
+    },
+    {
+      "repo": "vercel-labs/agent-browser",
+      "branch": "main",
+      "pushed_at": "2026-10-30T14:33:20Z",
+      "archived": false,
+      "license": "Apache-2.0",
+      "skills": [
+        ".agents/skills/technical-writer/SKILL.md",
+        "skill-data/agentcore/SKILL.md",
+        "skill-data/core/SKILL.md",
+        "skill-data/derive-client/SKILL.md",
+        "skill-data/dogfood/SKILL.md",
+        "skill-data/electron/SKILL.md",
+        "skill-data/protected-vercel-deployments/SKILL.md",
+        "skill-data/slack/SKILL.md",
+        "skill-data/vercel-sandbox/SKILL.md",
+        "skill-data/webmcp-gen/SKILL.md",
+        "skills/agent-browser/SKILL.md"
+      ]
+    },
+    {
+      "repo": "laravel/boost",
+      "branch": "main",
+      "pushed_at": "2026-10-29T18:32:33Z",
+      "archived": false,
+      "license": "MIT",
+      "skills": [
+        ".ai/deployments/skill/deploying-to-cloud/SKILL.md",
+        ".ai/laravel/skill/laravel-best-practices/SKILL.md",
+        ".ai/pennant/skill/pennant-development/SKILL.md",
+        ".ai/tailwindcss/3/skill/tailwindcss-development/SKILL.md",
+        ".ai/tailwindcss/4/skill/tailwindcss-development/SKILL.md"
+      ]
+    },
+    {
+      "repo": "spatie/guidelines-skills",
+      "branch": "main",
+      "pushed_at": "2026-10-22T15:01:29Z",
+      "archived": false,
+      "license": "MIT",
+      "skills": [
+        "resources/boost/skills/spatie-javascript/SKILL.md",
+        "resources/boost/skills/spatie-laravel-php/SKILL.md",
+        "resources/boost/skills/spatie-security/SKILL.md",
+        "resources/boost/skills/spatie-version-control/SKILL.md"
+      ]
+    },
+    {
+      "repo": "obra/superpowers",
+      "branch": "main",
+      "pushed_at": "2026-10-29T23:35:34Z",
+      "archived": false,
+      "license": "MIT",
+      "skills": [
+        "skills/brainstorming/SKILL.md",
+        "skills/diagnosing-superpowers/SKILL.md",
+        "skills/dispatching-parallel-agents/SKILL.md",
+        "skills/executing-plans/SKILL.md",
+        "skills/finishing-a-development-branch/SKILL.md",
+        "skills/receiving-code-review/SKILL.md",
+        "skills/requesting-code-review/SKILL.md",
+        "skills/subagent-driven-development/SKILL.md",
+        "skills/systematic-debugging/SKILL.md",
+        "skills/test-driven-development/SKILL.md",
+        "skills/using-git-worktrees/SKILL.md",
+        "skills/using-superpowers/SKILL.md",
+        "skills/verification-before-completion/SKILL.md",
+        "skills/writing-plans/SKILL.md",
+        "skills/writing-skills/SKILL.md"
+      ]
+    },
+    {
+      "repo": "openai/skills",
+      "branch": "main",
+      "pushed_at": "2026-10-28T17:31:41Z",
+      "archived": false,
+      "license": null,
+      "skills": [
+        "skills/.curated/aspnet-core/SKILL.md",
+        "skills/.curated/chatgpt-apps/SKILL.md",
+        "skills/.curated/cli-creator/SKILL.md",
+        "skills/.curated/cloudflare-deploy/SKILL.md",
+        "skills/.curated/define-goal/SKILL.md",
+        "skills/.curated/figma-code-connect-components/SKILL.md",
+        "skills/.curated/figma-create-design-system-rules/SKILL.md",
+        "skills/.curated/figma-create-new-file/SKILL.md",
+        "skills/.curated/figma-generate-design/SKILL.md",
+        "skills/.curated/figma-generate-library/SKILL.md",
+        "skills/.curated/figma-implement-design/SKILL.md",
+        "skills/.curated/figma-use/SKILL.md",
+        "skills/.curated/figma/SKILL.md",
+        "skills/.curated/gh-address-comments/SKILL.md",
+        "skills/.curated/gh-fix-ci/SKILL.md",
+        "skills/.curated/hatch-pet/SKILL.md",
+        "skills/.curated/jupyter-notebook/SKILL.md",
+        "skills/.curated/linear/SKILL.md",
+        "skills/.curated/migrate-to-codex/SKILL.md",
+        "skills/.curated/netlify-deploy/SKILL.md",
+        "skills/.curated/notion-knowledge-capture/SKILL.md",
+        "skills/.curated/notion-meeting-intelligence/SKILL.md",
+        "skills/.curated/notion-research-documentation/SKILL.md",
+        "skills/.curated/notion-spec-to-implementation/SKILL.md",
+        "skills/.curated/openai-docs/SKILL.md",
+        "skills/.curated/pdf/SKILL.md",
+        "skills/.curated/playwright-interactive/SKILL.md",
+        "skills/.curated/playwright/SKILL.md",
+        "skills/.curated/render-deploy/SKILL.md",
+        "skills/.curated/screenshot/SKILL.md",
+        "skills/.curated/security-best-practices/SKILL.md",
+        "skills/.curated/security-ownership-map/SKILL.md",
+        "skills/.curated/security-threat-model/SKILL.md",
+        "skills/.curated/sentry/SKILL.md",
+        "skills/.curated/speech/SKILL.md",
+        "skills/.curated/transcribe/SKILL.md",
+        "skills/.curated/vercel-deploy/SKILL.md",
+        "skills/.curated/winui-app/SKILL.md",
+        "skills/.curated/yeet/SKILL.md",
+        "skills/.system/imagegen/SKILL.md",
+        "skills/.system/openai-docs/SKILL.md",
+        "skills/.system/plugin-creator/SKILL.md",
+        "skills/.system/skill-creator/SKILL.md",
+        "skills/.system/skill-installer/SKILL.md"
+      ]
+    }
+  ],
+  "installed": [
+    {
+      "name": "gsap-core",
+      "scope": "global",
+      "path": "C:\\Users\\muzak\\.agents\\skills\\gsap-core",
+      "source": "https://github.com/greensock/gsap-skills",
+      "skill_sha256": "3887b47e050ab5afbe2a9a820f23d39fa02ab785e06a343be44c6f91d84d12b3",
+      "validation": "frontmatter name, reference existence, read-only instruction load; no remote scripts executed"
+    },
+    {
+      "name": "gsap-timeline",
+      "scope": "global",
+      "path": "C:\\Users\\muzak\\.agents\\skills\\gsap-timeline",
+      "source": "https://github.com/greensock/gsap-skills",
+      "skill_sha256": "1a8b0f39cc4be3ed3d834b89672e4ae2f151b901dc3450bebf10bbc45379fe02",
+      "validation": "frontmatter name, reference existence, read-only instruction load; no remote scripts executed"
+    },
+    {
+      "name": "gsap-scrolltrigger",
+      "scope": "global",
+      "path": "C:\\Users\\muzak\\.agents\\skills\\gsap-scrolltrigger",
+      "source": "https://github.com/greensock/gsap-skills",
+      "skill_sha256": "9351b6666a4749c0740406ea363aaccb99a087ff45cc5e8b99a0f367facf3ef4",
+      "validation": "frontmatter name, reference existence, read-only instruction load; no remote scripts executed"
+    },
+    {
+      "name": "gsap-plugins",
+      "scope": "global",
+      "path": "C:\\Users\\muzak\\.agents\\skills\\gsap-plugins",
+      "source": "https://github.com/greensock/gsap-skills",
+      "skill_sha256": "5838b856c74c07fbc9fa99b6dfd1eee34ea554c3e530c30e0d58014b707d70a4",
+      "validation": "frontmatter name, reference existence, read-only instruction load; no remote scripts executed"
+    },
+    {
+      "name": "gsap-performance",
+      "scope": "global",
+      "path": "C:\\Users\\muzak\\.agents\\skills\\gsap-performance",
+      "source": "https://github.com/greensock/gsap-skills",
+      "skill_sha256": "cb5408d6fba707aabcbfe3320317a14c1f8fca6070074e5261047930f50d441e",
+      "validation": "frontmatter name, reference existence, read-only instruction load; no remote scripts executed"
+    },
+    {
+      "name": "gsap-vanilla",
+      "scope": "global",
+      "path": "C:\\Users\\muzak\\.agents\\skills\\gsap-vanilla",
+      "source": "https://github.com/johnpolacek/animaxxing-skills",
+      "skill_sha256": "939f83c1ebe7548944c1ba9b1cf2467f4720bbba3e6a502110485180f4dcb628",
+      "validation": "frontmatter name, reference existence, read-only instruction load; no remote scripts executed"
+    },
+    {
+      "name": "animaxxing",
+      "scope": "global",
+      "path": "C:\\Users\\muzak\\.agents\\skills\\animaxxing",
+      "source": "https://github.com/johnpolacek/animaxxing-skills",
+      "skill_sha256": "923e740f2afd90f4443dc36dfdb7a4183106e6d5a96fa28d08e4caf522d959c7",
+      "validation": "frontmatter name, reference existence, read-only instruction load; no remote scripts executed"
+    },
+    {
+      "name": "spatie-laravel-php",
+      "scope": "global",
+      "path": "C:\\Users\\muzak\\.agents\\skills\\spatie-laravel-php",
+      "source": "https://github.com/spatie/guidelines-skills",
+      "skill_sha256": "97562c5d1466041669c2f3a8e896748668a6058381936fa010cbaf60cfb8d61d",
+      "validation": "frontmatter name, reference existence, read-only instruction load; no remote scripts executed"
+    },
+    {
+      "name": "agent-browser",
+      "scope": "global",
+      "path": "C:\\Users\\muzak\\.agents\\skills\\agent-browser",
+      "source": "https://github.com/vercel-labs/agent-browser",
+      "skill_sha256": "fd4ddd37ddb69f37ebc62e086566fcf606bbd09a5b4e4e7d7a6c4f0f94fdee47",
+      "validation": "frontmatter name, reference existence, read-only instruction load; no remote scripts executed"
+    }
+  ],
+  "runtime": {
+    "agent-browser": "0.41.0",
+    "install": "npm install -g agent-browser@0.41.0 --ignore-scripts",
+    "smoke": "isolated data: page open + snapshot + close succeeded"
+  },
+  "discovery": "on-disk verification completed; next-turn/fresh-session picker not observed"
+}

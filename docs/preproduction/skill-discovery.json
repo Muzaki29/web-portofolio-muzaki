@@ -1,0 +1,449 @@
+{
+  "verifiedAtUtc": "2026-10-30T16:34:46Z",
+  "codexVersion": "0.166.0-alpha.5.1",
+  "method": "fresh codex app-server stdio initialize + skills/list(forceReload=true)",
+  "cwd": "C:/laragon/www/web-portofolio-muzaki",
+  "modelTurnStarted": false,
+  "uiSidebarThreadCreated": false,
+  "selected": [
+    {
+      "name": "agent-browser",
+      "path": "C:\\Users\\muzak\\.agents\\skills\\agent-browser\\SKILL.md",
+      "scope": "user",
+      "enabled": true,
+      "interface": null
+    },
+    {
+      "name": "animaxxing",
+      "path": "C:\\Users\\muzak\\.agents\\skills\\animaxxing\\SKILL.md",
+      "scope": "user",
+      "enabled": true,
+      "interface": {
+        "displayName": "Animaxxing",
+        "shortDescription": "Reusable GSAP text, scroll, pointer, layout, SVG, and particle motion for any brand",
+        "iconSmall": null,
+        "iconLarge": null,
+        "iconSmallUrl": null,
+        "iconLargeUrl": null,
+        "brandColor": null,
+        "defaultPrompt": "Use $animaxxing with the matching GSAP framework skill to add text, scroll, pointer, layout, SVG, and particle effects while preserving this site's design."
+      }
+    },
+    {
+      "name": "gsap-core",
+      "path": "C:\\Users\\muzak\\.agents\\skills\\gsap-core\\SKILL.md",
+      "scope": "user",
+      "enabled": true,
+      "interface": null
+    },
+    {
+      "name": "gsap-performance",
+      "path": "C:\\Users\\muzak\\.agents\\skills\\gsap-performance\\SKILL.md",
+      "scope": "user",
+      "enabled": true,
+      "interface": null
+    },
+    {
+      "name": "gsap-plugins",
+      "path": "C:\\Users\\muzak\\.agents\\skills\\gsap-plugins\\SKILL.md",
+      "scope": "user",
+      "enabled": true,
+      "interface": null
+    },
+    {
+      "name": "gsap-scrolltrigger",
+      "path": "C:\\Users\\muzak\\.agents\\skills\\gsap-scrolltrigger\\SKILL.md",
+      "scope": "user",
+      "enabled": true,
+      "interface": null
+    },
+    {
+      "name": "gsap-timeline",
+      "path": "C:\\Users\\muzak\\.agents\\skills\\gsap-timeline\\SKILL.md",
+      "scope": "user",
+      "enabled": true,
+      "interface": null
+    },
+    {
+      "name": "gsap-vanilla",
+      "path": "C:\\Users\\muzak\\.agents\\skills\\gsap-vanilla\\SKILL.md",
+      "scope": "user",
+      "enabled": true,
+      "interface": {
+        "displayName": "GSAP Vanilla",
+        "shortDescription": "GSAP page and component lifecycles on plain HTML sites",
+        "iconSmall": null,
+        "iconLarge": null,
+        "iconSmallUrl": null,
+        "iconLargeUrl": null,
+        "brandColor": null,
+        "defaultPrompt": "Use $gsap-vanilla to add GSAP page transitions and component animation to this plain HTML, CSS, and JavaScript site."
+      }
+    },
+    {
+      "name": "muzaki-portfolio-motion",
+      "path": "C:\\laragon\\www\\web-portofolio-muzaki\\.agents\\skills\\muzaki-portfolio-motion\\SKILL.md",
+      "scope": "repo",
+      "enabled": true,
+      "interface": {
+        "displayName": "Muzaki Portfolio Motion",
+        "shortDescription": "Cinematic Blade motion with existing Muzaki branding",
+        "iconSmall": null,
+        "iconLarge": null,
+        "iconSmallUrl": null,
+        "iconLargeUrl": null,
+        "brandColor": null,
+        "defaultPrompt": null
+      }
+    },
+    {
+      "name": "spatie-laravel-php",
+      "path": "C:\\Users\\muzak\\.agents\\skills\\spatie-laravel-php\\SKILL.md",
+      "scope": "user",
+      "enabled": true,
+      "interface": null
+    }
+  ],
+  "missing": [],
+  "selectedLoadErrors": [],
+  "duplicateNames": {
+    "impeccable": [
+      "C:\\Users\\muzak\\.agents\\skills\\impeccable\\SKILL.md",
+      "C:\\Users\\muzak\\.codex\\skills\\impeccable\\SKILL.md"
+    ],
+    "ui-ux-pro-max": [
+      "C:\\Users\\muzak\\.agents\\skills\\ui-ux-pro-max\\SKILL.md",
+      "C:\\Users\\muzak\\.codex\\skills\\ui-ux-pro-max\\SKILL.md"
+    ]
+  },
+  "allSkillCount": 409,
+  "allLoadErrorCount": 0,
+  "stderrLineCount": 0,
+  "filesystemChecks": [
+    {
+      "name": "agent-browser",
+      "fileExists": true,
+      "frontmatterNameMatches": true,
+      "sha256": "fd4ddd37ddb69f37ebc62e086566fcf606bbd09a5b4e4e7d7a6c4f0f94fdee47",
+      "localReferences": []
+    },
+    {
+      "name": "animaxxing",
+      "fileExists": true,
+      "frontmatterNameMatches": true,
+      "sha256": "923e740f2afd90f4443dc36dfdb7a4183106e6d5a96fa28d08e4caf522d959c7",
+      "localReferences": [
+        {
+          "reference": "references/recipes/route-letters.md",
+          "exists": true
+        },
+        {
+          "reference": "references/motion-vocabulary.md#the-shelf-paired-entrances-and-exits",
+          "exists": true
+        },
+        {
+          "reference": "references/finding-the-vibe.md",
+          "exists": true
+        },
+        {
+          "reference": "references/finding-the-vibe.md",
+          "exists": true
+        },
+        {
+          "reference": "references/motion-vocabulary.md",
+          "exists": true
+        },
+        {
+          "reference": "references/motion-vocabulary.md#signature-curves",
+          "exists": true
+        },
+        {
+          "reference": "references/text-stability.md",
+          "exists": true
+        },
+        {
+          "reference": "references/recipes/split-entrances.md",
+          "exists": true
+        },
+        {
+          "reference": "references/recipes/route-letters.md",
+          "exists": true
+        },
+        {
+          "reference": "references/recipes/speak-in.md",
+          "exists": true
+        },
+        {
+          "reference": "references/recipes/typewriter.md",
+          "exists": true
+        },
+        {
+          "reference": "references/recipes/wave.md",
+          "exists": true
+        },
+        {
+          "reference": "references/recipes/scroll-effects.md",
+          "exists": true
+        },
+        {
+          "reference": "references/recipes/pointer-effects.md",
+          "exists": true
+        },
+        {
+          "reference": "references/recipes/endless-drag.md",
+          "exists": true
+        },
+        {
+          "reference": "references/recipes/sortable.md",
+          "exists": true
+        },
+        {
+          "reference": "references/recipes/section-pager.md",
+          "exists": true
+        },
+        {
+          "reference": "references/recipes/sound-cues.md",
+          "exists": true
+        },
+        {
+          "reference": "references/recipes/svg-effects.md",
+          "exists": true
+        },
+        {
+          "reference": "references/recipes/print-effects.md",
+          "exists": true
+        },
+        {
+          "reference": "references/recipes/doorways.md",
+          "exists": true
+        },
+        {
+          "reference": "references/recipes/ambient.md",
+          "exists": true
+        },
+        {
+          "reference": "references/recipes/counters-and-marquees.md",
+          "exists": true
+        },
+        {
+          "reference": "references/recipes/smooth-scroll.md",
+          "exists": true
+        },
+        {
+          "reference": "references/recipes/page-covers.md",
+          "exists": true
+        },
+        {
+          "reference": "references/recipes/layout-flip.md",
+          "exists": true
+        },
+        {
+          "reference": "references/recipes/media-effects.md",
+          "exists": true
+        },
+        {
+          "reference": "references/recipes/hover-effects.md",
+          "exists": true
+        },
+        {
+          "reference": "references/recipes/press-feedback.md",
+          "exists": true
+        },
+        {
+          "reference": "references/motion-vocabulary.md#accents",
+          "exists": true
+        },
+        {
+          "reference": "references/recipes/component-motion.md",
+          "exists": true
+        },
+        {
+          "reference": "references/recipes/blast-off.md",
+          "exists": true
+        },
+        {
+          "reference": "references/recipes/physics-effects.md",
+          "exists": true
+        },
+        {
+          "reference": "references/recipes/particle-effects.md",
+          "exists": true
+        },
+        {
+          "reference": "references/recipes/particle-field.md",
+          "exists": true
+        },
+        {
+          "reference": "references/motion-vocabulary.md#input-and-devices",
+          "exists": true
+        },
+        {
+          "reference": "references/effect-restoration.md",
+          "exists": true
+        },
+        {
+          "reference": "references/verification.md",
+          "exists": true
+        },
+        {
+          "reference": "references/effect-restoration.md",
+          "exists": true
+        },
+        {
+          "reference": "references/recipes/particle-field.md#input-and-density",
+          "exists": true
+        },
+        {
+          "reference": "references/verification.md",
+          "exists": true
+        },
+        {
+          "reference": "references/motion-vocabulary.md#resize",
+          "exists": true
+        }
+      ]
+    },
+    {
+      "name": "gsap-core",
+      "fileExists": true,
+      "frontmatterNameMatches": true,
+      "sha256": "3887b47e050ab5afbe2a9a820f23d39fa02ab785e06a343be44c6f91d84d12b3",
+      "localReferences": []
+    },
+    {
+      "name": "gsap-performance",
+      "fileExists": true,
+      "frontmatterNameMatches": true,
+      "sha256": "cb5408d6fba707aabcbfe3320317a14c1f8fca6070074e5261047930f50d441e",
+      "localReferences": []
+    },
+    {
+      "name": "gsap-plugins",
+      "fileExists": true,
+      "frontmatterNameMatches": true,
+      "sha256": "5838b856c74c07fbc9fa99b6dfd1eee34ea554c3e530c30e0d58014b707d70a4",
+      "localReferences": []
+    },
+    {
+      "name": "gsap-scrolltrigger",
+      "fileExists": true,
+      "frontmatterNameMatches": true,
+      "sha256": "9351b6666a4749c0740406ea363aaccb99a087ff45cc5e8b99a0f367facf3ef4",
+      "localReferences": []
+    },
+    {
+      "name": "gsap-timeline",
+      "fileExists": true,
+      "frontmatterNameMatches": true,
+      "sha256": "1a8b0f39cc4be3ed3d834b89672e4ae2f151b901dc3450bebf10bbc45379fe02",
+      "localReferences": []
+    },
+    {
+      "name": "gsap-vanilla",
+      "fileExists": true,
+      "frontmatterNameMatches": true,
+      "sha256": "939f83c1ebe7548944c1ba9b1cf2467f4720bbba3e6a502110485180f4dcb628",
+      "localReferences": [
+        {
+          "reference": "references/spa-navigation.md",
+          "exists": true
+        },
+        {
+          "reference": "references/cross-document-navigation.md#combining-with-gsap",
+          "exists": true
+        },
+        {
+          "reference": "references/initialization.md",
+          "exists": true
+        },
+        {
+          "reference": "references/motion-system.md#initialization-and-recovery",
+          "exists": true
+        },
+        {
+          "reference": "references/page-load.md",
+          "exists": true
+        },
+        {
+          "reference": "references/cross-document-navigation.md",
+          "exists": true
+        },
+        {
+          "reference": "references/spa-navigation.md",
+          "exists": true
+        },
+        {
+          "reference": "references/motion-system.md",
+          "exists": true
+        },
+        {
+          "reference": "references/smooth-scroll.md",
+          "exists": true
+        },
+        {
+          "reference": "references/page-load.md#smooth-scrolling",
+          "exists": true
+        },
+        {
+          "reference": "references/spa-navigation.md#smooth-scrolling-curtains-and-shared-elements",
+          "exists": true
+        },
+        {
+          "reference": "references/transition-archetypes.md",
+          "exists": true
+        },
+        {
+          "reference": "references/page-load.md#curtains-and-preloaders",
+          "exists": true
+        },
+        {
+          "reference": "references/spa-navigation.md#smooth-scrolling-curtains-and-shared-elements",
+          "exists": true
+        },
+        {
+          "reference": "references/devices.md",
+          "exists": true
+        },
+        {
+          "reference": "references/desktop-webviews.md",
+          "exists": true
+        },
+        {
+          "reference": "references/verification.md",
+          "exists": true
+        }
+      ]
+    },
+    {
+      "name": "muzaki-portfolio-motion",
+      "fileExists": true,
+      "frontmatterNameMatches": true,
+      "sha256": "7ac451a3fb724e5b9ca7da452bf60e6da75a1f4e5eda09e9afd903267c3039be",
+      "localReferences": [
+        {
+          "reference": "references/portfolio-contract.md",
+          "exists": true
+        },
+        {
+          "reference": "../../../CODEX-SKILLS-GUIDE.md",
+          "exists": true
+        }
+      ]
+    },
+    {
+      "name": "spatie-laravel-php",
+      "fileExists": true,
+      "frontmatterNameMatches": true,
+      "sha256": "97562c5d1466041669c2f3a8e896748668a6058381936fa010cbaf60cfb8d61d",
+      "localReferences": []
+    }
+  ],
+  "missingLocalReferences": [],
+  "agentBrowserRuntime": {
+    "version": "0.41.0",
+    "session": "muzaki-preprod-skills-20261030",
+    "target": "data:text/html local heading only",
+    "smoke": "open -> snapshot -> close passed",
+    "userBrowserProfileAttached": false
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "shellSyntax": "passed",
+  "automaticDatabaseMigration": false,
+  "backupBeforeReset": true,
+  "rollbackTrap": true,
+  "prerenderedMaintenanceBeforeMutation": true,
+  "healthCheckAfterUp": true,
+  "productionRunVerified": false
+}

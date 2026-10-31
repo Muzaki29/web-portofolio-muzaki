@@ -1,0 +1,14 @@
+{
+  "credentialAvailable": false,
+  "gitPushDryRun": "passed; HEAD:main fast-forward accepted",
+  "repository": "Muzaki29/web-portofolio-muzaki",
+  "workflow": {
+    "httpStatus": 401
+  },
+  "secrets": {
+    "httpStatus": 401
+  },
+  "runs": {
+    "httpStatus": 401
+  }
+}

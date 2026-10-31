@@ -1,0 +1,86 @@
+[
+  {
+    "original": "images/resume-studio.png",
+    "preview": "images/resume-studio.webp",
+    "originalBytes": 998562,
+    "previewBytes": 101010
+  },
+  {
+    "original": "images/journey-story.png",
+    "preview": "images/journey-story.webp",
+    "originalBytes": 228155,
+    "previewBytes": 146044
+  },
+  {
+    "original": "images/certificates/msib_batch_6_page1.jpg",
+    "preview": "images/certificates/previews/msib_batch_6_page1.webp",
+    "originalBytes": 555183,
+    "previewBytes": 48342
+  },
+  {
+    "original": "images/certificates/msib_batch_6_page2.jpg",
+    "preview": "images/certificates/previews/msib_batch_6_page2.webp",
+    "originalBytes": 1251411,
+    "previewBytes": 134560
+  },
+  {
+    "original": "images/certificates/msib_batch_5_page1.jpg",
+    "preview": "images/certificates/previews/msib_batch_5_page1.webp",
+    "originalBytes": 1231389,
+    "previewBytes": 97274
+  },
+  {
+    "original": "images/certificates/msib_batch_5_page2.jpg",
+    "preview": "images/certificates/previews/msib_batch_5_page2.webp",
+    "originalBytes": 1205243,
+    "previewBytes": 102200
+  },
+  {
+    "original": "images/certificates/msib_batch_5_page3.jpg",
+    "preview": "images/certificates/previews/msib_batch_5_page3.webp",
+    "originalBytes": 1184827,
+    "previewBytes": 100782
+  },
+  {
+    "original": "images/certificates/msib_batch_5_page4.jpg",
+    "preview": "images/certificates/previews/msib_batch_5_page4.webp",
+    "originalBytes": 1226552,
+    "previewBytes": 105462
+  },
+  {
+    "original": "images/certificates/magenta.png",
+    "preview": "images/certificates/previews/magenta.webp",
+    "originalBytes": 186381,
+    "previewBytes": 34046
+  },
+  {
+    "original": "images/certificates/maganghub_batch_2.png",
+    "preview": "images/certificates/previews/maganghub_batch_2.webp",
+    "originalBytes": 124950,
+    "previewBytes": 40042
+  },
+  {
+    "original": "images/certificates/nets_2023.jpg",
+    "preview": "images/certificates/previews/nets_2023.webp",
+    "originalBytes": 163876,
+    "previewBytes": 49222
+  },
+  {
+    "original": "images/certificates/hmpsti.png",
+    "preview": "images/certificates/previews/hmpsti.webp",
+    "originalBytes": 198023,
+    "previewBytes": 44212
+  },
+  {
+    "original": "images/certificates/asdos_devops.png",
+    "preview": "images/certificates/previews/asdos_devops.webp",
+    "originalBytes": 626661,
+    "previewBytes": 72932
+  },
+  {
+    "original": "images/contact-lets-talk.png",
+    "preview": "images/contact-lets-talk.webp",
+    "originalBytes": 82861,
+    "previewBytes": 37940
+  }
+]

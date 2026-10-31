@@ -1,0 +1,14 @@
+{
+  "scope": "local files only; no credentials emitted",
+  "geminiKeyConfigured": true,
+  "configuredKeyFoundInLocalLogs": true,
+  "realLookingGoogleKeyFoundInLocalLogs": false,
+  "note": "Configured local value appears in old local logs; a read-only Google metadata request rejects it as API_KEY_INVALID. No key value emitted; this does not verify production credentials.",
+  "configuredKeyLooksLikePlaceholder": false,
+  "requiresCredentialReview": true,
+  "providerMetadataVerification": {
+    "httpStatus": 400,
+    "reason": "API_KEY_INVALID",
+    "generationRequested": false
+  }
+}

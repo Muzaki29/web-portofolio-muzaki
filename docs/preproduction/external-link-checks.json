@@ -1,0 +1,55 @@
+{
+  "testedAt": "2026-10-31T00:54:19.206Z",
+  "method": "Read-only GET, no authentication; status may reflect access/rate/network restrictions",
+  "results": [
+    {
+      "url": "https://syahdulab.dev/",
+      "error": "apiRequestContext.get: getaddrinfo ENOTFOUND syahdulab.dev"
+    },
+    {
+      "url": "https://github.com/Muzaki29/web-syahdulab",
+      "status": 404,
+      "finalUrl": "https://github.com/Muzaki29/web-syahdulab"
+    },
+    {
+      "url": "https://github.com/Muzaki29/web-merchband",
+      "status": 200,
+      "finalUrl": "https://github.com/Muzaki29/web-merchband"
+    },
+    {
+      "url": "https://github.com/Muzaki29/website-sekolah",
+      "status": 404,
+      "finalUrl": "https://github.com/Muzaki29/website-sekolah"
+    },
+    {
+      "url": "https://github.com/Muzaki29/web-properti",
+      "status": 200,
+      "finalUrl": "https://github.com/Muzaki29/web-properti"
+    },
+    {
+      "url": "https://github.com/Muzaki29/website-surat-rt",
+      "status": 200,
+      "finalUrl": "https://github.com/Muzaki29/website-surat-rt"
+    },
+    {
+      "url": "https://muspen.komdigi.go.id/",
+      "status": 503,
+      "finalUrl": "https://muspen.komdigi.go.id/"
+    },
+    {
+      "url": "https://github.com/Muzaki29/website-presensi-magang-muspen",
+      "status": 404,
+      "finalUrl": "https://github.com/Muzaki29/website-presensi-magang-muspen"
+    },
+    {
+      "url": "https://github.com/Muzaki29/web-pengelolahan-koleksi",
+      "status": 404,
+      "finalUrl": "https://github.com/Muzaki29/web-pengelolahan-koleksi"
+    },
+    {
+      "url": "https://github.com/Muzaki29?tab=repositories",
+      "status": 200,
+      "finalUrl": "https://github.com/Muzaki29?tab=repositories"
+    }
+  ]
+}

@@ -1,0 +1,182 @@
+{
+  "testedAt": "2026-10-31T01:03:09.134Z",
+  "note": "Local Lighthouse simulated lab, not field Core Web Vitals; single runs; PHP development server; INP not measured. Desktop final run predates only the mobile portrait entrance change; mobile final is latest bundle.",
+  "runs": {
+    "desktop-baseline": {
+      "fetchTime": "2026-10-30T16:38:26.505Z",
+      "version": "13.6.0",
+      "scores": {
+        "performance": 67,
+        "accessibility": 94,
+        "best-practices": 100,
+        "seo": 100
+      },
+      "metrics": {
+        "first-contentful-paint": {
+          "value": 591.7784999999999,
+          "unit": "millisecond",
+          "display": "0.6 s"
+        },
+        "largest-contentful-paint": {
+          "value": 5981.8989,
+          "unit": "millisecond",
+          "display": "6.0 s"
+        },
+        "speed-index": {
+          "value": 3902.48776811283,
+          "unit": "millisecond",
+          "display": "3.9 s"
+        },
+        "total-blocking-time": {
+          "value": 13,
+          "unit": "millisecond",
+          "display": "10 ms"
+        },
+        "cumulative-layout-shift": {
+          "value": 0.01971866966551177,
+          "unit": "unitless",
+          "display": "0.02"
+        },
+        "total-byte-weight": {
+          "value": 9817777,
+          "unit": "byte",
+          "display": "Total size was 9,588 KiB"
+        }
+      },
+      "warnings": [],
+      "runtimeError": null
+    },
+    "desktop-final": {
+      "fetchTime": "2026-10-31T00:56:55.513Z",
+      "version": "13.6.0",
+      "scores": {
+        "performance": 94,
+        "accessibility": 100,
+        "best-practices": 100,
+        "seo": 100
+      },
+      "metrics": {
+        "first-contentful-paint": {
+          "value": 670.7905,
+          "unit": "millisecond",
+          "display": "0.7 s"
+        },
+        "largest-contentful-paint": {
+          "value": 1227.385,
+          "unit": "millisecond",
+          "display": "1.2 s"
+        },
+        "speed-index": {
+          "value": 1588.8366439580873,
+          "unit": "millisecond",
+          "display": "1.6 s"
+        },
+        "total-blocking-time": {
+          "value": 115,
+          "unit": "millisecond",
+          "display": "120 ms"
+        },
+        "cumulative-layout-shift": {
+          "value": 0.01864859364827406,
+          "unit": "unitless",
+          "display": "0.019"
+        },
+        "total-byte-weight": {
+          "value": 971601,
+          "unit": "byte",
+          "display": "Total size was 949 KiB"
+        }
+      },
+      "warnings": [],
+      "runtimeError": null
+    },
+    "mobile-baseline": {
+      "fetchTime": "2026-10-30T16:39:25.941Z",
+      "version": "13.6.0",
+      "scores": {
+        "performance": 53,
+        "accessibility": 94,
+        "best-practices": 100,
+        "seo": 100
+      },
+      "metrics": {
+        "first-contentful-paint": {
+          "value": 2406.7419,
+          "unit": "millisecond",
+          "display": "2.4 s"
+        },
+        "largest-contentful-paint": {
+          "value": 35734.61284999999,
+          "unit": "millisecond",
+          "display": "35.7 s"
+        },
+        "speed-index": {
+          "value": 29148.817494595645,
+          "unit": "millisecond",
+          "display": "29.1 s"
+        },
+        "total-blocking-time": {
+          "value": 390.5,
+          "unit": "millisecond",
+          "display": "390 ms"
+        },
+        "cumulative-layout-shift": {
+          "value": 0.0049962114179300555,
+          "unit": "unitless",
+          "display": "0.005"
+        },
+        "total-byte-weight": {
+          "value": 9817894,
+          "unit": "byte",
+          "display": "Total size was 9,588 KiB"
+        }
+      },
+      "warnings": [],
+      "runtimeError": null
+    },
+    "mobile-final": {
+      "fetchTime": "2026-10-31T01:01:29.403Z",
+      "version": "13.6.0",
+      "scores": {
+        "performance": 54,
+        "accessibility": 100,
+        "best-practices": 100,
+        "seo": 100
+      },
+      "metrics": {
+        "first-contentful-paint": {
+          "value": 2436.6431478899285,
+          "unit": "millisecond",
+          "display": "2.4 s"
+        },
+        "largest-contentful-paint": {
+          "value": 6093.504070458993,
+          "unit": "millisecond",
+          "display": "6.1 s"
+        },
+        "speed-index": {
+          "value": 5174.047553519524,
+          "unit": "millisecond",
+          "display": "5.2 s"
+        },
+        "total-blocking-time": {
+          "value": 684.0000000000009,
+          "unit": "millisecond",
+          "display": "680 ms"
+        },
+        "cumulative-layout-shift": {
+          "value": 0.000019150034601217082,
+          "unit": "unitless",
+          "display": "0"
+        },
+        "total-byte-weight": {
+          "value": 971648,
+          "unit": "byte",
+          "display": "Total size was 949 KiB"
+        }
+      },
+      "warnings": [],
+      "runtimeError": null
+    }
+  }
+}

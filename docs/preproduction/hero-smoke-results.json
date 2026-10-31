@@ -1,0 +1,312 @@
+{
+  "testedAt": "2026-10-31T01:09:22.503Z",
+  "checks": [
+    {
+      "name": "final hero 390px entrance, bounds, reduced motion",
+      "status": "passed",
+      "detail": {
+        "bundle": "http://127.0.0.1:8000/build/assets/index-CO5ywtT5.js",
+        "clips": [
+          "none"
+        ],
+        "scrollWidth": 390,
+        "width": 390,
+        "lines": [
+          {
+            "text": "Muzaki",
+            "left": 20,
+            "right": 249.6875
+          },
+          {
+            "text": "Abdullah",
+            "left": 20,
+            "right": 299.046875
+          },
+          {
+            "text": "Irsyad.",
+            "left": 20,
+            "right": 219.453125
+          }
+        ],
+        "placeholder": "Jawaban CAPTCHA"
+      }
+    },
+    {
+      "name": "final hero 768px entrance, bounds, reduced motion",
+      "status": "passed",
+      "detail": {
+        "bundle": "http://127.0.0.1:8000/build/assets/index-CO5ywtT5.js",
+        "clips": [
+          "none"
+        ],
+        "scrollWidth": 768,
+        "width": 768,
+        "lines": [
+          {
+            "text": "Muzaki",
+            "left": 32,
+            "right": 492.671875
+          },
+          {
+            "text": "Abdullah",
+            "left": 32,
+            "right": 591.6875
+          },
+          {
+            "text": "Irsyad.",
+            "left": 32,
+            "right": 432.03125
+          }
+        ],
+        "placeholder": "Jawaban CAPTCHA"
+      }
+    },
+    {
+      "name": "final hero 1024px entrance, bounds, reduced motion",
+      "status": "passed",
+      "detail": {
+        "bundle": "http://127.0.0.1:8000/build/assets/index-CO5ywtT5.js",
+        "clips": [
+          "inset(0px 0px 81.8989%)",
+          "inset(0px 0px 72.4553%)",
+          "inset(0px 0px 68.444%)",
+          "inset(0px 0px 57.8645%)",
+          "inset(0px 0px 54.7008%)",
+          "inset(0px 0px 52.9523%)",
+          "inset(0px 0px 50.826%)",
+          "inset(0px 0px 49.3761%)",
+          "inset(0px 0px 47.7573%)",
+          "inset(0px 0px 46.5697%)",
+          "inset(0px 0px 45.2122%)",
+          "inset(0px 0px 43.8846%)",
+          "inset(0px 0px 42.5865%)",
+          "inset(0px 0px 41.3173%)",
+          "inset(0px 0px 39.9019%)",
+          "inset(0px 0px 37.6797%)",
+          "inset(0px 0px 33.5151%)",
+          "inset(0px 0px 32.1573%)",
+          "inset(0px 0px 30.8412%)",
+          "inset(0px 0px 29.1498%)",
+          "inset(0px 0px 27.3969%)",
+          "inset(0px 0px 25.5989%)",
+          "inset(0px 0px 24.6121%)",
+          "inset(0px 0px 23.6541%)",
+          "inset(0px 0px 22.2698%)",
+          "inset(0px 0px 21.491%)",
+          "inset(0px 0px 20.4139%)",
+          "inset(0px 0px 19.1755%)",
+          "inset(0px 0px 18.1873%)",
+          "inset(0px 0px 17.1449%)",
+          "inset(0px 0px 15.9715%)",
+          "inset(0px 0px 14.7763%)",
+          "inset(0px 0px 13.7278%)",
+          "inset(0px 0px 12.6621%)",
+          "inset(0px 0px 11.6597%)",
+          "inset(0px 0px 10.718%)",
+          "inset(0px 0px 7.9164%)",
+          "inset(0px 0px 3.296%)",
+          "inset(0px 0px 3.0099%)",
+          "inset(0px 0px 2.8138%)",
+          "inset(0px 0px 2.6502%)",
+          "inset(0px 0px 2.3238%)",
+          "inset(0px 0px 1.9007%)",
+          "inset(0px 0px 1.5535%)",
+          "inset(0px 0px 1.3227%)",
+          "inset(0px 0px 1.1187%)",
+          "inset(0px 0px 0.9497%)",
+          "inset(0px 0px 0.8006%)",
+          "inset(0px 0px 0.6781%)",
+          "inset(0px 0px 0.5629%)",
+          "inset(0px 0px 0.4756%)",
+          "inset(0px 0px 0.3988%)",
+          "inset(0px 0px 0.3318%)",
+          "inset(0px 0px 0.2653%)",
+          "inset(0px 0px 0.2163%)",
+          "inset(0px 0px 0.1628%)",
+          "inset(0px 0px 0.1199%)",
+          "inset(0px 0px 0.0879%)",
+          "inset(0px 0px 0.0655%)",
+          "inset(0px 0px 0.0478%)",
+          "inset(0px 0px 0.0347%)",
+          "inset(0px 0px 0.022%)",
+          "inset(0px 0px 0.0163%)",
+          "inset(0px 0px 0.0097%)",
+          "inset(0px 0px 0.0062%)",
+          "inset(0px 0px 0.0034%)",
+          "inset(0px 0px 0.0017%)",
+          "inset(0px 0px 0.001%)",
+          "inset(0px 0px 0.0005%)",
+          "inset(0px 0px 0.0001%)",
+          "inset(0px 0px 0%)",
+          "none"
+        ],
+        "scrollWidth": 1024,
+        "width": 1024,
+        "lines": [
+          {
+            "text": "Muzaki",
+            "left": 32,
+            "right": 434
+          },
+          {
+            "text": "Abdullah",
+            "left": 32,
+            "right": 520.40625
+          },
+          {
+            "text": "Irsyad.",
+            "left": 32,
+            "right": 381.078125
+          }
+        ],
+        "placeholder": "Jawaban CAPTCHA"
+      }
+    },
+    {
+      "name": "final hero 1440px entrance, bounds, reduced motion",
+      "status": "passed",
+      "detail": {
+        "bundle": "http://127.0.0.1:8000/build/assets/index-CO5ywtT5.js",
+        "clips": [
+          "inset(0px 0px 71.9105%)",
+          "inset(0px 0px 67.922%)",
+          "inset(0px 0px 66.1186%)",
+          "inset(0px 0px 63.6049%)",
+          "inset(0px 0px 54.2597%)",
+          "inset(0px 0px 50.2007%)",
+          "inset(0px 0px 46.5697%)",
+          "inset(0px 0px 44.6396%)",
+          "inset(0px 0px 40.605%)",
+          "inset(0px 0px 37.8473%)",
+          "inset(0px 0px 35.3918%)",
+          "inset(0px 0px 32.3061%)",
+          "inset(0px 0px 29.4267%)",
+          "inset(0px 0px 25.5989%)",
+          "inset(0px 0px 23.1857%)",
+          "inset(0px 0px 21.601%)",
+          "inset(0px 0px 19.9947%)",
+          "inset(0px 0px 17.8029%)",
+          "inset(0px 0px 15.9715%)",
+          "inset(0px 0px 14.6112%)",
+          "inset(0px 0px 13.2631%)",
+          "inset(0px 0px 11.7292%)",
+          "inset(0px 0px 11.2488%)",
+          "inset(0px 0px 10.3323%)",
+          "inset(0px 0px 9.4731%)",
+          "inset(0px 0px 8.6686%)",
+          "inset(0px 0px 7.5592%)",
+          "inset(0px 0px 6.7422%)",
+          "inset(0px 0px 0.3616%)",
+          "inset(0px 0px 0.2128%)",
+          "inset(0px 0px 0.1685%)",
+          "inset(0px 0px 0.0232%)",
+          "inset(0px 0px 0.0081%)",
+          "inset(0px 0px 0.0022%)",
+          "inset(0px 0px 0.0006%)",
+          "inset(0px 0px 0.0001%)",
+          "inset(0px 0px 0%)",
+          "none"
+        ],
+        "scrollWidth": 1440,
+        "width": 1440,
+        "lines": [
+          {
+            "text": "Muzaki",
+            "left": 152,
+            "right": 717.375
+          },
+          {
+            "text": "Abdullah",
+            "left": 152,
+            "right": 838.890625
+          },
+          {
+            "text": "Irsyad.",
+            "left": 152,
+            "right": 642.9375
+          }
+        ],
+        "placeholder": "Jawaban CAPTCHA"
+      }
+    },
+    {
+      "name": "final hero 1920px entrance, bounds, reduced motion",
+      "status": "passed",
+      "detail": {
+        "bundle": "http://127.0.0.1:8000/build/assets/index-CO5ywtT5.js",
+        "clips": [
+          "inset(0px 0px 70.562%)",
+          "inset(0px 0px 66.6302%)",
+          "inset(0px 0px 63.853%)",
+          "inset(0px 0px 59.2616%)",
+          "inset(0px 0px 50.2007%)",
+          "inset(0px 0px 47.1607%)",
+          "inset(0px 0px 39.3806%)",
+          "inset(0px 0px 34.9155%)",
+          "inset(0px 0px 32.7556%)",
+          "inset(0px 0px 29.288%)",
+          "inset(0px 0px 27.3969%)",
+          "inset(0px 0px 24.7339%)",
+          "inset(0px 0px 23.0697%)",
+          "inset(0px 0px 21.601%)",
+          "inset(0px 0px 19.9947%)",
+          "inset(0px 0px 18.1873%)",
+          "inset(0px 0px 15.7095%)",
+          "inset(0px 0px 13.8854%)",
+          "inset(0px 0px 11.3165%)",
+          "inset(0px 0px 10.4597%)",
+          "inset(0px 0px 9.1796%)",
+          "inset(0px 0px 7.7108%)",
+          "inset(0px 0px 6.25%)",
+          "inset(0px 0px 4.9341%)",
+          "inset(0px 0px 4.4775%)",
+          "inset(0px 0px 3.5735%)",
+          "inset(0px 0px 3.0351%)",
+          "inset(0px 0px 2.6274%)",
+          "inset(0px 0px 2.0851%)",
+          "inset(0px 0px 1.8305%)",
+          "inset(0px 0px 0.9927%)",
+          "inset(0px 0px 0.3719%)",
+          "inset(0px 0px 0.3366%)",
+          "inset(0px 0px 0.313%)",
+          "inset(0px 0px 0.238%)",
+          "inset(0px 0px 0.1439%)",
+          "inset(0px 0px 0.1091%)",
+          "inset(0px 0px 0.073%)",
+          "inset(0px 0px 0.0394%)",
+          "inset(0px 0px 0.022%)",
+          "inset(0px 0px 0.0127%)",
+          "inset(0px 0px 0.0072%)",
+          "inset(0px 0px 0.0034%)",
+          "inset(0px 0px 0.0015%)",
+          "none"
+        ],
+        "scrollWidth": 1920,
+        "width": 1920,
+        "lines": [
+          {
+            "text": "Muzaki",
+            "left": 392,
+            "right": 1133.609375
+          },
+          {
+            "text": "Abdullah",
+            "left": 392,
+            "right": 1293
+          },
+          {
+            "text": "Irsyad.",
+            "left": 392,
+            "right": 1035.96875
+          }
+        ],
+        "placeholder": "Jawaban CAPTCHA"
+      }
+    }
+  ],
+  "pageErrors": [],
+  "summary": {
+    "passed": 5,
+    "failed": 0
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "operation": "read-only Gemini model metadata; no inference or email",
+  "credentialPrinted": false,
+  "httpStatus": 400,
+  "reasonCodes": [
+    "API_KEY_INVALID"
+  ],
+  "keyRejectedAsInvalid": true
+}

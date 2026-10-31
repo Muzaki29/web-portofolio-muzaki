@@ -59,6 +59,7 @@ rollback() {
 trap rollback EXIT
 php artisan down --render=errors::503 --retry=60
 cp storage/framework/maintenance.php "$backup/maintenance.php"
+umask 022
 tar -xf "$archive" -C "$app"
 COMPOSER_ALLOW_SUPERUSER=1 composer install --no-dev --prefer-dist --no-interaction --optimize-autoloader
 composer check-platform-reqs --no-dev
@@ -71,8 +72,11 @@ php artisan route:cache
 php artisan view:cache
 if [ "$(id -u)" -eq 0 ]; then
     chown -R "$runtime_owner" storage bootstrap/cache
+    chgrp "${runtime_owner#*:}" .env
 fi
 chmod 640 .env
+chmod 750 bootstrap/cache
+find bootstrap/cache -type f -exec chmod 640 {} +
 printf '%s\n' "$revision" > .release-revision
 php artisan up
 reload_php

@@ -57,7 +57,7 @@ PROMPT;
 - Title: Full-Stack Web Developer & IT Support Specialist
 - Education: Informatics Engineering, STT Terpadu Nurul Fikri (GPA 3.86/4.00)
 - Location: Jakarta, Indonesia
-- Email: contact@muzakiabdullahirsyad.my.id
+- Email: muzaki@syahdulab.biz.id
 - LinkedIn: https://www.linkedin.com/in/muzaki-abdullah-irsyad-893a98220/
 - GitHub: https://github.com/Muzaki29
 
@@ -114,7 +114,7 @@ KB;
 - Title: Full-Stack Web Developer & IT Support Specialist
 - Pendidikan: Teknik Informatika, STT Terpadu Nurul Fikri (IPK 3.86/4.00)
 - Lokasi: Jakarta, Indonesia
-- Email: contact@muzakiabdullahirsyad.my.id
+- Email: muzaki@syahdulab.biz.id
 - LinkedIn: https://www.linkedin.com/in/muzaki-abdullah-irsyad-893a98220/
 - GitHub: https://github.com/Muzaki29
 
@@ -170,6 +170,9 @@ KB;
      */
     public function chat(Request $request)
     {
+        // Off unless CHATBOT_ENABLED=true, so the Gemini key cannot be used while the widget is hidden.
+        abort_unless(config('services.gemini.enabled'), 404);
+
         // Validate input
         $validated = $request->validate([
             'message' => 'required|string|max:500',

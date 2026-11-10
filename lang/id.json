@@ -297,5 +297,14 @@
     "motion.explore": "Jelajahi portfolio",
     "motion.preview": "pratinjau proyek",
     "motion.featured": "Proyek pilihan",
-    "motion.close": "Tutup dialog"
+    "motion.close": "Tutup dialog",
+    "contact.group_reach": "Hubungi Saya",
+    "contact.group_work": "Karya & Konten",
+    "contact.cta_email": "Kirim email",
+    "contact.cta_linkedin": "Lihat profil profesional",
+    "contact.cta_github": "Lihat kode dan proyek",
+    "contact.cta_dribbble": "Lihat showcase UI dan desain",
+    "contact.cta_pinterest": "Jelajahi koleksi visual",
+    "contact.cta_instagram": "Lihat konten visual dan update",
+    "contact.cta_threads": "Baca tulisan singkat dan diskusi"
 }

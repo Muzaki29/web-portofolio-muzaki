@@ -297,5 +297,14 @@
     "motion.explore": "Explore the portfolio",
     "motion.preview": "project preview",
     "motion.featured": "Featured project",
-    "motion.close": "Close dialog"
+    "motion.close": "Close dialog",
+    "contact.group_reach": "Get in Touch",
+    "contact.group_work": "Work & Content",
+    "contact.cta_email": "Send an email",
+    "contact.cta_linkedin": "View professional profile",
+    "contact.cta_github": "Browse code and projects",
+    "contact.cta_dribbble": "See UI and design showcase",
+    "contact.cta_pinterest": "Explore visual collections",
+    "contact.cta_instagram": "See visual content and updates",
+    "contact.cta_threads": "Read short posts and discussions"
 }

@@ -21,18 +21,18 @@
     <meta name="twitter:image" content="{{ asset('images/mai-social.png') }}">
     <meta name="twitter:image:alt" content="MAI — Muzaki Abdullah Irsyad monogram logo">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}?v=mai-1">
-    <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('favicon-32.png') }}?v=mai-1">
-    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('favicon-16.png') }}?v=mai-1">
-    <link rel="icon" type="image/png" sizes="192x192" href="{{ asset('favicon-192.png') }}?v=mai-1">
-    <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('apple-touch-icon.png') }}?v=mai-1">
+    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}?v=mai-2">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('favicon-32.png') }}?v=mai-2">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('favicon-16.png') }}?v=mai-2">
+    <link rel="icon" type="image/png" sizes="192x192" href="{{ asset('favicon-192.png') }}?v=mai-2">
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('apple-touch-icon.png') }}?v=mai-2">
     <title>Muzaki Abdullah Irsyad — Portfolio</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Syne:wght@700;800&family=Fira+Code:wght@400;500&family=Playfair+Display:ital,wght@0,500;0,700;1,500;1,700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-    <link rel="stylesheet" href="{{ asset('css/portfolio.css') }}?v=4.0">
+    <link rel="stylesheet" href="{{ asset('css/portfolio.css') }}?v=4.4">
     @vite('resources/js/motion/index.js')
     <noscript><style>
         .skills-panel { display: block !important; margin-bottom: 2rem; }
@@ -60,7 +60,15 @@
 {{-- ── NAVBAR ── --}}
 <nav class="navbar" id="navbar">
     <div class="container">
-        <a class="nav-brand" href="#hero" aria-label="MAI — Muzaki Home">MAI<span class="brand-dot">.</span></a>
+        <a class="nav-brand" href="#hero" aria-label="MAI — Muzaki Home">
+            <svg class="nav-brand-logo" viewBox="323 143 890 590" aria-hidden="true">
+                <polygon points="333,160 611,410 863,160 1178,722 1054,722 837,318 611,540 433,370 433,722 333,722"/>
+                <polygon points="832,365 870,435 688,722 593,722"/>
+                <polygon points="825,550 931,550 971,625 778,625"/>
+                <polygon points="1102,224 1202,153 1202,250 1102,322"/>
+                <polygon points="1102,350 1202,279 1202,722 1193,722 1102,562"/>
+            </svg>
+        </a>
 
         <ul class="nav-pill" id="navMenu">
             <li><a href="#about"          class="nav-link">{{ __('nav.about') }}</a></li>
@@ -102,7 +110,7 @@
 
     <div class="hero-dock container">
         <div class="hero-dock-left">
-            <p class="hero-kicker">{{ __('hero.kicker') }}</p>
+            <p class="hero-kicker">{{ $profile['hero_role'] }}</p>
             <h1 class="hero-name" aria-label="Muzaki Abdullah Irsyad">
                 <span class="hero-line"><span>Muzaki</span></span>
                 <span class="hero-line hero-name-outline"><span>Abdullah</span></span>
@@ -157,18 +165,18 @@
 <section class="about-section" id="about" tabindex="-1">
     <div class="container">
         <div style="text-align:center"><span class="sec-label">About</span></div>
-        <h2 class="section-title">{{ __('about.title') }}</h2>
-        <p class="about-desc">{{ __('about.description') }}</p>
+        <h2 class="section-title">{{ $profile['about_title'] }}</h2>
+        <p class="about-desc">{{ $profile['about_description'] }}</p>
 
         <div class="details-grid details-grid-minimal">
             <div class="det-row">
                 <span class="det-lbl"><i class="fas fa-map-marker-alt" style="color:var(--blue2);margin-right:.4rem"></i>{{ __('about.location') }}</span>
-                <span class="det-val">Jakarta, Indonesia</span>
+                <span class="det-val">{{ $profile['location'] }}</span>
             </div>
             <div class="det-row">
                 <span class="det-lbl"><i class="fab fa-linkedin" style="color:var(--blue2);margin-right:.4rem"></i>LinkedIn</span>
                 <span class="det-val">
-                    <a href="https://www.linkedin.com/in/muzaki-abdullah-irsyad-893a98220/" target="_blank">muzaki-abdullah-irsyad</a>
+                    <a href="{{ $profile['linkedin_url'] }}" target="_blank" rel="noopener">{{ $profile['linkedin_label'] }}</a>
                 </span>
             </div>
         </div>
@@ -211,37 +219,39 @@
         </div>
 
         <div class="exp-topics-grid">
-            <article class="exp-topic">
+            @foreach($experiences as $exp)
+            @php $highlights = $exp->lines('highlights'); $certKey = $exp->v('cert_key'); $minimal = $certKey && ! $exp->v('description'); @endphp
+            <article class="exp-topic {{ $minimal ? 'exp-topic-interactive exp-topic-minimal' : '' }}" @if($minimal) role="button" tabindex="0" data-open-cert="{{ $certKey }}" @endif>
                 <span class="exp-topic-marker" aria-hidden="true"></span>
-                <span class="exp-topic-num">01</span>
-                <h3 class="exp-topic-title exp-topic-title-serif">{{ __('experience.role_pranata') }}</h3>
-                <p class="exp-topic-meta">{{ __('experience.comp_pranata') }} · {{ __('experience.date_pranata') }}</p>
-                <p class="exp-topic-desc">{{ __('experience.desc_pranata_short') }}</p>
+                <span class="exp-topic-num">{{ str_pad($loop->iteration, 2, '0', STR_PAD_LEFT) }}</span>
+                <h3 class="exp-topic-title exp-topic-title-serif">{{ $exp->v('role') }}</h3>
+                @if($exp->v('company') || $exp->v('period'))
+                <p class="exp-topic-meta">{{ collect([$exp->v('company'), $exp->v('period')])->filter()->implode(' · ') }}</p>
+                @endif
+                @if($exp->v('location'))<p class="exp-topic-location">{{ $exp->v('location') }}</p>@endif
+                @if($exp->v('description'))<p class="exp-topic-desc">{{ $exp->v('description') }}</p>@endif
+                @if($highlights)
+                <ul class="exp-topic-highlights">
+                    @foreach($highlights as $line)<li>{{ $line }}</li>@endforeach
+                </ul>
+                @endif
+                @if($exp->v('link_url') || ($certKey && ! $minimal))
                 <div class="exp-topic-actions">
-                    <a href="https://github.com/Muzaki29/website-presensi-magang-muspen" target="_blank" rel="noopener" class="exp-topic-link">{{ __('experience.work_btn') }} <i class="fas fa-arrow-up-right-from-square"></i></a>
+                    @if($exp->v('link_url'))
+                    <a href="{{ $exp->v('link_url') }}" target="_blank" rel="noopener" class="exp-topic-link">{{ __('experience.work_btn') }} <i class="fas fa-arrow-up-right-from-square"></i></a>
+                    @endif
+                    @if($certKey && ! $minimal)
+                    <button type="button" class="exp-topic-link exp-btn-cert" data-open-cert="{{ $certKey }}"><i class="fas fa-certificate"></i> {{ __('experience.lecturer_cert_hint') }}</button>
+                    @endif
                 </div>
-            </article>
-
-            <article class="exp-topic">
-                <span class="exp-topic-marker" aria-hidden="true"></span>
-                <span class="exp-topic-num">02</span>
-                <h3 class="exp-topic-title exp-topic-title-serif">{{ __('experience.role_onexpert') }}</h3>
-                <p class="exp-topic-meta">{{ __('experience.comp_onexpert') }} · {{ __('experience.date_onexpert') }}</p>
-                <p class="exp-topic-desc">{{ __('experience.desc_onexpert_short') }}</p>
-                <div class="exp-topic-actions">
-                    <a href="https://github.com/Muzaki29" target="_blank" rel="noopener" class="exp-topic-link">{{ __('experience.work_btn') }} <i class="fas fa-arrow-up-right-from-square"></i></a>
-                </div>
-            </article>
-
-            <article class="exp-topic exp-topic-interactive exp-topic-minimal" role="button" tabindex="0" data-open-cert="asdos_devops">
-                <span class="exp-topic-marker" aria-hidden="true"></span>
-                <span class="exp-topic-num">03</span>
-                <h3 class="exp-topic-title exp-topic-title-serif">{{ __('experience.role_lecturer_short') }}</h3>
+                @elseif($minimal)
                 <span class="exp-topic-cert-hint"><i class="fas fa-certificate"></i> {{ __('experience.lecturer_cert_hint') }}</span>
+                @endif
             </article>
+            @endforeach
         </div>
 
-        <p class="exp-topics-counter" aria-live="polite">3 / 3 {{ __('experience.topics_label') }}</p>
+        <p class="exp-topics-counter" aria-live="polite">{{ $experiences->count() }} / {{ $experiences->count() }} {{ __('experience.topics_label') }}</p>
     </div>
 </section>
 
@@ -366,17 +376,17 @@
 
         <div class="works-grid">
 
-            @foreach(config('portfolio.works_projects', []) as $project)
+            @foreach($worksProjects as $project)
             <article class="project-grid-card {{ $loop->first ? 'project-featured' : '' }}">
                 <div class="pgc-image {{ $project['gradient'] ?? '' }}">
-                    <img src="{{ asset(preg_replace('/\.png$/', '.webp', $project['image'])) }}"
-                         alt="{{ __($project['title_key']) }} — {{ __('motion.preview') }}" width="960" height="600" loading="lazy" decoding="async">
+                    <img src="{{ asset(str_starts_with($project['image'] ?? '', 'images/') ? preg_replace('/\.png$/', '.webp', $project['image']) : ($project['image'] ?? '')) }}"
+                         alt="{{ $project['title'] }} — {{ __('motion.preview') }}" width="1672" height="941" loading="lazy" decoding="async">
                     <span class="project-index" aria-hidden="true">{{ str_pad($loop->iteration, 2, '0', STR_PAD_LEFT) }} / {{ str_pad($loop->count, 2, '0', STR_PAD_LEFT) }}</span>
                 </div>
                 <div class="pgc-info">
                     @if($loop->first)<span class="sec-label">{{ __('motion.featured') }}</span>@endif
                     <div class="pgc-header">
-                        <h3 class="pgc-name">{{ __($project['title_key']) }}</h3>
+                        <h3 class="pgc-name">{{ $project['title'] }}</h3>
                         @if(($project['link_type'] ?? '') === 'github' && !empty($project['github_url']))
                         <a href="{{ $project['github_url'] }}" target="_blank" rel="noopener" class="pgc-visit" aria-label="Github Repo">
                             <i class="fab fa-github"></i>
@@ -387,19 +397,19 @@
                         </a>
                         @endif
                     </div>
-                    <p class="pgc-short-desc">{{ __($project['short_key']) }}</p>
+                    <p class="pgc-short-desc">{{ $project['short'] }}</p>
                     <div class="project-stack">@foreach(array_slice($project['tags'] ?? [], 0, 3) as $tag)<span>{{ $tag['label'] }}</span>@endforeach</div>
 
                     <div class="pgc-details-template" style="display:none">
                         <div class="pm-detail-header">
-                            <h3 class="pm-detail-title">{{ __($project['title_key']) }}</h3>
-                            <span class="pm-detail-tagline">{{ __($project['tagline_key']) }}</span>
+                            <h3 class="pm-detail-title">{{ $project['title'] }}</h3>
+                            <span class="pm-detail-tagline">{{ $project['tagline'] }}</span>
                         </div>
-                        <p class="pm-detail-desc">{{ __($project['desc_key']) }}</p>
+                        <p class="pm-detail-desc">{{ $project['desc'] }}</p>
                         <h4 class="pm-sub-heading"><i class="fas fa-star" style="color:var(--blue2)"></i> {{ __('works.features_heading') }}</h4>
                         <ul class="pc-bullets">
-                            @foreach($project['bullets'] ?? [] as $bulletKey)
-                            <li>{!! __($bulletKey) !!}</li>
+                            @foreach($project['bullets'] ?? [] as $bullet)
+                            <li>{!! strip_tags($bullet, '<strong><em><b><i>') !!}</li>
                             @endforeach
                         </ul>
                         <h4 class="pm-sub-heading"><i class="fas fa-tools" style="color:var(--blue2)"></i> {{ __('works.tech_stack') }}</h4>
@@ -451,50 +461,23 @@
             </div>
 
             <div class="tl-items tl-items-compact">
-            <div class="tl-item">
-                <div class="tl-date">24 Nov 2025 – 24 Mei 2026</div>
-                <div class="tl-content"><h3>{{ __('timeline.item_pranata') }}</h3></div>
+            @foreach($timelineItems as $item)
+            @php $certKey = $item->v('cert_key'); @endphp
+            <div class="tl-item {{ $certKey ? 'tl-item-cert' : '' }}" @if($certKey) role="button" tabindex="0" data-open-cert="{{ $certKey }}" @endif>
+                <div class="tl-date">{{ $item->v('period') }}</div>
+                <div class="tl-content"><h3>{{ $item->v('title') }}</h3></div>
             </div>
-            <div class="tl-item tl-item-cert" role="button" tabindex="0" data-open-cert="asdos_devops">
-                <div class="tl-date">Sep 2023 – Jan 2025</div>
-                <div class="tl-content">
-                    <h3>{{ __('timeline.item_lecturer_short') }}</h3>
-                </div>
-            </div>
-            <div class="tl-item">
-                <div class="tl-date">Feb 2024 – Jun 2024</div>
-                <div class="tl-content"><h3>{{ __('timeline.item_codeless') }}</h3></div>
-            </div>
-            <div class="tl-item">
-                <div class="tl-date">Aug 2023 – Dec 2023</div>
-                <div class="tl-content"><h3>{{ __('timeline.item_webdev') }}</h3></div>
-            </div>
-            <div class="tl-item">
-                <div class="tl-date">Dec 2022 – Dec 2024</div>
-                <div class="tl-content"><h3>{{ __('timeline.item_onexpert') }}</h3></div>
-            </div>
-            <div class="tl-item">
-                <div class="tl-date">2022 – {{ __('timeline.present') }}</div>
-                <div class="tl-content"><h3>{{ __('timeline.item_karangtaruna') }}</h3></div>
-            </div>
-            <div class="tl-item">
-                <div class="tl-date">Oct 2019 – Mar 2020</div>
-                <div class="tl-content"><h3>{{ __('timeline.item_trainee') }}</h3></div>
-            </div>
-            <div class="tl-item">
-                <div class="tl-date">2021 – 2025</div>
-                <div class="tl-content"><h3>{{ __('timeline.item_informatics') }}</h3></div>
-            </div>
+            @endforeach
             </div>
         </div>
 
         <div class="achievements">
             <div class="ach-item">
-                <span class="ach-num" id="counter-projects">9+</span>
+                <span class="ach-num" id="counter-projects">{{ count($worksProjects) }}+</span>
                 <div class="ach-lbl">{{ __('hero.stat_projects') }}</div>
             </div>
             <div class="ach-item">
-                <span class="ach-num" id="counter-certs">4</span>
+                <span class="ach-num" id="counter-certs">{{ $certificates->count() }}</span>
                 <div class="ach-lbl">{{ __('timeline.achievement_certs') }}</div>
             </div>
             <div class="ach-item">
@@ -513,168 +496,47 @@
         <p class="section-subtitle">{{ __('certs.subtitle') }}</p>
         
         <div class="certs-visual-grid">
-
-            {{-- Cert 1: MSIB Batch 6 Page 1 & 2 (Codeless Data Science) Slider --}}
-            <div class="cert-card cert-card-slider" id="cert-slider-codeless" data-cert-img="{{ asset('images/certificates/msib_batch_6_page1.jpg') }}" data-cert-title="Sertifikat & Transkrip MSIB Batch 6 - Codeless Data Science" data-cert-issuer="Kementerian Pendidikan, Kebudayaan, Riset, dan Teknologi x PT Nurul Fikri Cipta Inovasi">
-                <div class="cert-img-wrap cert-slider-wrap">
+            @foreach($certificates as $cert)
+            @php
+                $pages = $cert->v('images') ?? [];
+                $first = $pages[0] ?? null;
+                $multi = count($pages) > 1;
+            @endphp
+            <div class="cert-card {{ $multi ? 'cert-card-slider' : '' }}" @if($multi) id="cert-slider-{{ $cert->v('key') ?: $cert->id }}" @endif
+                 data-cert-key="{{ $cert->v('key') }}"
+                 data-cert-img="{{ $first ? asset($first['full']) : '' }}"
+                 data-cert-title="{{ $cert->v('full_title') ?: $cert->v('title') }}"
+                 data-cert-issuer="{{ $cert->v('full_issuer') ?: $cert->v('issuer') }}">
+                <div class="cert-img-wrap {{ $multi ? 'cert-slider-wrap' : '' }}">
+                    @if($multi)
                     <div class="cert-slides">
-                        <div class="cert-slide active" data-img-url="{{ asset('images/certificates/msib_batch_6_page1.jpg') }}">
-                            <img width="960" height="679" loading="lazy" decoding="async" src="{{ asset('images/certificates/previews/msib_batch_6_page1.webp') }}" alt="Sertifikat MSIB Batch 6 Page 1">
+                        @foreach($pages as $page)
+                        <div class="cert-slide {{ $loop->first ? 'active' : '' }}" data-img-url="{{ asset($page['full']) }}">
+                            <img width="960" height="679" loading="lazy" decoding="async" src="{{ asset($page['preview'] ?? $page['full']) }}" alt="{{ $cert->v('title') }} — {{ $loop->iteration }}">
                         </div>
-                        <div class="cert-slide" data-img-url="{{ asset('images/certificates/msib_batch_6_page2.jpg') }}">
-                            <img width="960" height="679" loading="lazy" decoding="async" src="{{ asset('images/certificates/previews/msib_batch_6_page2.webp') }}" alt="Sertifikat MSIB Batch 6 Page 2">
-                        </div>
+                        @endforeach
                     </div>
-                    
-                    {{-- Slider Controls --}}
                     <button class="cert-slide-btn prev-btn" aria-label="Previous Slide"><i class="fas fa-chevron-left"></i></button>
                     <button class="cert-slide-btn next-btn" aria-label="Next Slide"><i class="fas fa-chevron-right"></i></button>
-                    
                     <div class="cert-slide-dots">
-                        <span class="slide-dot active" data-slide-to="0"></span>
-                        <span class="slide-dot" data-slide-to="1"></span>
+                        @foreach($pages as $page)<span class="slide-dot {{ $loop->first ? 'active' : '' }}" data-slide-to="{{ $loop->index }}"></span>@endforeach
                     </div>
-
+                    @elseif($first)
+                    <img width="960" height="679" loading="lazy" decoding="async" src="{{ asset($first['preview'] ?? $first['full']) }}" alt="{{ $cert->v('title') }}">
+                    @endif
                     <div class="cert-hover-overlay">
                         <i class="fas fa-search-plus"></i>
                         <span>{{ __('certs.view_credential') }}</span>
                     </div>
                 </div>
                 <div class="cert-info-wrap">
-                    <span class="cert-badge">MSIB Batch 6 (2 Pages)</span>
-                    <h3>Sertifikat & Transkrip Codeless Data Science</h3>
-                    <p class="cert-issuer">PT Nurul Fikri Cipta Inovasi</p>
-                    <p class="cert-date">Feb – Jun 2024</p>
+                    @if($cert->v('badge'))<span class="cert-badge">{{ $cert->v('badge') }}</span>@endif
+                    <h3>{{ $cert->v('title') }}</h3>
+                    @if($cert->v('issuer'))<p class="cert-issuer">{{ $cert->v('issuer') }}</p>@endif
+                    @if($cert->v('date'))<p class="cert-date">{{ $cert->v('date') }}</p>@endif
                 </div>
             </div>
-
-            {{-- Cert 2: MSIB Batch 5 Page 1-4 (Infinite Learning) Slider --}}
-            <div class="cert-card cert-card-slider" id="cert-slider-infinite" data-cert-img="{{ asset('images/certificates/msib_batch_5_page1.jpg') }}" data-cert-title="Sertifikat & Transkrip MSIB Batch 5 - Web Development" data-cert-issuer="Kementerian Pendidikan, Kebudayaan, Riset, dan Teknologi x Infinite Learning">
-                <div class="cert-img-wrap cert-slider-wrap">
-                    <div class="cert-slides">
-                        <div class="cert-slide active" data-img-url="{{ asset('images/certificates/msib_batch_5_page1.jpg') }}">
-                            <img width="960" height="678" loading="lazy" decoding="async" src="{{ asset('images/certificates/previews/msib_batch_5_page1.webp') }}" alt="Sertifikat MSIB Batch 5 Page 1">
-                        </div>
-                        <div class="cert-slide" data-img-url="{{ asset('images/certificates/msib_batch_5_page2.jpg') }}">
-                            <img width="960" height="678" loading="lazy" decoding="async" src="{{ asset('images/certificates/previews/msib_batch_5_page2.webp') }}" alt="Sertifikat MSIB Batch 5 Page 2">
-                        </div>
-                        <div class="cert-slide" data-img-url="{{ asset('images/certificates/msib_batch_5_page3.jpg') }}">
-                            <img width="960" height="678" loading="lazy" decoding="async" src="{{ asset('images/certificates/previews/msib_batch_5_page3.webp') }}" alt="Sertifikat MSIB Batch 5 Page 3">
-                        </div>
-                        <div class="cert-slide" data-img-url="{{ asset('images/certificates/msib_batch_5_page4.jpg') }}">
-                            <img width="960" height="678" loading="lazy" decoding="async" src="{{ asset('images/certificates/previews/msib_batch_5_page4.webp') }}" alt="Sertifikat MSIB Batch 5 Page 4">
-                        </div>
-                    </div>
-                    
-                    {{-- Slider Controls --}}
-                    <button class="cert-slide-btn prev-btn" aria-label="Previous Slide"><i class="fas fa-chevron-left"></i></button>
-                    <button class="cert-slide-btn next-btn" aria-label="Next Slide"><i class="fas fa-chevron-right"></i></button>
-                    
-                    <div class="cert-slide-dots">
-                        <span class="slide-dot active" data-slide-to="0"></span>
-                        <span class="slide-dot" data-slide-to="1"></span>
-                        <span class="slide-dot" data-slide-to="2"></span>
-                        <span class="slide-dot" data-slide-to="3"></span>
-                    </div>
-
-                    <div class="cert-hover-overlay">
-                        <i class="fas fa-search-plus"></i>
-                        <span>{{ __('certs.view_credential') }}</span>
-                    </div>
-                </div>
-                <div class="cert-info-wrap">
-                    <span class="cert-badge">MSIB Batch 5 (4 Pages)</span>
-                    <h3>Sertifikat & Transkrip Web Development</h3>
-                    <p class="cert-issuer">Infinite Learning</p>
-                    <p class="cert-date">Aug – Dec 2023</p>
-                </div>
-            </div>
-
-            {{-- Cert 3: Magenta BUMN --}}
-            <div class="cert-card" data-cert-img="{{ asset('images/certificates/magenta.png') }}" data-cert-title="Sertifikat Magang Magenta BUMN" data-cert-issuer="Kementerian BUMN / Forum Human Capital Indonesia (FHCI)">
-                <div class="cert-img-wrap">
-                    <img width="960" height="671" loading="lazy" decoding="async" src="{{ asset('images/certificates/previews/magenta.webp') }}" alt="Sertifikat Magenta BUMN">
-                    <div class="cert-hover-overlay">
-                        <i class="fas fa-search-plus"></i>
-                        <span>{{ __('certs.view_credential') }}</span>
-                    </div>
-                </div>
-                <div class="cert-info-wrap">
-                    <span class="cert-badge">Magenta BUMN</span>
-                    <h3>Magang Kerja BUMN</h3>
-                    <p class="cert-issuer">Kementerian BUMN & FHCI</p>
-                    <p class="cert-date">2024</p>
-                </div>
-            </div>
-
-            {{-- Cert 4: Maganghub Batch 2 --}}
-            <div class="cert-card" data-cert-img="{{ asset('images/certificates/maganghub_batch_2.png') }}" data-cert-title="Sertifikat Maganghub Batch 2" data-cert-issuer="Maganghub Indonesia">
-                <div class="cert-img-wrap">
-                    <img width="960" height="676" loading="lazy" decoding="async" src="{{ asset('images/certificates/previews/maganghub_batch_2.webp') }}" alt="Sertifikat Maganghub Batch 2">
-                    <div class="cert-hover-overlay">
-                        <i class="fas fa-search-plus"></i>
-                        <span>{{ __('certs.view_credential') }}</span>
-                    </div>
-                </div>
-                <div class="cert-info-wrap">
-                    <span class="cert-badge">Maganghub</span>
-                    <h3>Maganghub Batch 2</h3>
-                    <p class="cert-issuer">Maganghub Indonesia</p>
-                    <p class="cert-date">24 November 2025 – 24 Mei 2026</p>
-                </div>
-            </div>
-
-            {{-- Cert 5: NETS 2023 --}}
-            <div class="cert-card" data-cert-img="{{ asset('images/certificates/nets_2023.jpg') }}" data-cert-title="Sertifikat Seminar Nasional (NETS) 2023" data-cert-issuer="National Education and Technology Seminar">
-                <div class="cert-img-wrap">
-                    <img width="960" height="679" loading="lazy" decoding="async" src="{{ asset('images/certificates/previews/nets_2023.webp') }}" alt="Sertifikat NETS 2023">
-                    <div class="cert-hover-overlay">
-                        <i class="fas fa-search-plus"></i>
-                        <span>{{ __('certs.view_credential') }}</span>
-                    </div>
-                </div>
-                <div class="cert-info-wrap">
-                    <span class="cert-badge">Seminar Nasional</span>
-                    <h3>Seminar Nasional NETS 2023</h3>
-                    <p class="cert-issuer">National Education & Technology</p>
-                    <p class="cert-date">2023</p>
-                </div>
-            </div>
-
-            {{-- Cert 6: HMPSTI --}}
-            <div class="cert-card" data-cert-img="{{ asset('images/certificates/hmpsti.png') }}" data-cert-title="Sertifikat Pengurus HMPSTI STT NF" data-cert-issuer="Himpunan Mahasiswa Program Studi Teknologi Informasi">
-                <div class="cert-img-wrap">
-                    <img width="960" height="678" loading="lazy" decoding="async" src="{{ asset('images/certificates/previews/hmpsti.webp') }}" alt="Sertifikat HMPSTI">
-                    <div class="cert-hover-overlay">
-                        <i class="fas fa-search-plus"></i>
-                        <span>{{ __('certs.view_credential') }}</span>
-                    </div>
-                </div>
-                <div class="cert-info-wrap">
-                    <span class="cert-badge">Organisasi</span>
-                    <h3>HMPSTI STT NF</h3>
-                    <p class="cert-issuer">Himpunan Mahasiswa TI STT NF</p>
-                    <p class="cert-date">2023 – 2024</p>
-                </div>
-            </div>
-
-            {{-- Cert 7: DevOps Assistant Praktikum --}}
-            <div class="cert-card" data-cert-img="{{ asset('images/certificates/asdos_devops.png') }}" data-cert-title="Sertifikat Asisten Praktikum DevOps 2023/2024" data-cert-issuer="STT Terpadu Nurul Fikri">
-                <div class="cert-img-wrap">
-                    <img width="960" height="678" loading="lazy" decoding="async" src="{{ asset('images/certificates/previews/asdos_devops.webp') }}" alt="Sertifikat Asisten Praktikum DevOps">
-                    <div class="cert-hover-overlay">
-                        <i class="fas fa-search-plus"></i>
-                        <span>{{ __('certs.view_credential') }}</span>
-                    </div>
-                </div>
-                <div class="cert-info-wrap">
-                    <span class="cert-badge">Asisten Dosen</span>
-                    <h3>Asisten Praktikum DevOps</h3>
-                    <p class="cert-issuer">STT Terpadu Nurul Fikri</p>
-                    <p class="cert-date">Genap 2023/2024</p>
-                </div>
-            </div>
-
+            @endforeach
         </div>
     </div>
 
@@ -723,12 +585,37 @@
             </div>
 
             <div class="contact-main-panel">
-                <div class="contact-cards contact-cards-minimal">
-                    <div class="ct-card"><i class="fab fa-linkedin"></i><div><strong>{{ __('contact.linkedin') }}</strong><span><a href="https://www.linkedin.com/in/muzaki-abdullah-irsyad-893a98220/" target="_blank">LinkedIn</a></span></div></div>
-                    <div class="ct-card"><i class="fab fa-github"></i><div><strong>{{ __('contact.github') }}</strong><span><a href="https://github.com/Muzaki29" target="_blank">@Muzaki29</a></span></div></div>
-                    <div class="ct-card"><i class="fas fa-envelope"></i><div><strong>{{ __('contact.email') }}</strong><span><a href="mailto:contact@muzakiabdullahirsyad.my.id">contact@muzakiabdullahirsyad.my.id</a></span></div></div>
-                    <div class="ct-card"><i class="fas fa-map-marker-alt"></i><div><strong>{{ __('contact.location') }}</strong><span>Jakarta, Indonesia</span></div></div>
+                @php
+                    $p = $profile;
+                    $contactLinks = [
+                        __('contact.group_reach') => [
+                            ['icon' => 'fas fa-envelope', 'name' => 'Email', 'href' => 'mailto:'.$p['contact_email'], 'text' => $p['contact_email'], 'hint' => __('contact.cta_email')],
+                            ['icon' => 'fab fa-linkedin', 'name' => 'LinkedIn', 'href' => $p['linkedin_url'], 'text' => 'Muzaki Abdullah Irsyad', 'hint' => __('contact.cta_linkedin')],
+                        ],
+                        __('contact.group_work') => [
+                            ['icon' => 'fab fa-github', 'name' => 'GitHub', 'href' => $p['github_username'] ? 'https://github.com/'.$p['github_username'] : null, 'text' => '@'.$p['github_username'], 'hint' => __('contact.cta_github')],
+                            ['icon' => 'fab fa-dribbble', 'name' => 'Dribbble', 'href' => $p['dribbble_url'], 'text' => 'Muzaki Abdullah Irsyad', 'hint' => __('contact.cta_dribbble')],
+                            ['icon' => 'fab fa-pinterest', 'name' => 'Pinterest', 'href' => $p['pinterest_url'], 'text' => $p['pinterest_label'], 'hint' => __('contact.cta_pinterest')],
+                            ['icon' => 'fab fa-instagram', 'name' => 'Instagram', 'href' => $p['instagram_username'] ? 'https://www.instagram.com/'.$p['instagram_username'].'/' : null, 'text' => '@'.$p['instagram_username'], 'hint' => __('contact.cta_instagram')],
+                            ['icon' => 'fab fa-threads', 'name' => 'Threads', 'href' => $p['threads_username'] ? 'https://www.threads.com/@'.$p['threads_username'] : null, 'text' => '@'.$p['threads_username'], 'hint' => __('contact.cta_threads')],
+                        ],
+                    ];
+                @endphp
+                @foreach($contactLinks as $group => $links)
+                <div class="contact-group">
+                    <h3 class="contact-group-title">{{ $group }}</h3>
+                    <div class="contact-cards contact-cards-minimal">
+                        @foreach($links as $link)
+                        @continue(! $link['href'])
+                        <a class="ct-card ct-card-link" href="{{ $link['href'] }}" @unless(str_starts_with($link['href'], 'mailto:')) target="_blank" rel="noopener" @endunless aria-label="{{ $link['name'] }} — {{ $link['hint'] }}">
+                            <i class="{{ $link['icon'] }}" aria-hidden="true"></i>
+                            <div><strong>{{ $link['name'] }}</strong><span>{{ $link['text'] }}</span></div>
+                            <em class="ct-card-cta">{{ $link['hint'] }} <i class="fas fa-arrow-right" aria-hidden="true"></i></em>
+                        </a>
+                        @endforeach
+                    </div>
                 </div>
+                @endforeach
 
                 <div class="form-card form-card-minimal">
                 <h3>{{ __('contact.form_title') }}</h3>
@@ -782,9 +669,10 @@
                 <a href="#contact">{{ __('footer.contact') }}</a>
             </nav>
             <div class="footer-soc footer-soc-clean">
-                <a href="https://www.linkedin.com/in/muzaki-abdullah-irsyad-893a98220/" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
-                <a href="https://github.com/Muzaki29" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
-                <a href="mailto:contact@muzakiabdullahirsyad.my.id" aria-label="Email"><i class="fas fa-envelope"></i></a>
+                @foreach(collect($contactLinks)->flatten(1) as $link)
+                @continue(! $link['href'])
+                <a href="{{ $link['href'] }}" @unless(str_starts_with($link['href'], 'mailto:')) target="_blank" rel="noopener" @endunless aria-label="{{ $link['name'] }}"><i class="{{ $link['icon'] }}"></i></a>
+                @endforeach
             </div>
         </div>
         <div class="footer-export-bar">
@@ -805,6 +693,7 @@
 <button class="back-top" id="backTop" aria-label="Back to top"><i class="fas fa-arrow-up"></i></button>
 
 {{-- ── AI CHATBOT WIDGET ── --}}
+@if(config('services.gemini.enabled'))
 <div class="ai-chat-widget" id="aiChatWidget">
     <button class="ai-chat-bubble" id="aiChatBubble" aria-label="{{ __('chatbot.header_title') }}" aria-controls="aiChatWindow" aria-expanded="false">
         <i class="fas fa-robot ai-bubble-icon" aria-hidden="true"></i>
@@ -835,23 +724,24 @@
         </form>
     </div>
 </div>
+@endif
 
 @php
-    $exportProjects = collect(config('portfolio.works_projects', []))
-        ->map(fn ($p) => __($p['title_key'] ?? ''))
+    $exportProjects = collect($worksProjects)
+        ->map(fn ($p) => $p['title'] ?? '')
         ->filter()
         ->values()
         ->all();
-    $exportExperience = [
-        ['role' => __('experience.role_pranata'), 'meta' => __('experience.comp_pranata') . ' · ' . __('experience.date_pranata'), 'desc' => __('experience.desc_pranata_short')],
-        ['role' => __('experience.role_onexpert'), 'meta' => __('experience.comp_onexpert') . ' · ' . __('experience.date_onexpert'), 'desc' => __('experience.desc_onexpert_short')],
-        ['role' => __('experience.role_lecturer_short'), 'meta' => __('experience.comp_lecturer') . ' · ' . __('experience.date_lecturer'), 'desc' => __('experience.desc_lecturer_short')],
-    ];
+    $exportExperience = $experiences->map(fn ($e) => [
+        'role' => $e->v('role'),
+        'meta' => collect([$e->v('company'), $e->v('period')])->filter()->implode(' · '),
+        'desc' => $e->v('description'),
+    ])->values()->all();
     $portfolioExport = [
         'name' => 'Muzaki Abdullah Irsyad',
         'tagline' => __('hero.tagline'),
         'taglineShort' => __('hero.tagline_short'),
-        'about' => __('about.description'),
+        'about' => $profile['about_description'],
         'years' => __('hero.years_value'),
         'projectsLabel' => __('hero.stat_projects'),
         'rolesLabel' => __('hero.stat_roles'),
@@ -863,7 +753,7 @@
         'projectsTitle' => __('works.title'),
         'projects' => $exportProjects,
         'contactTitle' => __('contact.title'),
-        'contactEmail' => 'contact@muzakiabdullahirsyad.my.id',
+        'contactEmail' => $profile['contact_email'],
         'contactLinkedIn' => 'linkedin.com/in/muzaki-abdullah-irsyad-893a98220',
         'contactGithub' => 'github.com/Muzaki29',
         'website' => 'muzakiabdullahirsyad.my.id',
@@ -884,7 +774,7 @@ window.i18n = {
 };
 window.portfolioExport = @json($portfolioExport);
 </script>
-<script src="{{ asset('js/portfolio.js') }}?v=4.0" defer></script>
+<script src="{{ asset('js/portfolio.js') }}?v=4.1" defer></script>
 <script src="{{ asset('js/portfolio-export.js') }}?v=2.0" defer></script>
 </body>
 </html>

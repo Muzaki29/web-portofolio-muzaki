@@ -47,7 +47,8 @@ class ContactController extends Controller
         }
 
         try {
-            Mail::to(config('mail.from.address'))->send(
+            // Deliver to the contact email set in admin (Profil & Kontak), else the mail sender address.
+            Mail::to(\App\Models\Setting::get('contact_email', config('mail.from.address')))->send(
                 new ContactMail(
                     $request->name,
                     $request->email,

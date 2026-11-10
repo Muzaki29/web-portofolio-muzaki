@@ -36,8 +36,9 @@ section[id] { scroll-margin-top: 95px; }
 .project-grid-card { background: transparent; border: 0; border-radius: 0; backdrop-filter: none; -webkit-backdrop-filter: none; overflow: visible; transition: none; box-shadow: none; }
 .project-grid-card:hover { transform: none; box-shadow: none; }
 .project-featured { grid-column: 1 / -1; display: grid; grid-template-columns: 1.5fr 1fr; gap: 2rem; align-items: center; padding-bottom: 3rem; border-bottom: 1px solid var(--border); }
-.pgc-image { padding: 1.5rem; border-radius: 3px; aspect-ratio: 16/10; overflow: hidden; }
-.pgc-image img { border-radius: 2px; transform: none; width: 100%; height: 100%; object-fit: cover; object-position: top center; transition: transform .7s var(--motion-ease); }
+/* Show each screenshot at its own ratio so nothing is cropped (uploads are 16:9, older ones 16:10). */
+.pgc-image { padding: 1.5rem; border-radius: 3px; aspect-ratio: auto; overflow: hidden; align-items: flex-start; }
+.pgc-image img { border-radius: 2px; transform: none; width: 100%; height: auto; object-fit: contain; transition: transform .7s var(--motion-ease); }
 .project-grid-card:hover .pgc-image img { transform: scale(1.035); }
 .project-index { position: absolute; bottom: .6rem; left: 1.5rem; color: var(--cream); font: .6rem 'Fira Code', monospace; letter-spacing: .1em; }
 .pgc-info { padding: 1.25rem 0 0; }

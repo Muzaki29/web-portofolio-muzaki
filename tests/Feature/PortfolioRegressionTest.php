@@ -11,6 +11,13 @@ use Tests\TestCase;
 
 class PortfolioRegressionTest extends TestCase
 {
+    protected function setUp(): void
+    {
+        parent::setUp();
+        // The chatbot ships disabled; these tests cover its behaviour when it is switched on.
+        config(['services.gemini.enabled' => true]);
+    }
+
     public function test_home_keeps_professional_content_and_existing_integrations(): void
     {
         $this->get('/')

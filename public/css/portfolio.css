@@ -111,7 +111,12 @@ body {
     color: var(--cream);
     text-transform: uppercase;
     white-space: nowrap;
+    display: inline-flex;
+    align-items: center;
 }
+.nav-brand-logo { height: 26px; width: auto; fill: #c8102e; display: block; }
+[data-theme="light"] .nav-brand-logo { fill: var(--cream); }
+@media (max-width: 600px) { .nav-brand-logo { height: 22px; } }
 
 .nav-pill {
     display: flex; list-style: none; gap: .15rem;
@@ -3198,6 +3203,7 @@ body.is-exporting .exp-raymond-section,
     left: auto;
 }
 .back-top {
+    left: auto;
     right: max(24px, env(safe-area-inset-right, 24px));
     bottom: max(92px, calc(env(safe-area-inset-bottom, 20px) + 72px));
 }
@@ -3502,6 +3508,40 @@ body.is-exporting .exp-raymond-section,
 }
 [data-theme="light"] .exp-topic-desc { color: var(--txt2); }
 
+/* Location line + short highlight list (managed from the admin CMS). */
+.exp-topic-location {
+    font-size: .74rem;
+    color: rgba(26, 26, 26, 0.5);
+    margin: -.55rem 0 .75rem;
+}
+.exp-topic-highlights {
+    list-style: none;
+    margin: .85rem 0 0;
+    padding: 0;
+    display: grid;
+    gap: .4rem;
+    max-width: 34ch;
+}
+.exp-topic-highlights li {
+    position: relative;
+    padding-left: 1rem;
+    font-size: .8rem;
+    line-height: 1.55;
+    color: rgba(26, 26, 26, 0.7);
+}
+.exp-topic-highlights li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: .6em;
+    width: .4rem;
+    height: 1px;
+    background: var(--maroon);
+}
+[data-theme="light"] .exp-topic-location,
+[data-theme="light"] .exp-topic-highlights li { color: var(--txt2); }
+button.exp-topic-link { background: none; border: 0; padding: 0; cursor: pointer; font: inherit; }
+
 .exp-topic-link {
     display: inline-flex;
     align-items: center;
@@ -3729,3 +3769,35 @@ body.is-exporting .exp-raymond-section,
         right: max(14px, env(safe-area-inset-right, 14px));
     }
 }
+
+/* Contact channels grouped: "Hubungi Saya" / "Karya & Konten" (links managed in admin). */
+.contact-group + .contact-group { margin-top: 1.5rem; }
+.contact-group-title {
+    font-family: 'Fira Code', monospace;
+    font-size: .7rem;
+    font-weight: 500;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--txt2);
+    margin: 0 0 .75rem;
+}
+.contact-group + .form-card { margin-top: 1.5rem; }
+a.ct-card-link { text-decoration: none; color: inherit; }
+.ct-card-link > div { min-width: 0; flex: 1; }
+.ct-card-link span { display: block; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.ct-card-cta {
+    margin-left: auto;
+    font-style: normal;
+    font-size: .72rem;
+    color: var(--txt2);
+    white-space: nowrap;
+    display: inline-flex;
+    align-items: center;
+    gap: .35rem;
+    opacity: .75;
+    transition: opacity .2s, color .2s;
+}
+.ct-card-cta i { font-size: .65rem !important; width: auto !important; color: inherit !important; }
+.ct-card-link:hover .ct-card-cta,
+.ct-card-link:focus-visible .ct-card-cta { opacity: 1; color: var(--blue2); }
+@media (max-width: 600px) { .ct-card-cta { display: none; } }

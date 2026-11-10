@@ -595,6 +595,7 @@
     function openCertByKey(certKey) {
         if (!certKey) return;
         const targetCard = $$('.cert-card').find(card => {
+            if (card.getAttribute('data-cert-key') === certKey) return true;
             const img = card.getAttribute('data-cert-img') || '';
             const title = card.getAttribute('data-cert-title') || '';
             return img.toLowerCase().includes(certKey) || title.toLowerCase().includes(certKey);

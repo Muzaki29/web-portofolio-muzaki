@@ -49,7 +49,8 @@ class SecurityHeaders
             "base-uri 'self'",
             "form-action 'self'",
             "frame-ancestors 'none'",
-            "upgrade-insecure-requests",
+            // Only over HTTPS: on plain-http local dev it rewrites redirects to https and breaks them.
+            ...($request->isSecure() ? ['upgrade-insecure-requests'] : []),
         ]);
         $response->headers->set('Content-Security-Policy', $csp);
 

@@ -77,7 +77,7 @@ return [
     'works_projects' => [
         [
             'gradient' => 'pc-g1',
-            'image' => 'images/project_merchband.png',
+            'image' => 'images/project_merchband_v2.webp',
             'placeholder_icon' => 'fas fa-shirt',
             'placeholder_label' => 'PMO Merch',
             'title_key' => 'works.merchband_title',
@@ -98,7 +98,7 @@ return [
         ],
         [
             'gradient' => 'pc-g5',
-            'image' => 'images/project_syahdulab.png',
+            'image' => 'images/project_syahdulab_v2.webp',
             'placeholder_icon' => 'fas fa-palette',
             'placeholder_label' => 'SyahduLab',
             'title_key' => 'works.syahdulab_title',
@@ -119,7 +119,7 @@ return [
         ],
         [
             'gradient' => 'pc-g3',
-            'image' => 'images/project_jagadproperty.png',
+            'image' => 'images/project_jagadproperty_v2.webp',
             'placeholder_icon' => 'fas fa-home',
             'placeholder_label' => 'Jagad Property',
             'title_key' => 'works.jagad_title',
@@ -140,7 +140,7 @@ return [
         ],
         [
             'gradient' => 'pc-g4',
-            'image' => 'images/project_cuci_motor.png',
+            'image' => 'images/project_cuci_motor_v2.webp',
             'placeholder_icon' => 'fas fa-motorcycle',
             'placeholder_label' => 'Cumo',
             'title_key' => 'works.cumo_title',

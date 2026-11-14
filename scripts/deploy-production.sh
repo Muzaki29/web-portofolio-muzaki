@@ -89,6 +89,9 @@ npm ci --include=dev
 npm run build
 test -s public/build/manifest.json
 test ! -e public/hot
+# The deploy shell runs with umask 077; make application code and vendor readable by the PHP-FPM/nginx user.
+# Excludes .env, storage and the database directory (its metadata is verified above).
+chmod -R u=rwX,go=rX app bootstrap/app.php bootstrap/providers.php config database/migrations database/seeders lang public resources routes artisan vendor
 php artisan migrate --force
 php artisan db:seed --force
 php artisan storage:link --force

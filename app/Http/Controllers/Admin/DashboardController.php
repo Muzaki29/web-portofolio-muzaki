@@ -78,6 +78,8 @@ class DashboardController extends Controller
                     'missing' => array_keys(array_filter($checks, fn ($ok) => ! $ok)),
                 ];
             })->sortBy('percent')->values(),
+            // Hostinger Mail summary (cached by the service; never blocks the dashboard on API errors).
+            'mail' => $this->mailSummary(),
             'content' => [
                 'projects' => $projects->count(),
                 'experience' => (int) ($counts['experience'] ?? 0),
@@ -93,5 +95,35 @@ class DashboardController extends Controller
                 'updated_at' => $p->updated_at?->diffForHumans(),
             ])->values(),
         ]);
+    }
+
+    private function mailSummary(): ?array
+    {
+        $mail = app(\App\Services\HostingerMail::class);
+        if (! $mail->enabled()) {
+            return null;
+        }
+
+        return rescue(function () use ($mail) {
+            $box = $mail->mailboxes()[0] ?? null;
+            if (! $box) {
+                return null;
+            }
+            $inbox = collect($mail->folders($box['resourceId']))->firstWhere('path', 'INBOX') ?? [];
+            $latest = $mail->messages($box['resourceId'], 'INBOX', 1, 4)['data'];
+
+            return [
+                'address' => $box['address'],
+                'unread' => (int) ($inbox['unreadCount'] ?? 0),
+                'total' => (int) ($inbox['messageCount'] ?? 0),
+                'latest' => array_map(fn ($m) => [
+                    'uid' => $m['uid'],
+                    'from' => $m['from']['name'] ?? $m['from']['address'] ?? '',
+                    'subject' => $m['subject'] ?? '',
+                    'unseen' => (bool) ($m['unseen'] ?? false),
+                    'date' => $m['date'] ?? null,
+                ], $latest),
+            ];
+        }, ['error' => true], false);
     }
 }

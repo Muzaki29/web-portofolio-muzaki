@@ -35,6 +35,12 @@ return [
         ],
     ],
 
+    // Read-only mailbox monitor in the admin (Hostinger Mail API token from hPanel → Email → Developer).
+    'hostinger_mail' => [
+        'token' => env('HOSTINGER_MAIL_TOKEN'),
+        'base_url' => env('HOSTINGER_MAIL_BASE_URL', 'https://api.mail.hostinger.com'),
+    ],
+
     // Admin sign-in with Google. Only emails that already exist as admin users may log in.
     'google' => [
         'client_id' => env('GOOGLE_CLIENT_ID'),

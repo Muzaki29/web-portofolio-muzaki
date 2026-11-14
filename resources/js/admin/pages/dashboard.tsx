@@ -10,6 +10,7 @@ import {
   FolderKanban,
   GraduationCap,
   Laptop,
+  Mail,
   Plus,
   Smartphone,
   TrendingDown,
@@ -48,6 +49,7 @@ type Props = {
   landingViews: number
   completeness: { id: number; title: string; featured: boolean; percent: number; missing: string[] }[]
   content: { projects: number; experience: number; timeline: number; certificate: number; drafts: number }
+  mail: null | { error: true } | { error?: undefined; address: string; unread: number; total: number; latest: { uid: number; from: string; subject: string; unseen: boolean; date: string | null }[] }
 }
 
 const fmtDay = (d: string) => new Date(d).toLocaleDateString('id-ID', { day: 'numeric', month: 'short' })
@@ -71,7 +73,7 @@ function Sparkline({ data, dataKey }: { data: Point[]; dataKey: 'views' | 'visit
   )
 }
 
-export default function Dashboard({ range, visits, caseStudies, landingViews, completeness, content }: Props) {
+export default function Dashboard({ range, visits, caseStudies, landingViews, completeness, content, mail }: Props) {
   const { auth } = usePage<SharedProps>().props
   const [metric, setMetric] = useState<'views' | 'visitors'>('views')
   const firstName = (auth.user?.name ?? '').split(' ')[0]
@@ -184,6 +186,32 @@ export default function Dashboard({ range, visits, caseStudies, landingViews, co
         </Card>
 
         <div className="grid content-start gap-4">
+          <Card>
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2"><Mail className="size-4" />Email</CardTitle>
+              <CardDescription>{mail && !mail.error ? mail.address : 'Hostinger Mail'}</CardDescription>
+              <CardAction><Button size="sm" variant="ghost" asChild><Link href="/admin/mail">Buka</Link></Button></CardAction>
+            </CardHeader>
+            <CardContent className="grid gap-3">
+              {!mail && <p className="text-muted-foreground text-sm">Belum terhubung. Isi HOSTINGER_MAIL_TOKEN di .env untuk memantau kotak masuk.</p>}
+              {mail?.error && <p className="text-destructive text-sm">Tidak bisa mengambil data email. Buka halaman Email untuk detail.</p>}
+              {mail && !mail.error && (
+                <>
+                  <div className="flex items-baseline gap-2"><span className="text-3xl font-semibold tabular-nums">{mail.unread}</span><span className="text-muted-foreground text-sm">belum dibaca dari {mail.total}</span></div>
+                  <ul className="grid gap-1">
+                    {mail.latest.map((m) => (
+                      <li key={m.uid}><Link href="/admin/mail" className="hover:bg-accent -mx-2 flex items-center gap-2 rounded-md px-2 py-1.5 text-sm">
+                        {m.unseen ? <span className="bg-primary size-1.5 shrink-0 rounded-full" /> : <span className="size-1.5 shrink-0" />}
+                        <span className={m.unseen ? 'truncate font-medium' : 'text-muted-foreground truncate'}>{m.subject || '(tanpa subjek)'}</span>
+                        <span className="text-muted-foreground ml-auto max-w-[40%] shrink-0 truncate text-xs">{m.from}</span>
+                      </Link></li>
+                    ))}
+                  </ul>
+                </>
+              )}
+            </CardContent>
+          </Card>
+
           <Card>
             <CardHeader>
               <CardTitle>Perangkat</CardTitle>

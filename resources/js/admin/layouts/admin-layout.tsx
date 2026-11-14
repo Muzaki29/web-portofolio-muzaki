@@ -5,6 +5,7 @@ import {
   FolderKanban,
   GraduationCap,
   LayoutDashboard,
+  Mail,
   LogOut,
   Moon,
   Sun,
@@ -62,6 +63,7 @@ const contentNav = [
   { label: 'Timeline', href: '/admin/content/timeline', icon: GraduationCap },
   { label: 'Sertifikat', href: '/admin/content/certificate', icon: Award },
   { label: 'Profil & Kontak', href: '/admin/settings', icon: UserRound },
+  { label: 'Email', href: '/admin/mail', icon: Mail },
 ] as { label: string; href: string | null; icon: typeof Award }[]
 
 function useTheme() {

@@ -26,7 +26,7 @@
         '@context' => 'https://schema.org',
         '@type' => 'Person',
         'name' => 'Muzaki Abdullah Irsyad',
-        'jobTitle' => 'Full-Stack Developer',
+        'jobTitle' => 'AI-assisted Developer',
         'url' => url('/'),
         'email' => 'mailto:'.$profile['contact_email'],
         'image' => asset('images/mai-social.png'),
@@ -53,7 +53,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Syne:wght@700;800&family=Fira+Code:wght@400;500&family=Playfair+Display:ital,wght@0,500;0,700;1,500;1,700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <link rel="stylesheet" href="{{ asset('css/portfolio.css') }}?v=4.4">
-    <link rel="stylesheet" href="{{ asset('css/work.css') }}?v=1.4">
+    <link rel="stylesheet" href="{{ asset('css/work.css') }}?v=2.8">
     @vite('resources/js/motion/index.js')
     <noscript><style>
         .skills-panel { display: block !important; margin-bottom: 2rem; }
@@ -91,7 +91,7 @@
             </svg>
         </a>
 
-        <ul class="nav-pill" id="navMenu">
+        <ul class="nav-pill nav-v2" id="navMenu">
             <li><a href="#about"          class="nav-link">{{ __('nav.about') }}</a></li>
             <li><a href="#works"          class="nav-link">{{ __('nav.works') }}</a></li>
             <li><a href="#skills"         class="nav-link">{{ __('nav.skills') }}</a></li>
@@ -143,20 +143,21 @@
         </div>
 
         <div class="hero-v2-base">
-            <p class="hero-v2-role"><span>01/</span> Full-Stack<br>Developer</p>
+            <p class="hero-v2-role"><span>01/</span> AI-assisted<br>Developer</p>
             <h1 class="hero-name hero-v2-name" aria-label="Muzaki Abdullah Irsyad">
                 <span class="hero-line"><span>Muzaki<span class="hero-period" aria-hidden="true">.</span></span></span>
                 <span class="hero-v2-surname" aria-hidden="true">Abdullah Irsyad</span>
             </h1>
             <p class="hero-v2-meta">© {{ date('Y') }}<br>{{ $profile['location'] }}</p>
         </div>
+        <div class="hero-v2-ruler" aria-hidden="true"><span>© {{ date('Y') }}</span><i></i><span>JKT</span></div>
     </div>
 </section>
 
 <div class="name-marquee" aria-hidden="true">
     <div class="marquee-track">
         @for ($i = 0; $i < 10; $i++)
-        <span>FULL-STACK DEVELOPER · QA ENGINEERING · SYSTEM ANALYSIS · LINUX &amp; NETWORKING • </span>
+        <span>AI-ASSISTED DEVELOPER · FULL-STACK · QA ENGINEERING · SYSTEM ANALYSIS • </span>
         @endfor
     </div>
 </div>
@@ -195,8 +196,10 @@
 {{-- ── ABOUT ── --}}
 <section class="about-section" id="about" tabindex="-1">
     <div class="container">
-        <div style="text-align:center"><span class="sec-label">About</span></div>
-        <h2 class="section-title">{{ $profile['about_title'] }}</h2>
+        <header class="w-head">
+            <span class="w-head-label">{{ __('label.about') }}</span>
+            <h2 class="w-head-title">{{ $profile['about_title'] }}</h2>
+        </header>
         <p class="about-desc">{{ $profile['about_description'] }}</p>
 
         <div class="details-grid details-grid-minimal">
@@ -251,10 +254,11 @@
             ->filter(fn ($c) => $c['count'] > 0)->values();
     @endphp
     <div class="w-container">
-        <div class="w-section-head">
-            <h2 id="works-title">{{ __('work.featured_title') }}</h2>
-            <p>{{ __('work.featured_lead') }}</p>
-        </div>
+        <header class="w-head">
+            <span class="w-head-label">{{ __('nav.works') }}</span>
+            <h2 class="w-head-title" id="works-title">{{ __('work.featured_title') }}</h2>
+            <p class="w-head-lead">{{ __('work.featured_lead') }}</p>
+        </header>
 
         <div class="w-featured">
             @foreach($featuredWorks as $project)
@@ -289,10 +293,10 @@
     </div>
 
     <div class="w-container" style="margin-top: var(--w-s9)">
-        <div class="w-section-head">
-            <h2 id="library-title">{{ __('work.library_title') }}</h2>
-            <p>{{ __('work.library_lead') }} <span id="libraryCount" aria-live="polite">{{ __('work.count', ['count' => count($worksProjects)]) }}</span></p>
-        </div>
+        <header class="w-head w-head-sub">
+            <h3 class="w-head-title" id="library-title">{{ __('work.library_title') }}</h3>
+            <p class="w-head-lead">{{ __('work.library_lead') }} <span id="libraryCount" aria-live="polite">{{ __('work.count', ['count' => count($worksProjects)]) }}</span></p>
+        </header>
 
         <div class="w-filters" role="group" aria-label="{{ __('work.filter_label') }}">
             <button type="button" class="w-filter" data-filter="all" aria-pressed="true">{{ __('work.cat_all') }}<span>{{ count($worksProjects) }}</span></button>
@@ -303,7 +307,7 @@
 
         <div class="w-library" id="projectLibrary" data-count-template="{{ __('work.count', ['count' => '__N__']) }}">
             @foreach($worksProjects as $project)
-            <article class="w-card" data-category="{{ $project['category'] ?: 'web' }}">
+            <article class="w-card" data-reveal data-category="{{ $project['category'] ?: 'web' }}">
                 <div class="w-card-media"><img src="{{ $workImg($project) }}" alt="{{ $project['title'] }} — {{ $project['project_type'] ?: __('motion.preview') }}" width="1672" height="941" loading="lazy" decoding="async"></div>
                 <div class="w-card-body">
                     <div class="w-card-top">
@@ -330,9 +334,11 @@
 {{-- ── SKILLS ── --}}
 <section class="skills-section" id="skills">
     <div class="container">
-        <div style="text-align:center"><span class="sec-label">Skills</span></div>
-        <h2 class="section-title">{{ __('skills.title') }}</h2>
-        <p class="section-subtitle">Teknologi yang paling sering saya gunakan untuk membangun sistem handal</p>
+        <header class="w-head">
+            <span class="w-head-label">{{ __('label.skills') }}</span>
+            <h2 class="w-head-title">{{ __('skills.title') }}</h2>
+            <p class="w-head-lead">Teknologi yang paling sering saya gunakan untuk membangun sistem handal</p>
+        </header>
 
         <div class="skills-tabs">
             <button class="tab-btn active" data-tab="languages"><i class="fas fa-code"></i> Languages</button>
@@ -443,11 +449,11 @@
 {{-- ── WORK EXPERIENCE (Raymond-style topics) ── --}}
 <section class="experience-section exp-raymond-section" id="experience">
     <div class="container">
-        <div class="exp-raymond-head">
-            <span class="sec-label">{{ __('experience.sec_label') }}</span>
-            <h2 class="section-title exp-raymond-title">{{ __('experience.title') }}<span class="exp-raymond-accent">.</span></h2>
-            <p class="exp-raymond-lead">{{ __('experience.subtitle') }}</p>
-        </div>
+        <header class="w-head">
+            <span class="w-head-label">{{ __('experience.sec_label') }}</span>
+            <h2 class="w-head-title">{{ __('experience.title') }}</h2>
+            <p class="w-head-lead">{{ __('experience.subtitle') }}</p>
+        </header>
 
         <div class="exp-topics-grid">
             @foreach($experiences as $exp)
@@ -491,11 +497,13 @@
 {{-- ── TIMELINE / JOURNEY ── --}}
 <section class="timeline-section" id="timeline">
     <div class="container">
-        <div style="text-align:center"><span class="sec-label">Journey</span></div>
-        <h2 class="section-title">{{ __('timeline.title') }}</h2>
-        <p class="section-subtitle timeline-intro-sub">{{ __('timeline.subtitle') }}</p>
+        <header class="w-head">
+            <span class="w-head-label">{{ __('label.journey') }}</span>
+            <h2 class="w-head-title">{{ __('timeline.title') }}</h2>
+            <p class="w-head-lead">{{ __('timeline.subtitle') }}</p>
+        </header>
 
-        <div class="timeline-journey-layout">
+        <div class="timeline-journey-layout w-journey">
             <div class="timeline-story-art">
                 <img src="{{ asset('images/journey-story.webp') }}"
                      alt="{{ __('timeline.story_alt') }}"
@@ -503,15 +511,17 @@
                      width="900" height="1200">
             </div>
 
-            <div class="tl-items tl-items-compact">
+            <ol class="w-rows">
             @foreach($timelineItems as $item)
             @php $certKey = $item->v('cert_key'); @endphp
-            <div class="tl-item {{ $certKey ? 'tl-item-cert' : '' }}" @if($certKey) role="button" tabindex="0" data-open-cert="{{ $certKey }}" @endif>
-                <div class="tl-date">{{ $item->v('period') }}</div>
-                <div class="tl-content"><h3>{{ $item->v('title') }}</h3></div>
-            </div>
+            <li class="w-row {{ $certKey ? 'w-row-link tl-item-cert' : '' }}" data-reveal @if($certKey) role="button" tabindex="0" data-open-cert="{{ $certKey }}" @endif>
+                <span class="w-row-num">{{ str_pad($loop->iteration, 2, '0', STR_PAD_LEFT) }}</span>
+                <span class="w-row-title">{{ $item->v('title') }}</span>
+                <span class="w-row-meta">{{ $item->v('period') }}</span>
+            </li>
             @endforeach
-            </div>
+            </ol>
+</div>
         </div>
 
         <div class="achievements">
@@ -536,13 +546,14 @@
 {{-- ── DEVELOPMENT PROCESS ── --}}
 <section class="w-section" id="process" aria-labelledby="process-title">
     <div class="w-container">
-        <div class="w-section-head">
-            <h2 id="process-title">{{ __('process.title') }}</h2>
-            <p>{{ __('process.lead') }}</p>
-        </div>
+        <header class="w-head">
+            <span class="w-head-label">{{ __('label.process') }}</span>
+            <h2 class="w-head-title" id="process-title">{{ __('process.title') }}</h2>
+            <p class="w-head-lead">{{ __('process.lead') }}</p>
+        </header>
         <ol class="w-process">
             @foreach(['discover', 'design', 'build', 'test', 'document'] as $step)
-            <li class="w-process-step">
+            <li class="w-process-step" data-reveal>
                 <span class="w-eyebrow-num">{{ str_pad($loop->iteration, 2, '0', STR_PAD_LEFT) }}</span>
                 <h3>{{ __('process.'.$step.'_title') }}</h3>
                 <p>{{ __('process.'.$step.'_desc') }}</p>
@@ -557,9 +568,11 @@
 {{-- ── CERTIFICATIONS ── --}}
 <section class="certs-section" id="certifications">
     <div class="container">
-        <div style="text-align:center"><span class="sec-label">Credentials</span></div>
-        <h2 class="section-title">{{ __('certs.title') }}</h2>
-        <p class="section-subtitle">{{ __('certs.subtitle') }}</p>
+        <header class="w-head">
+            <span class="w-head-label">{{ __('label.credentials') }}</span>
+            <h2 class="w-head-title">{{ __('certs.title') }}</h2>
+            <p class="w-head-lead">{{ __('certs.subtitle') }}</p>
+        </header>
         
         <div class="certs-visual-grid">
             @foreach($certificates as $cert)
@@ -637,57 +650,33 @@
 @endif
 
 {{-- ── CONTACT ── --}}
-<section class="contact-section" id="contact">
-    <div class="container">
-        <div style="text-align:center"><span class="sec-label">Contact</span></div>
-        <h2 class="section-title">{{ __('contact.title') }}</h2>
-        <p class="section-subtitle">{{ __('contact.subtitle') }}</p>
+<section class="contact-section w-contact" id="contact" aria-labelledby="contact-title">
+    <img class="w-contact-photo" src="{{ asset('images/contact-lets-talk.webp') }}"
+         alt="{{ __('contact.visual_alt') }}" width="576" height="1024" loading="lazy" decoding="async">
+    <div class="w-contact-overlay w-container">
+        <h2 class="sr-only" id="contact-title">{{ __('contact.title') }}</h2>
+        <div class="w-contact-actions">
+            <button type="button" class="w-contact-btn w-contact-btn-primary" data-open-contact>
+                <i class="fas fa-paper-plane" aria-hidden="true"></i> {{ __('contact.form_title') }}
+            </button>
+            <a class="w-contact-btn" href="mailto:{{ $profile['contact_email'] }}">
+                <i class="fas fa-envelope" aria-hidden="true"></i> {{ $profile['contact_email'] }}
+            </a>
+        </div>
+    </div>
+</section>
 
-        <div class="contact-layout">
-            <div class="contact-visual-panel">
-                <img src="{{ asset('images/contact-lets-talk.webp') }}"
-                     alt="{{ __('contact.visual_alt') }}"
-                     loading="lazy"
-                     width="800" height="1200">
-            </div>
-
-            <div class="contact-main-panel">
-                @php
-                    $p = $profile;
-                    $contactLinks = [
-                        __('contact.group_reach') => [
-                            ['icon' => 'fas fa-envelope', 'name' => 'Email', 'href' => 'mailto:'.$p['contact_email'], 'text' => $p['contact_email'], 'hint' => __('contact.cta_email')],
-                            ['icon' => 'fab fa-linkedin', 'name' => 'LinkedIn', 'href' => $p['linkedin_url'], 'text' => 'Muzaki Abdullah Irsyad', 'hint' => __('contact.cta_linkedin')],
-                        ],
-                        __('contact.group_work') => [
-                            ['icon' => 'fab fa-github', 'name' => 'GitHub', 'href' => $p['github_username'] ? 'https://github.com/'.$p['github_username'] : null, 'text' => '@'.$p['github_username'], 'hint' => __('contact.cta_github')],
-                            ['icon' => 'fab fa-dribbble', 'name' => 'Dribbble', 'href' => $p['dribbble_url'], 'text' => 'Muzaki Abdullah Irsyad', 'hint' => __('contact.cta_dribbble')],
-                            ['icon' => 'fab fa-pinterest', 'name' => 'Pinterest', 'href' => $p['pinterest_url'], 'text' => $p['pinterest_label'], 'hint' => __('contact.cta_pinterest')],
-                            ['icon' => 'fab fa-instagram', 'name' => 'Instagram', 'href' => $p['instagram_username'] ? 'https://www.instagram.com/'.$p['instagram_username'].'/' : null, 'text' => '@'.$p['instagram_username'], 'hint' => __('contact.cta_instagram')],
-                            ['icon' => 'fab fa-threads', 'name' => 'Threads', 'href' => $p['threads_username'] ? 'https://www.threads.com/@'.$p['threads_username'] : null, 'text' => '@'.$p['threads_username'], 'hint' => __('contact.cta_threads')],
-                        ],
-                    ];
-                @endphp
-                @foreach($contactLinks as $group => $links)
-                <div class="contact-group">
-                    <h3 class="contact-group-title">{{ $group }}</h3>
-                    <div class="contact-cards contact-cards-minimal">
-                        @foreach($links as $link)
-                        @continue(! $link['href'])
-                        <a class="ct-card ct-card-link" href="{{ $link['href'] }}" @unless(str_starts_with($link['href'], 'mailto:')) target="_blank" rel="noopener" @endunless aria-label="{{ $link['name'] }} — {{ $link['hint'] }}">
-                            <i class="{{ $link['icon'] }}" aria-hidden="true"></i>
-                            <div><strong>{{ $link['name'] }}</strong><span>{{ $link['text'] }}</span></div>
-                            <em class="ct-card-cta">{{ $link['hint'] }} <i class="fas fa-arrow-right" aria-hidden="true"></i></em>
-                        </a>
-                        @endforeach
-                    </div>
-                </div>
-                @endforeach
-
-                <div class="form-card form-card-minimal">
-                <h3>{{ __('contact.form_title') }}</h3>
-                <p class="form-card-lead">{{ __('contact.form_desc') }}</p>
-                <form id="contactForm" class="contact-form" action="{{ route('contact.send') }}" method="POST">
+{{-- Contact form lives in a native dialog (focus trap + Esc built in). Messages go to the admin-set mailbox. --}}
+<dialog class="w-dialog" id="contactDialog" aria-labelledby="contactDialogTitle">
+    <div class="w-dialog-head">
+        <div>
+            <h3 id="contactDialogTitle">{{ __('contact.form_title') }}</h3>
+            <p>{{ __('contact.form_desc') }}</p>
+        </div>
+        <button type="button" class="w-dialog-close" data-close-contact aria-label="{{ __('motion.close') }}">&times;</button>
+    </div>
+    <div class="form-card form-card-minimal w-dialog-body">
+        <form id="contactForm" class="contact-form" action="{{ route('contact.send') }}" method="POST">
                         @csrf
                         <label class="sr-only" for="contactName">{{ __('contact.placeholder_name') }}</label>
                         <input id="contactName" type="text" name="name" autocomplete="name" maxlength="255" placeholder="{{ __('contact.placeholder_name') }}" required>
@@ -713,46 +702,74 @@
                         </button>
                         <div id="formMessage" class="form-msg" style="display:none" role="status" aria-live="polite"></div>
                     </form>
-                </div>
-            </div>
-        </div>
     </div>
-</section>
+</dialog>
 
 </main>{{-- /#portfolio-export --}}
 
 {{-- ── FOOTER ── --}}
-<footer class="footer-clean">
-    <div class="container">
-        <div class="footer-clean-top">
-            <div class="footer-clean-brand">
-                <span class="footer-logo">MUZAKI</span>
-                <p>{{ __('footer.tagline') }}</p>
+@php
+    $p = $profile;
+    $contactLinks = [
+        __('contact.group_reach') => [
+            ['icon' => 'fas fa-envelope', 'name' => 'Email', 'href' => 'mailto:'.$p['contact_email'], 'text' => $p['contact_email'], 'hint' => __('contact.cta_email')],
+            ['icon' => 'fab fa-linkedin', 'name' => 'LinkedIn', 'href' => $p['linkedin_url'], 'text' => 'Muzaki Abdullah Irsyad', 'hint' => __('contact.cta_linkedin')],
+        ],
+        __('contact.group_work') => [
+            ['icon' => 'fab fa-github', 'name' => 'GitHub', 'href' => $p['github_username'] ? 'https://github.com/'.$p['github_username'] : null, 'text' => '@'.$p['github_username'], 'hint' => __('contact.cta_github')],
+            ['icon' => 'fab fa-dribbble', 'name' => 'Dribbble', 'href' => $p['dribbble_url'], 'text' => 'Muzaki Abdullah Irsyad', 'hint' => __('contact.cta_dribbble')],
+            ['icon' => 'fab fa-pinterest', 'name' => 'Pinterest', 'href' => $p['pinterest_url'], 'text' => $p['pinterest_label'], 'hint' => __('contact.cta_pinterest')],
+            ['icon' => 'fab fa-instagram', 'name' => 'Instagram', 'href' => $p['instagram_username'] ? 'https://www.instagram.com/'.$p['instagram_username'].'/' : null, 'text' => '@'.$p['instagram_username'], 'hint' => __('contact.cta_instagram')],
+            ['icon' => 'fab fa-threads', 'name' => 'Threads', 'href' => $p['threads_username'] ? 'https://www.threads.com/@'.$p['threads_username'] : null, 'text' => '@'.$p['threads_username'], 'hint' => __('contact.cta_threads')],
+        ],
+    ];
+@endphp
+<footer class="footer-clean w-footer">
+    <div class="w-container">
+        {{-- CTA line --}}
+        <div class="w-footer-cta">
+            <p class="w-footer-kicker">{{ __('footer.cta_kicker') }}</p>
+            <a class="w-footer-mail" href="mailto:{{ $profile['contact_email'] }}">{{ $profile['contact_email'] }} <span aria-hidden="true">↗</span></a>
+        </div>
+
+        {{-- Columns: navigation (numbered), channels, export --}}
+        <div class="w-footer-grid">
+            <div>
+                <p class="w-footer-label">(01) {{ __('footer.col_nav') }}</p>
+                <nav class="w-footer-nav" aria-label="Footer">
+                    <a href="#about">{{ __('footer.about') }}</a>
+                    <a href="#works">{{ __('footer.works') }}</a>
+                    @if(\App\Models\Setting::flag('show_experience'))<a href="#experience">{{ __('nav.experience') }}</a>@endif
+                    @if(\App\Models\Setting::flag('show_certifications'))<a href="#certifications">{{ __('footer.certifications') }}</a>@endif
+                    <a href="#contact">{{ __('footer.contact') }}</a>
+                </nav>
             </div>
-            <nav class="footer-clean-nav" aria-label="Footer">
-                <a href="#about">{{ __('footer.about') }}</a>
-                <a href="#works">{{ __('footer.works') }}</a>
-                @if(\App\Models\Setting::flag('show_certifications'))<a href="#certifications">{{ __('footer.certifications') }}</a>@endif
-                <a href="#contact">{{ __('footer.contact') }}</a>
-            </nav>
-            <div class="footer-soc footer-soc-clean">
-                @foreach(collect($contactLinks)->flatten(1) as $link)
-                @continue(! $link['href'])
-                <a href="{{ $link['href'] }}" @unless(str_starts_with($link['href'], 'mailto:')) target="_blank" rel="noopener" @endunless aria-label="{{ $link['name'] }}"><i class="{{ $link['icon'] }}"></i></a>
-                @endforeach
+            <div>
+                <p class="w-footer-label">(02) {{ __('footer.col_social') }}</p>
+                <ul class="w-footer-social">
+                    @foreach(collect($contactLinks)->flatten(1) as $link)
+                    @continue(! $link['href'] || str_starts_with($link['href'], 'mailto:'))
+                    <li><a href="{{ $link['href'] }}" target="_blank" rel="noopener noreferrer"><i class="{{ $link['icon'] }}" aria-hidden="true"></i>{{ $link['name'] }}</a></li>
+                    @endforeach
+                </ul>
+            </div>
+            <div>
+                <p class="w-footer-label">(03) {{ __('footer.export_label') }}</p>
+                <div class="w-footer-export">
+                    <button type="button" class="w-footer-btn" id="exportPortfolioPdfFooter"><i class="fas fa-file-pdf" aria-hidden="true"></i> {{ __('footer.export_pdf') }}</button>
+                    <button type="button" class="w-footer-btn" id="exportPortfolioPptFooter"><i class="fas fa-file-powerpoint" aria-hidden="true"></i> {{ __('footer.export_ppt') }}</button>
+                    <a class="w-footer-btn" href="{{ asset('cv/muzaki-abdullah-irsyad.pdf') }}" download><i class="fas fa-download" aria-hidden="true"></i> {{ __('about.download_cv') }}</a>
+                </div>
             </div>
         </div>
-        <div class="footer-export-bar">
-            <span class="footer-export-label">{{ __('footer.export_label') }}</span>
-            <button type="button" class="btn btn-outline btn-sm footer-export-btn" id="exportPortfolioPdfFooter">
-                <i class="fas fa-file-pdf"></i> {{ __('footer.export_pdf') }}
-            </button>
-            <button type="button" class="btn btn-outline btn-sm footer-export-btn" id="exportPortfolioPptFooter">
-                <i class="fas fa-file-powerpoint"></i> {{ __('footer.export_ppt') }}
-            </button>
-        </div>
-        <div class="footer-clean-bottom">
-            <p>© {{ date('Y') }} Muzaki Abdullah Irsyad. {{ __('footer.rights') }}</p>
+
+        {{-- Giant wordmark + ruler, echoing the hero --}}
+        <p class="w-footer-word" aria-hidden="true">Muzaki<span>.</span></p>
+        <div class="w-footer-bottom">
+            <span>© {{ date('Y') }} Muzaki Abdullah Irsyad</span>
+            <i aria-hidden="true"></i>
+            <span>{{ __('footer.tagline') }}</span>
+            <a href="#hero" class="w-footer-top">{{ __('footer.back_top') }} ↑</a>
         </div>
     </div>
 </footer>
@@ -841,7 +858,7 @@ window.i18n = {
 };
 window.portfolioExport = @json($portfolioExport);
 </script>
-<script src="{{ asset('js/portfolio.js') }}?v=4.2" defer></script>
+<script src="{{ asset('js/portfolio.js') }}?v=4.4" defer></script>
 <script src="{{ asset('js/portfolio-export.js') }}?v=2.0" defer></script>
 </body>
 </html>

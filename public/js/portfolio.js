@@ -1003,3 +1003,33 @@
         if (count) count.textContent = template.replace('__N__', shown);
     }));
 })();
+
+/* Scroll reveal for [data-reveal]: staggered rows/cards, once. Skipped for reduced motion. */
+(function () {
+    const items = document.querySelectorAll('[data-reveal]');
+    if (!items.length || !('IntersectionObserver' in window) || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    document.documentElement.classList.add('js-reveal');
+    const io = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+            if (!entry.isIntersecting) return;
+            const siblings = [...entry.target.parentElement.children].filter(el => el.hasAttribute('data-reveal'));
+            entry.target.style.transitionDelay = Math.min(siblings.indexOf(entry.target), 8) * 60 + 'ms';
+            entry.target.classList.add('is-in');
+            io.unobserve(entry.target);
+        });
+    }, { rootMargin: '0px 0px -8% 0px', threshold: 0.12 });
+    items.forEach(el => io.observe(el));
+})();
+
+/* Contact dialog: native <dialog> (focus trap + Esc). Opens from [data-open-contact] or #contact-form links. */
+(function () {
+    const dialog = document.getElementById('contactDialog');
+    if (!dialog || typeof dialog.showModal !== 'function') return;
+    let opener = null;
+    const open = (from) => { opener = from || document.activeElement; dialog.showModal(); dialog.querySelector('input, textarea')?.focus(); };
+    document.querySelectorAll('[data-open-contact]').forEach(btn => btn.addEventListener('click', () => open(btn)));
+    dialog.querySelectorAll('[data-close-contact]').forEach(btn => btn.addEventListener('click', () => dialog.close()));
+    dialog.addEventListener('click', e => { if (e.target === dialog) dialog.close(); }); // click on backdrop
+    dialog.addEventListener('close', () => opener?.focus?.());
+    if (location.hash === '#contact-form') open();
+})();

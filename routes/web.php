@@ -136,6 +136,7 @@ use App\Http\Controllers\Admin\DashboardController as AdminDashboard;
 use App\Http\Controllers\Admin\ProjectController as AdminProjects;
 use App\Http\Controllers\Admin\ContentController as AdminContent;
 use App\Http\Controllers\Admin\SettingsController as AdminSettings;
+use App\Http\Controllers\Admin\MailController as AdminMail;
 use App\Http\Middleware\HandleInertiaRequests;
 
 Route::middleware(HandleInertiaRequests::class)->group(function () {
@@ -152,6 +153,14 @@ Route::middleware(HandleInertiaRequests::class)->group(function () {
         Route::post('/projects/reorder', [AdminProjects::class, 'reorder'])->name('projects.reorder');
         Route::patch('/projects/{project}/toggle', [AdminProjects::class, 'toggle'])->name('projects.toggle');
         Route::resource('projects', AdminProjects::class)->except('show');
+
+        Route::get('/mail', [AdminMail::class, 'index'])->name('mail.index');
+        Route::post('/mail/refresh', [AdminMail::class, 'refresh'])->name('mail.refresh');
+        Route::get('/mail/{mailbox}/messages/{uid}', [AdminMail::class, 'show'])->whereNumber('uid')->middleware('throttle:60,1')->name('mail.show');
+        Route::post('/mail/{mailbox}/messages/{uid}/flags', [AdminMail::class, 'flags'])->whereNumber('uid')->middleware('throttle:60,1')->name('mail.flags');
+        Route::post('/mail/{mailbox}/messages/{uid}/move', [AdminMail::class, 'move'])->whereNumber('uid')->middleware('throttle:30,1')->name('mail.move');
+        Route::get('/mail/{mailbox}/messages/{uid}/attachments/{attachment}', [AdminMail::class, 'attachment'])->whereNumber('uid')->middleware('throttle:30,1')->name('mail.attachment');
+        Route::post('/mail/{mailbox}/send', [AdminMail::class, 'send'])->middleware('throttle:10,1')->name('mail.send');
 
         Route::get('/settings', [AdminSettings::class, 'edit'])->name('settings.edit');
         Route::put('/settings', [AdminSettings::class, 'update'])->name('settings.update');

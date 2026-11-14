@@ -17,7 +17,7 @@ class DashboardController extends Controller
         $from = now()->subDays($range - 1)->startOfDay();
         $prevFrom = (clone $from)->subDays($range);
 
-        $visits = PageVisit::where('visited_on', '>=', $from->toDateString())->get(['visited_on', 'visitor_hash', 'referrer_host', 'device']);
+        $visits = PageVisit::where('visited_on', '>=', $from->toDateString())->get(['visited_on', 'visitor_hash', 'referrer_host', 'device', 'path']);
         $byDay = $visits->groupBy(fn ($v) => $v->visited_on->toDateString());
 
         $series = collect(range($range - 1, 0))->map(function ($ago) use ($byDay) {
@@ -49,6 +49,35 @@ class DashboardController extends Controller
                     ->map->count()->sortDesc()->take(5)
                     ->map(fn ($count, $host) => ['host' => $host, 'count' => $count])->values(),
             ],
+            // Case-study views in the range, joined to project titles by slug.
+            'caseStudies' => $visits->filter(fn ($v) => str_starts_with((string) $v->path, '/work/'))
+                ->groupBy(fn ($v) => substr($v->path, 6))->map->count()->sortDesc()->take(5)
+                ->map(fn ($count, $slug) => [
+                    'slug' => $slug,
+                    'count' => $count,
+                    'title' => optional($projects->firstWhere('slug', $slug))->t('title', 'id') ?? $slug,
+                    'id' => optional($projects->firstWhere('slug', $slug))->id,
+                ])->values(),
+            'landingViews' => $visits->where('path', '/')->count(),
+            // Which case-study sections are still empty, so the admin knows what to write next.
+            'completeness' => $projects->sortBy('sort_order')->map(function (Project $p) {
+                $checks = [
+                    'Gambar' => (bool) $p->image,
+                    'Masalah' => filled($p->t('problem', 'id')),
+                    'Solusi' => filled($p->t('solution', 'id')),
+                    'Peran' => filled($p->t('role', 'id')),
+                    'Galeri' => ! empty($p->gallery),
+                ];
+                $done = count(array_filter($checks));
+
+                return [
+                    'id' => $p->id,
+                    'title' => $p->t('title', 'id'),
+                    'featured' => (bool) $p->featured,
+                    'percent' => (int) round($done / count($checks) * 100),
+                    'missing' => array_keys(array_filter($checks, fn ($ok) => ! $ok)),
+                ];
+            })->sortBy('percent')->values(),
             'content' => [
                 'projects' => $projects->count(),
                 'experience' => (int) ($counts['experience'] ?? 0),

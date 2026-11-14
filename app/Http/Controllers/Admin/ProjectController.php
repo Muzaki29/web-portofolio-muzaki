@@ -45,8 +45,10 @@ class ProjectController extends Controller
     {
         return Inertia::render('projects/form', [
             'project' => [
-                ...$project->only('id', 'title', 'short', 'tagline', 'description', 'bullets', 'tags', 'github_url', 'live_url', 'link_type', 'is_published', 'gradient'),
+                ...$project->only('id', 'title', 'short', 'tagline', 'description', 'bullets', 'tags', 'github_url', 'live_url', 'link_type', 'is_published', 'gradient',
+                    'slug', 'featured', 'category', 'status', 'year', 'project_type', 'role', 'problem', 'solution', 'responsibilities', 'technical_decisions', 'lessons'),
                 'image_url' => $project->image ? asset($project->image) : null,
+                'gallery' => array_map(fn ($g) => ['path' => $g, 'url' => asset($g)], $project->gallery ?? []),
             ],
         ]);
     }
@@ -107,11 +109,35 @@ class ProjectController extends Controller
             'is_published' => ['boolean'],
             'gradient' => ['nullable', 'string', 'max:20'],
             'image' => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp', 'max:4096'],
+            'keep_gallery' => ['nullable', 'array'],
+            'keep_gallery.*' => ['string'],
+            'new_gallery' => ['nullable', 'array', 'max:8'],
+            'new_gallery.*' => ['image', 'mimes:jpg,jpeg,png,webp', 'max:5120'],
+            'slug' => ['nullable', 'string', 'max:80', 'regex:/^[a-z0-9-]+$/', \Illuminate\Validation\Rule::unique('projects', 'slug')->ignore($project?->id)],
+            'featured' => ['boolean'],
+            'category' => ['nullable', \Illuminate\Validation\Rule::in(config('cms.project_categories'))],
+            'status' => ['nullable', \Illuminate\Validation\Rule::in(Project::STATUSES)],
+            'year' => ['nullable', 'string', 'max:20'],
+            ...collect(['project_type' => 160, 'role' => 160, 'problem' => 3000, 'solution' => 3000, 'responsibilities' => 3000, 'technical_decisions' => 3000, 'lessons' => 3000])
+                ->flatMap(fn ($max, $f) => ["$f.id" => ['nullable', 'string', "max:$max"], "$f.en" => ['nullable', 'string', "max:$max"]])->all(),
         ]);
+        $v['slug'] = $v['slug'] ?? null ?: \Illuminate\Support\Str::slug($v['title']['id']);
+        $v['status'] = $v['status'] ?? null ?: 'implemented';
 
         $clean = fn ($list) => array_values(array_filter($list ?? [], fn ($s) => filled($s)));
         $v['bullets'] = ['id' => $clean($v['bullets']['id'] ?? []), 'en' => $clean($v['bullets']['en'] ?? [])];
         $v['tags'] = array_map(fn ($t) => ['icon' => $t['icon'] ?? 'fas fa-code', 'label' => $t['label']], $v['tags'] ?? []);
+
+        // Interface gallery: keep the listed existing images (in order), delete the rest, append uploads.
+        $keep = array_values(array_intersect($request->input('keep_gallery', []), $project?->gallery ?? []));
+        foreach (array_diff($project?->gallery ?? [], $keep) as $old) {
+            $this->deleteUploaded($old);
+        }
+        foreach ($request->file('new_gallery', []) as $file) {
+            $keep[] = 'storage/'.$file->store('projects/gallery', 'public');
+        }
+        $v['gallery'] = $keep;
+        unset($v['keep_gallery'], $v['new_gallery']);
 
         unset($v['image']);
         if ($request->hasFile('image')) {

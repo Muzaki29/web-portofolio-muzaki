@@ -10,7 +10,11 @@ class Project extends Model
         'sort_order', 'is_published', 'image', 'gradient',
         'title', 'short', 'tagline', 'description', 'bullets', 'tags',
         'github_url', 'live_url', 'link_type',
+        'slug', 'featured', 'category', 'status', 'year', 'project_type', 'role',
+        'problem', 'solution', 'responsibilities', 'technical_decisions', 'lessons', 'gallery',
     ];
+
+    public const STATUSES = ['implemented', 'verified', 'partial', 'in_development', 'concept'];
 
     protected function casts(): array
     {
@@ -22,6 +26,15 @@ class Project extends Model
             'description' => 'array',
             'bullets' => 'array',
             'tags' => 'array',
+            'featured' => 'boolean',
+            'project_type' => 'array',
+            'role' => 'array',
+            'problem' => 'array',
+            'solution' => 'array',
+            'responsibilities' => 'array',
+            'technical_decisions' => 'array',
+            'lessons' => 'array',
+            'gallery' => 'array',
         ];
     }
 
@@ -31,7 +44,18 @@ class Project extends Model
         $value = $this->{$field} ?? [];
         $locale ??= app()->getLocale();
 
-        return $value[$locale] ?? $value['id'] ?? null;
+        return filled($value[$locale] ?? null) ? $value[$locale] : ($value['id'] ?? null);
+    }
+
+    /** Multi-line translatable field as a list of non-empty lines. */
+    public function lines(string $field): array
+    {
+        return array_values(array_filter(array_map('trim', preg_split('/\R/', (string) $this->t($field)))));
+    }
+
+    public function caseStudyUrl(): ?string
+    {
+        return $this->slug ? route('work.show', $this->slug) : null;
     }
 
     /** Shape consumed by the landing page works section. */
@@ -49,6 +73,14 @@ class Project extends Model
             'github_url' => $this->github_url,
             'live_url' => $this->live_url,
             'link_type' => $this->link_type,
+            'slug' => $this->slug,
+            'url' => $this->caseStudyUrl(),
+            'featured' => $this->featured,
+            'category' => $this->category,
+            'status' => $this->status,
+            'year' => $this->year,
+            'project_type' => $this->t('project_type'),
+            'role' => $this->t('role'),
         ];
     }
 }

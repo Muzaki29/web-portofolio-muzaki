@@ -65,6 +65,8 @@ Route::get('/', function () {
             'github_url' => $p['github_url'] ?? null,
             'live_url' => $p['live_url'] ?? null,
             'link_type' => $p['link_type'] ?? 'none',
+            'slug' => null, 'url' => null, 'featured' => false, 'category' => 'web',
+            'status' => 'implemented', 'year' => null, 'project_type' => null, 'role' => null,
         ])->all();
     }
 
@@ -97,6 +99,25 @@ Route::get('/', function () {
     ]);
 })->middleware(\App\Http\Middleware\TrackVisit::class);
 
+Route::get('/work/{slug}', [\App\Http\Controllers\WorkController::class, 'show'])
+    ->where('slug', '[a-z0-9-]+')
+    ->name('work.show')
+    ->middleware(\App\Http\Middleware\TrackVisit::class);
+
+// Sitemap: homepage + every published case study.
+Route::get('/sitemap.xml', function () {
+    $projects = rescue(fn () => \App\Models\Project::where('is_published', true)->whereNotNull('slug')->orderBy('sort_order')->get(['slug', 'updated_at']), collect(), false);
+    $urls = collect([['loc' => url('/'), 'lastmod' => null]])
+        ->merge($projects->map(fn ($p) => ['loc' => route('work.show', $p->slug), 'lastmod' => $p->updated_at?->toAtomString()]));
+    $xml = '<?xml version="1.0" encoding="UTF-8"?>'."
+".'<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">';
+    foreach ($urls as $u) {
+        $xml .= '<url><loc>'.e($u['loc']).'</loc>'.($u['lastmod'] ? '<lastmod>'.$u['lastmod'].'</lastmod>' : '').'</url>';
+    }
+
+    return response($xml.'</urlset>', 200, ['Content-Type' => 'application/xml']);
+})->name('sitemap');
+
 // Max 3 attempts per minute per IP — prevents email flood/spam
 Route::post('/contact', [ContactController::class, 'sendEmail'])
     ->name('contact.send')
@@ -121,6 +142,8 @@ Route::middleware(HandleInertiaRequests::class)->group(function () {
     Route::middleware('guest')->group(function () {
         Route::get('/loginadmin', [AdminAuth::class, 'show'])->name('admin.login');
         Route::post('/loginadmin', [AdminAuth::class, 'login'])->middleware('throttle:5,1');
+        Route::get('/auth/google/redirect', [AdminAuth::class, 'googleRedirect'])->name('admin.google')->middleware('throttle:10,1');
+        Route::get('/auth/google/callback', [AdminAuth::class, 'googleCallback'])->middleware('throttle:10,1');
     });
 
     Route::middleware('auth')->prefix('admin')->name('admin.')->group(function () {

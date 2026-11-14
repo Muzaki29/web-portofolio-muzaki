@@ -105,4 +105,16 @@ class AdminContentTest extends TestCase
         $this->get('/')->assertOk()->assertDontSee('id="aiChatWidget"', false);
         $this->postJson('/api/chatbot', ['message' => 'Halo', 'locale' => 'id'])->assertNotFound();
     }
+
+    public function test_certifications_are_hidden_by_default_and_toggle_from_admin(): void
+    {
+        $this->get('/')->assertDontSee('id="certifications"', false)->assertSee('id="process"', false);
+
+        $this->actingAs(User::factory()->create())
+            ->put('/admin/settings', ['values' => ['show_certifications' => true, 'show_process' => false]])
+            ->assertSessionHasNoErrors();
+        auth()->logout();
+
+        $this->get('/')->assertSee('id="certifications"', false)->assertDontSee('id="process"', false);
+    }
 }

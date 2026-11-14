@@ -8,7 +8,7 @@ class PageVisit extends Model
 {
     public const UPDATED_AT = null;
 
-    protected $fillable = ['visited_on', 'visitor_hash', 'referrer_host', 'device', 'locale'];
+    protected $fillable = ['visited_on', 'visitor_hash', 'referrer_host', 'device', 'locale', 'path'];
 
     protected function casts(): array
     {

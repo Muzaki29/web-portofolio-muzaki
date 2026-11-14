@@ -14,7 +14,10 @@ class SettingsController extends Controller
     {
         return Inertia::render('settings', [
             'fields' => config('cms.settings'),
-            'values' => (object) Setting::query()->get()->mapWithKeys(fn (Setting $s) => [$s->key => $s->value])->all(),
+            'values' => (object) [
+                ...collect(config('cms.settings'))->where('type', 'toggle')->mapWithKeys(fn ($f) => [$f['name'] => Setting::flag($f['name'])])->all(),
+                ...Setting::query()->get()->mapWithKeys(fn (Setting $s) => [$s->key => $s->value])->all(),
+            ],
         ]);
     }
 
@@ -22,6 +25,10 @@ class SettingsController extends Controller
     {
         $rules = [];
         foreach (config('cms.settings') as $f) {
+            if ($f['type'] === 'toggle') {
+                $rules["values.{$f['name']}"] = ['nullable', 'boolean'];
+                continue;
+            }
             $base = match ($f['type']) {
                 'url' => ['url', 'max:255'],
                 'email' => ['email', 'max:255'],
@@ -36,7 +43,13 @@ class SettingsController extends Controller
             }
         }
 
-        foreach ($request->validate($rules)['values'] ?? [] as $key => $value) {
+        $values = $request->validate($rules)['values'] ?? [];
+        foreach (config('cms.settings') as $f) {
+            if ($f['type'] === 'toggle' && array_key_exists($f['name'], $values)) {
+                $values[$f['name']] = (bool) $values[$f['name']];
+            }
+        }
+        foreach ($values as $key => $value) {
             Setting::updateOrCreate(['key' => $key], ['value' => $value]);
         }
         Setting::flush();

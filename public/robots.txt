@@ -1,2 +1,5 @@
 User-agent: *
-Disallow:
+Disallow: /admin
+Disallow: /loginadmin
+
+Sitemap: https://muzakiabdullahirsyad.my.id/sitemap.xml

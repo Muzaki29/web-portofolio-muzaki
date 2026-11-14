@@ -63,7 +63,8 @@ class AdminCmsTest extends TestCase
             'bullets' => ['id' => ['<script>alert(1)</script><strong>Aman</strong>']],
         ]));
 
-        $this->get('/')->assertSee('<strong>Aman</strong>', false)->assertDontSee('<script>alert(1)</script>', false);
+        // Feature bullets render on the case study page (slug generated from the title).
+        $this->get('/work/proyek-uji')->assertSee('<strong>Aman</strong>', false)->assertDontSee('<script>alert(1)</script>', false);
     }
 
     public function test_landing_falls_back_to_config_when_cms_is_empty(): void

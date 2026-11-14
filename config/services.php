@@ -35,6 +35,13 @@ return [
         ],
     ],
 
+    // Admin sign-in with Google. Only emails that already exist as admin users may log in.
+    'google' => [
+        'client_id' => env('GOOGLE_CLIENT_ID'),
+        'client_secret' => env('GOOGLE_CLIENT_SECRET'),
+        'redirect' => env('GOOGLE_REDIRECT_URI', '/auth/google/callback'),
+    ],
+
     'gemini' => [
         // Floating AI assistant on the landing page; off unless CHATBOT_ENABLED=true.
         'enabled' => (bool) env('CHATBOT_ENABLED', false),

@@ -26,6 +26,7 @@ class TrackVisit
                 'referrer_host' => $this->referrerHost($request),
                 'device' => preg_match('/Mobi|Android|iPhone/i', (string) $request->userAgent()) ? 'mobile' : 'desktop',
                 'locale' => app()->getLocale(),
+                'path' => '/'.ltrim($request->path(), '/'),
             ]), report: false);
         }
 

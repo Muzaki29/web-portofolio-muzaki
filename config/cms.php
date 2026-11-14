@@ -9,6 +9,9 @@
 */
 
 return [
+    // Project Library filters (solution type, not framework). Labels live in lang files: work.cat_<key>.
+    'project_categories' => ['web', 'operational', 'ecommerce', 'education', 'public', 'creative3d', 'uiux'],
+
     'sections' => [
         'experience' => [
             'label' => 'Pengalaman',
@@ -57,6 +60,10 @@ return [
 
     // Profil & Kontak settings form.
     'settings' => [
+        ['name' => 'show_experience', 'label' => 'Tampilkan Pengalaman', 'type' => 'toggle', 'group' => 'Tampilan section', 'default' => true],
+        ['name' => 'show_timeline', 'label' => 'Tampilkan Journey / Timeline', 'type' => 'toggle', 'group' => 'Tampilan section', 'default' => true],
+        ['name' => 'show_process', 'label' => 'Tampilkan Proses Kerja', 'type' => 'toggle', 'group' => 'Tampilan section', 'default' => true],
+        ['name' => 'show_certifications', 'label' => 'Tampilkan Sertifikat', 'type' => 'toggle', 'group' => 'Tampilan section', 'default' => false],
         ['name' => 'hero_role', 'label' => 'Peran di hero', 'type' => 'text', 'translatable' => true, 'group' => 'Profil', 'hint' => 'Teks kecil di atas nama, mis. Full Stack · Freelance · Content'],
         ['name' => 'about_title', 'label' => 'Judul Tentang', 'type' => 'text', 'translatable' => true, 'group' => 'Profil'],
         ['name' => 'about_description', 'label' => 'Paragraf Tentang', 'type' => 'textarea', 'translatable' => true, 'group' => 'Profil'],

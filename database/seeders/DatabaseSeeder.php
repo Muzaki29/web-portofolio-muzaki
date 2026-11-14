@@ -16,6 +16,6 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         // Admin accounts are created with `php artisan admin:create`, never seeded.
-        $this->call([ProjectSeeder::class, CmsSeeder::class]);
+        $this->call([ProjectSeeder::class, ProjectCaseStudySeeder::class, CmsSeeder::class]);
     }
 }

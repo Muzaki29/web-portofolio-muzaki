@@ -10,9 +10,10 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Switch } from '@/components/ui/switch'
 import { Textarea } from '@/components/ui/textarea'
 import { projectCode } from '@/components/status-badge'
+import { SchemaField } from '@/components/schema-field'
 import { UnderlineTabs } from '@/components/underline-tabs'
 import AdminLayout from '@/layouts/admin-layout'
-import type { Locale, Tag, Translated } from '@/types'
+import type { FieldSchema, FieldValue, Locale, Tag, Translated } from '@/types'
 
 type Project = {
   id: number
@@ -27,10 +28,41 @@ type Project = {
   link_type: 'github' | 'live' | 'none'
   is_published: boolean
   gradient: string | null
+  slug: string | null
+  featured: boolean
+  category: string | null
+  status: string
+  year: string | null
+  project_type: Translated | null
+  role: Translated | null
+  problem: Translated | null
+  solution: Translated | null
+  responsibilities: Translated | null
+  technical_decisions: Translated | null
+  lessons: Translated | null
   image_url: string | null
+  gallery: { path: string; url: string }[]
 }
 
 const blank = { id: '', en: '' }
+
+const categoryLabels: Record<string, string> = {
+  web: 'Aplikasi Web', operational: 'Sistem Operasional', ecommerce: 'E-commerce', education: 'Pendidikan',
+  public: 'Sektor Publik', creative3d: '3D & Creative Engineering', uiux: 'UI/UX & Produk Digital',
+}
+const statusLabels: Record<string, string> = {
+  implemented: 'Implemented', verified: 'Verified', partial: 'Partially verified', in_development: 'In development', concept: 'Concept',
+}
+type CaseKey = 'project_type' | 'role' | 'problem' | 'solution' | 'responsibilities' | 'technical_decisions' | 'lessons'
+const caseFields: FieldSchema[] = [
+  { name: 'project_type', label: 'Jenis sistem', type: 'text', translatable: true, hint: 'Contoh: E-commerce merchandise resmi' },
+  { name: 'role', label: 'Peran saya', type: 'text', translatable: true },
+  { name: 'problem', label: 'Masalah & konteks', type: 'textarea', translatable: true },
+  { name: 'solution', label: 'Solusi', type: 'textarea', translatable: true },
+  { name: 'responsibilities', label: 'Tanggung jawab', type: 'textarea', translatable: true, hint: 'Satu per baris.' },
+  { name: 'technical_decisions', label: 'Pendekatan & keputusan teknis', type: 'textarea', translatable: true, hint: 'Satu per baris.' },
+  { name: 'lessons', label: 'Pelajaran', type: 'textarea', translatable: true },
+]
 
 function Field({ label, error, hint, children }: { label: string; error?: string; hint?: string; children: ReactNode }) {
   return (
@@ -46,6 +78,8 @@ function Field({ label, error, hint, children }: { label: string; error?: string
 export default function ProjectForm({ project }: { project: Project | null }) {
   const [lang, setLang] = useState<Locale>('id')
   const [preview, setPreview] = useState<string | null>(project?.image_url ?? null)
+  const [gallery, setGallery] = useState(project?.gallery ?? [])
+  const [newGallery, setNewGallery] = useState<{ file: File; url: string }[]>([])
 
   const form = useForm({
     title: project?.title ?? { ...blank },
@@ -59,7 +93,21 @@ export default function ProjectForm({ project }: { project: Project | null }) {
     link_type: project?.link_type ?? 'none',
     is_published: project?.is_published ?? true,
     gradient: project?.gradient ?? 'pc-g1',
+    slug: project?.slug ?? '',
+    featured: project?.featured ?? false,
+    category: project?.category ?? 'web',
+    status: project?.status ?? 'implemented',
+    year: project?.year ?? '',
+    project_type: project?.project_type ?? { ...blank },
+    role: project?.role ?? { ...blank },
+    problem: project?.problem ?? { ...blank },
+    solution: project?.solution ?? { ...blank },
+    responsibilities: project?.responsibilities ?? { ...blank },
+    technical_decisions: project?.technical_decisions ?? { ...blank },
+    lessons: project?.lessons ?? { ...blank },
     image: null as File | null,
+    keep_gallery: [] as string[],
+    new_gallery: [] as File[],
     _method: project ? 'put' : 'post',
   })
 
@@ -74,6 +122,7 @@ export default function ProjectForm({ project }: { project: Project | null }) {
   const submit = (e: FormEvent) => {
     e.preventDefault()
     // Multipart + method spoofing so the image upload also works on update.
+    form.transform((d) => ({ ...d, keep_gallery: gallery.map((g) => g.path), new_gallery: newGallery.map((g) => g.file) }))
     form.post(project ? `/admin/projects/${project.id}` : '/admin/projects', { forceFormData: true })
   }
 
@@ -136,6 +185,22 @@ export default function ProjectForm({ project }: { project: Project | null }) {
               </div>
             </Field>
           </CardContent>
+          <CardHeader className="border-t pt-6">
+            <CardTitle>Case study</CardTitle>
+            <CardDescription>Tampil di halaman /work/{data.slug || 'slug'}. Bagian yang kosong otomatis disembunyikan — tulis hanya yang benar-benar terjadi.</CardDescription>
+          </CardHeader>
+          <CardContent className="grid gap-5">
+            {caseFields.map((f) => (
+              <SchemaField
+                key={f.name}
+                field={f}
+                lang={lang}
+                value={data[f.name as CaseKey]}
+                error={err(`${f.name}.${lang}`)}
+                onChange={(v: FieldValue) => setData(f.name as CaseKey, v as Translated)}
+              />
+            ))}
+          </CardContent>
         </Card>
 
         <div className="grid gap-6 lg:sticky lg:top-20">
@@ -156,6 +221,33 @@ export default function ProjectForm({ project }: { project: Project | null }) {
                 </Button>
                 <Button type="button" variant="outline" asChild><Link href="/admin/projects">Batal</Link></Button>
               </div>
+            </CardContent>
+          </Card>
+
+          <Card>
+            <CardHeader>
+              <CardTitle>Galeri antarmuka</CardTitle>
+              <CardDescription>Tampil di case study. Ideal 1600×1000 px.</CardDescription>
+            </CardHeader>
+            <CardContent className="grid grid-cols-2 gap-2">
+              {gallery.map((g, i) => (
+                <div key={g.path} className="relative overflow-hidden rounded-md border">
+                  <img src={g.url} alt={`Galeri ${i + 1}`} className="aspect-[8/5] w-full object-cover" />
+                  <Button type="button" variant="secondary" size="icon" className="absolute top-1 right-1 size-6" onClick={() => setGallery(gallery.filter((_, j) => j !== i))} aria-label="Hapus gambar galeri"><X /></Button>
+                </div>
+              ))}
+              {newGallery.map((g, i) => (
+                <div key={g.url} className="relative overflow-hidden rounded-md border border-dashed">
+                  <img src={g.url} alt="Gambar baru" className="aspect-[8/5] w-full object-cover" />
+                  <Button type="button" variant="secondary" size="icon" className="absolute top-1 right-1 size-6" onClick={() => setNewGallery(newGallery.filter((_, j) => j !== i))} aria-label="Batal tambah"><X /></Button>
+                </div>
+              ))}
+              <label className="bg-muted hover:bg-muted/70 text-muted-foreground flex aspect-[8/5] cursor-pointer flex-col items-center justify-center gap-1 rounded-md border border-dashed text-xs">
+                <ImageUp className="size-4" /> Tambah
+                <input type="file" multiple accept="image/png,image/jpeg,image/webp" className="sr-only"
+                  onChange={(e) => { const files = Array.from(e.target.files ?? []); setNewGallery([...newGallery, ...files.map((file) => ({ file, url: URL.createObjectURL(file) }))]); e.target.value = '' }} />
+              </label>
+              {Object.entries(errors).filter(([k]) => k.startsWith('new_gallery')).map(([k, v]) => <p key={k} className="text-destructive col-span-2 text-sm">{v}</p>)}
             </CardContent>
           </Card>
 
@@ -181,6 +273,38 @@ export default function ProjectForm({ project }: { project: Project | null }) {
               </label>
               <p className="text-muted-foreground text-xs">JPG, PNG, atau WebP, maks 4 MB. Rasio 16:10.</p>
               {err('image') && <p className="text-destructive text-sm">{err('image')}</p>}
+            </CardContent>
+          </Card>
+
+          <Card>
+            <CardHeader><CardTitle>Showcase</CardTitle></CardHeader>
+            <CardContent className="grid gap-4">
+              <div className="flex items-center justify-between gap-4">
+                <Label htmlFor="featured">Tampil di Karya Pilihan</Label>
+                <Switch id="featured" checked={data.featured} onCheckedChange={(v) => setData('featured', v)} />
+              </div>
+              <Field label="Jenis solusi (filter)" error={err('category')}>
+                <Select value={data.category ?? 'web'} onValueChange={(v) => setData('category', v)}>
+                  <SelectTrigger className="w-full"><SelectValue /></SelectTrigger>
+                  <SelectContent>
+                    {Object.entries(categoryLabels).map(([k, l]) => <SelectItem key={k} value={k}>{l}</SelectItem>)}
+                  </SelectContent>
+                </Select>
+              </Field>
+              <Field label="Status" error={err('status')} hint="Jangan pilih Verified bila belum diverifikasi.">
+                <Select value={data.status} onValueChange={(v) => setData('status', v)}>
+                  <SelectTrigger className="w-full"><SelectValue /></SelectTrigger>
+                  <SelectContent>
+                    {Object.entries(statusLabels).map(([k, l]) => <SelectItem key={k} value={k}>{l}</SelectItem>)}
+                  </SelectContent>
+                </Select>
+              </Field>
+              <Field label="Tahun" error={err('year')}>
+                <Input value={data.year ?? ''} placeholder="2025" onChange={(e) => setData('year', e.target.value)} />
+              </Field>
+              <Field label="Slug URL" error={err('slug')} hint="Kosongkan untuk dibuat otomatis dari judul.">
+                <Input value={data.slug ?? ''} className="font-mono text-xs" onChange={(e) => setData('slug', e.target.value)} />
+              </Field>
             </CardContent>
           </Card>
 

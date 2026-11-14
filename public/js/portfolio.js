@@ -980,3 +980,26 @@
     }
 
 })();
+
+/* Project Library filter: solution-type buttons with aria-pressed and a live count. */
+(function () {
+    const lib = document.getElementById('projectLibrary');
+    if (!lib) return;
+    const buttons = document.querySelectorAll('.w-filter');
+    const cards = lib.querySelectorAll('.w-card');
+    const empty = document.getElementById('libraryEmpty');
+    const count = document.getElementById('libraryCount');
+    const template = lib.dataset.countTemplate || '__N__';
+    buttons.forEach(btn => btn.addEventListener('click', () => {
+        const filter = btn.dataset.filter;
+        let shown = 0;
+        buttons.forEach(b => b.setAttribute('aria-pressed', String(b === btn)));
+        cards.forEach(card => {
+            const match = filter === 'all' || card.dataset.category === filter;
+            card.hidden = !match;
+            if (match) shown++;
+        });
+        if (empty) empty.hidden = shown > 0;
+        if (count) count.textContent = template.replace('__N__', shown);
+    }));
+})();

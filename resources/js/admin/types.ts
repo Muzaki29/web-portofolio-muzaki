@@ -15,7 +15,7 @@ export interface Tag {
 export interface FieldSchema {
   name: string
   label: string
-  type: 'text' | 'textarea' | 'url' | 'email' | 'images'
+  type: 'text' | 'textarea' | 'url' | 'email' | 'images' | 'toggle'
   translatable?: boolean
   required?: boolean
   hint?: string
@@ -31,5 +31,5 @@ export interface SectionSchema {
 }
 
 /** A CMS field value: plain string, or {id, en} for translatable fields. */
-export type FieldValue = string | Translated | null
+export type FieldValue = string | boolean | Translated | null
 export type FieldValues = Record<string, FieldValue>

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Muzaki Abdullah Irsyad — Full Stack Developer, Freelancer & Content Creator. Building modern web experiences from Jakarta, Indonesia.">
+    <meta name="description" content="Muzaki Abdullah Irsyad — Full-Stack Developer building reliable digital products and operational systems, with QA, system analysis, and infrastructure experience. Jakarta, Indonesia.">
     <meta name="author" content="Muzaki Abdullah Irsyad">
     <link rel="canonical" href="{{ url('/') }}">
     <meta property="og:type" content="website">
@@ -21,6 +21,26 @@
     <meta name="twitter:image" content="{{ asset('images/mai-social.png') }}">
     <meta name="twitter:image:alt" content="MAI — Muzaki Abdullah Irsyad monogram logo">
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    <link rel="sitemap" type="application/xml" href="{{ url('/sitemap.xml') }}">
+    <script type="application/ld+json">{!! json_encode([
+        '@context' => 'https://schema.org',
+        '@type' => 'Person',
+        'name' => 'Muzaki Abdullah Irsyad',
+        'jobTitle' => 'Full-Stack Developer',
+        'url' => url('/'),
+        'email' => 'mailto:'.$profile['contact_email'],
+        'image' => asset('images/mai-social.png'),
+        'address' => ['@type' => 'PostalAddress', 'addressLocality' => 'Jakarta', 'addressCountry' => 'ID'],
+        'knowsAbout' => ['Full-Stack Development', 'QA Engineering', 'System Analysis', 'IT Support & Infrastructure', 'Linux and Networking', 'System Administration', 'Digital Transformation'],
+        'sameAs' => array_values(array_filter([
+            $profile['linkedin_url'],
+            $profile['github_username'] ? 'https://github.com/'.$profile['github_username'] : null,
+            $profile['dribbble_url'],
+            $profile['pinterest_url'],
+            $profile['instagram_username'] ? 'https://www.instagram.com/'.$profile['instagram_username'].'/' : null,
+            $profile['threads_username'] ? 'https://www.threads.com/@'.$profile['threads_username'] : null,
+        ])),
+    ], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) !!}</script>
     <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}?v=mai-2">
     <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('favicon-32.png') }}?v=mai-2">
     <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('favicon-16.png') }}?v=mai-2">
@@ -33,6 +53,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Syne:wght@700;800&family=Fira+Code:wght@400;500&family=Playfair+Display:ital,wght@0,500;0,700;1,500;1,700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <link rel="stylesheet" href="{{ asset('css/portfolio.css') }}?v=4.4">
+    <link rel="stylesheet" href="{{ asset('css/work.css') }}?v=1.4">
     @vite('resources/js/motion/index.js')
     <noscript><style>
         .skills-panel { display: block !important; margin-bottom: 2rem; }
@@ -72,10 +93,10 @@
 
         <ul class="nav-pill" id="navMenu">
             <li><a href="#about"          class="nav-link">{{ __('nav.about') }}</a></li>
-            <li><a href="#experience"     class="nav-link">{{ __('nav.experience') }}</a></li>
-            <li><a href="#skills"         class="nav-link">{{ __('nav.skills') }}</a></li>
             <li><a href="#works"          class="nav-link">{{ __('nav.works') }}</a></li>
-            <li><a href="#certifications" class="nav-link">{{ __('nav.certifications') }}</a></li>
+            <li><a href="#skills"         class="nav-link">{{ __('nav.skills') }}</a></li>
+            @if(\App\Models\Setting::flag('show_experience'))<li><a href="#experience"     class="nav-link">{{ __('nav.experience') }}</a></li>@endif
+            @if(\App\Models\Setting::flag('show_certifications'))<li><a href="#certifications" class="nav-link">{{ __('nav.certifications') }}</a></li>@endif
             <li><a href="#contact"        class="nav-link">{{ __('nav.contact') }}</a></li>
         </ul>
 
@@ -108,54 +129,64 @@
         <div class="hero-media-overlay hero-raymond-overlay"></div>
     </div>
 
-    <div class="hero-dock container">
-        <div class="hero-dock-left">
+    {{-- Hierarchy: small positioning + text CTAs top-left, giant name anchored bottom, role label and meta in the corners. --}}
+    <div class="hero-v2 container">
+        <div class="hero-v2-intro">
             <p class="hero-kicker">{{ $profile['hero_role'] }}</p>
-            <h1 class="hero-name" aria-label="Muzaki Abdullah Irsyad">
-                <span class="hero-line"><span>Muzaki</span></span>
-                <span class="hero-line hero-name-outline"><span>Abdullah</span></span>
-                <span class="hero-line"><span>Irsyad<span class="hero-period" aria-hidden="true">.</span></span></span>
-            </h1>
-            <div class="hero-headline">
-                <p class="hero-role-line">
-                    <span class="sr-only">Full Stack Developer</span><span class="tw-text" id="tw-text" aria-hidden="true">Full Stack Developer</span><span class="tw-cursor" aria-hidden="true"></span>
-                </p>
-            </div>
+            <p class="hero-positioning">{{ __('hero.positioning') }}</p>
+            <p class="hero-supporting">{{ __('hero.supporting') }}</p>
             <div class="hero-actions">
-                <a href="#contact" class="btn btn-primary">
-                    <i class="fas fa-paper-plane"></i> {{ __('hero.hire_me') }}
-                </a>
-                <a href="{{ asset('cv/muzaki-abdullah-irsyad.pdf') }}" class="btn btn-outline" download>
-                    <i class="fas fa-download"></i> {{ __('about.download_cv') }}
-                </a>
+                <a href="#works" class="hero-cta hero-cta-primary">{{ __('hero.cta_work') }} <span aria-hidden="true">↘</span></a>
+                <a href="#contact" class="hero-cta">{{ __('hero.cta_contact') }}</a>
+                <a href="{{ asset('cv/muzaki-abdullah-irsyad.pdf') }}" class="hero-cta" download>{{ __('about.download_cv') }}</a>
             </div>
         </div>
+
+        <div class="hero-v2-base">
+            <p class="hero-v2-role"><span>01/</span> Full-Stack<br>Developer</p>
+            <h1 class="hero-name hero-v2-name" aria-label="Muzaki Abdullah Irsyad">
+                <span class="hero-line"><span>Muzaki<span class="hero-period" aria-hidden="true">.</span></span></span>
+                <span class="hero-v2-surname" aria-hidden="true">Abdullah Irsyad</span>
+            </h1>
+            <p class="hero-v2-meta">© {{ date('Y') }}<br>{{ $profile['location'] }}</p>
+        </div>
     </div>
-    <div class="hero-footnote container"><span>Jakarta, Indonesia · {{ __('motion.discipline') }}</span><a href="#about">{{ __('motion.explore') }} <span aria-hidden="true">↘</span></a></div>
 </section>
 
 <div class="name-marquee" aria-hidden="true">
     <div class="marquee-track">
         @for ($i = 0; $i < 10; $i++)
-        <span>FULL STACK · FREELANCER · CONTENT CREATOR • </span>
+        <span>FULL-STACK DEVELOPER · QA ENGINEERING · SYSTEM ANALYSIS · LINUX &amp; NETWORKING • </span>
         @endfor
     </div>
 </div>
 
 <div class="hero-services-wrap">
     <div class="container">
-        <div class="hero-services">
+        <div class="hero-services hero-services-six">
             <div class="svc-card">
-                <i class="fas fa-layer-group"></i>
-                <p class="svc-title">{{ __('hero.role_fullstack') }}</p>
+                <i class="fas fa-layer-group" aria-hidden="true"></i>
+                <p class="svc-title">{{ __('positioning.fullstack') }}</p>
             </div>
             <div class="svc-card">
-                <i class="fas fa-briefcase"></i>
-                <p class="svc-title">{{ __('hero.role_freelancer') }}</p>
+                <i class="fas fa-vial-circle-check" aria-hidden="true"></i>
+                <p class="svc-title">{{ __('positioning.qa') }}</p>
             </div>
             <div class="svc-card">
-                <i class="fas fa-video"></i>
-                <p class="svc-title">{{ __('hero.role_creator') }}</p>
+                <i class="fas fa-diagram-project" aria-hidden="true"></i>
+                <p class="svc-title">{{ __('positioning.analysis') }}</p>
+            </div>
+            <div class="svc-card">
+                <i class="fas fa-server" aria-hidden="true"></i>
+                <p class="svc-title">{{ __('positioning.infra') }}</p>
+            </div>
+            <div class="svc-card">
+                <i class="fab fa-linux" aria-hidden="true"></i>
+                <p class="svc-title">{{ __('positioning.linux') }}</p>
+            </div>
+            <div class="svc-card">
+                <i class="fas fa-arrows-rotate" aria-hidden="true"></i>
+                <p class="svc-title">{{ __('positioning.transformation') }}</p>
             </div>
         </div>
     </div>
@@ -209,49 +240,90 @@
     </div>
 </section>
 
-{{-- ── WORK EXPERIENCE (Raymond-style topics) ── --}}
-<section class="experience-section exp-raymond-section" id="experience">
-    <div class="container">
-        <div class="exp-raymond-head">
-            <span class="sec-label">{{ __('experience.sec_label') }}</span>
-            <h2 class="section-title exp-raymond-title">{{ __('experience.title') }}<span class="exp-raymond-accent">.</span></h2>
-            <p class="exp-raymond-lead">{{ __('experience.subtitle') }}</p>
+{{-- ── STUFF I BUILT ── --}}
+<section class="works-section w-section" id="works" aria-labelledby="works-title">
+    @php
+        $workImg = fn ($p) => asset(str_starts_with($p['image'] ?? '', 'images/') ? preg_replace('/\.png$/', '.webp', $p['image']) : ($p['image'] ?? ''));
+        $featuredWorks = collect($worksProjects)->where('featured', true)->take(6)->values();
+        if ($featuredWorks->isEmpty()) { $featuredWorks = collect($worksProjects)->take(4)->values(); }
+        $categories = collect(config('cms.project_categories'))
+            ->map(fn ($c) => ['key' => $c, 'count' => collect($worksProjects)->where('category', $c)->count()])
+            ->filter(fn ($c) => $c['count'] > 0)->values();
+    @endphp
+    <div class="w-container">
+        <div class="w-section-head">
+            <h2 id="works-title">{{ __('work.featured_title') }}</h2>
+            <p>{{ __('work.featured_lead') }}</p>
         </div>
 
-        <div class="exp-topics-grid">
-            @foreach($experiences as $exp)
-            @php $highlights = $exp->lines('highlights'); $certKey = $exp->v('cert_key'); $minimal = $certKey && ! $exp->v('description'); @endphp
-            <article class="exp-topic {{ $minimal ? 'exp-topic-interactive exp-topic-minimal' : '' }}" @if($minimal) role="button" tabindex="0" data-open-cert="{{ $certKey }}" @endif>
-                <span class="exp-topic-marker" aria-hidden="true"></span>
-                <span class="exp-topic-num">{{ str_pad($loop->iteration, 2, '0', STR_PAD_LEFT) }}</span>
-                <h3 class="exp-topic-title exp-topic-title-serif">{{ $exp->v('role') }}</h3>
-                @if($exp->v('company') || $exp->v('period'))
-                <p class="exp-topic-meta">{{ collect([$exp->v('company'), $exp->v('period')])->filter()->implode(' · ') }}</p>
-                @endif
-                @if($exp->v('location'))<p class="exp-topic-location">{{ $exp->v('location') }}</p>@endif
-                @if($exp->v('description'))<p class="exp-topic-desc">{{ $exp->v('description') }}</p>@endif
-                @if($highlights)
-                <ul class="exp-topic-highlights">
-                    @foreach($highlights as $line)<li>{{ $line }}</li>@endforeach
-                </ul>
-                @endif
-                @if($exp->v('link_url') || ($certKey && ! $minimal))
-                <div class="exp-topic-actions">
-                    @if($exp->v('link_url'))
-                    <a href="{{ $exp->v('link_url') }}" target="_blank" rel="noopener" class="exp-topic-link">{{ __('experience.work_btn') }} <i class="fas fa-arrow-up-right-from-square"></i></a>
+        <div class="w-featured">
+            @foreach($featuredWorks as $project)
+            @php $stack = collect($project['tags'] ?? [])->pluck('label')->take(5); @endphp
+            <article class="w-feature" data-reveal>
+                <a class="w-feature-media w-media" href="{{ $project['url'] ?? '#works' }}" tabindex="-1" aria-hidden="true">
+                    <img src="{{ $workImg($project) }}" alt="" width="1672" height="941" loading="{{ $loop->first ? 'eager' : 'lazy' }}" decoding="async">
+                </a>
+                <div class="w-feature-body">
+                    <div class="w-feature-top">
+                        <span class="w-eyebrow-num">{{ str_pad($loop->iteration, 2, '0', STR_PAD_LEFT) }} — {{ __('work.cat_'.($project['category'] ?: 'web')) }}</span>
+                        <span class="w-status" data-status="{{ $project['status'] }}">{{ __('work.status_'.$project['status']) }}</span>
+                    </div>
+                    <h3>@if($project['url'])<a href="{{ $project['url'] }}">{{ $project['title'] }}</a>@else{{ $project['title'] }}@endif</h3>
+                    @if($project['project_type'])<p class="w-feature-type">{{ $project['project_type'] }}</p>@endif
+                    @if($project['short'])<p class="w-feature-summary">{{ $project['short'] }}</p>@endif
+                    @if($project['role'])
+                    <dl class="w-meta"><dt>{{ __('work.role') }}</dt><dd>{{ $project['role'] }}</dd></dl>
                     @endif
-                    @if($certKey && ! $minimal)
-                    <button type="button" class="exp-topic-link exp-btn-cert" data-open-cert="{{ $certKey }}"><i class="fas fa-certificate"></i> {{ __('experience.lecturer_cert_hint') }}</button>
+                    @if($stack->isNotEmpty())
+                    <ul class="w-chips" aria-label="{{ __('work.stack') }}">@foreach($stack as $t)<li class="w-chip">{{ $t }}</li>@endforeach</ul>
                     @endif
+                    <div class="w-actions">
+                        @if($project['url'])<a class="w-link" href="{{ $project['url'] }}">{{ __('work.case_study') }} <i class="fas fa-arrow-right" aria-hidden="true"></i></a>@endif
+                        @if($project['live_url'])<a class="w-link" href="{{ $project['live_url'] }}" target="_blank" rel="noopener noreferrer">{{ __('work.live') }}<span class="sr-only"> — {{ $project['title'] }}</span> <i class="fas fa-arrow-up-right-from-square" aria-hidden="true"></i></a>@endif
+                        @if($project['github_url'])<a class="w-link" href="{{ $project['github_url'] }}" target="_blank" rel="noopener noreferrer">{{ __('work.repo') }}<span class="sr-only"> — {{ $project['title'] }}</span> <i class="fab fa-github" aria-hidden="true"></i></a>@endif
+                    </div>
                 </div>
-                @elseif($minimal)
-                <span class="exp-topic-cert-hint"><i class="fas fa-certificate"></i> {{ __('experience.lecturer_cert_hint') }}</span>
-                @endif
             </article>
             @endforeach
         </div>
+    </div>
 
-        <p class="exp-topics-counter" aria-live="polite">{{ $experiences->count() }} / {{ $experiences->count() }} {{ __('experience.topics_label') }}</p>
+    <div class="w-container" style="margin-top: var(--w-s9)">
+        <div class="w-section-head">
+            <h2 id="library-title">{{ __('work.library_title') }}</h2>
+            <p>{{ __('work.library_lead') }} <span id="libraryCount" aria-live="polite">{{ __('work.count', ['count' => count($worksProjects)]) }}</span></p>
+        </div>
+
+        <div class="w-filters" role="group" aria-label="{{ __('work.filter_label') }}">
+            <button type="button" class="w-filter" data-filter="all" aria-pressed="true">{{ __('work.cat_all') }}<span>{{ count($worksProjects) }}</span></button>
+            @foreach($categories as $c)
+            <button type="button" class="w-filter" data-filter="{{ $c['key'] }}" aria-pressed="false">{{ __('work.cat_'.$c['key']) }}<span>{{ $c['count'] }}</span></button>
+            @endforeach
+        </div>
+
+        <div class="w-library" id="projectLibrary" data-count-template="{{ __('work.count', ['count' => '__N__']) }}">
+            @foreach($worksProjects as $project)
+            <article class="w-card" data-category="{{ $project['category'] ?: 'web' }}">
+                <div class="w-card-media"><img src="{{ $workImg($project) }}" alt="{{ $project['title'] }} — {{ $project['project_type'] ?: __('motion.preview') }}" width="1672" height="941" loading="lazy" decoding="async"></div>
+                <div class="w-card-body">
+                    <div class="w-card-top">
+                        <span class="w-eyebrow-num">{{ __('work.cat_'.($project['category'] ?: 'web')) }}</span>
+                        <span class="w-status" data-status="{{ $project['status'] }}">{{ __('work.status_'.$project['status']) }}</span>
+                    </div>
+                    <h3>@if($project['url'])<a href="{{ $project['url'] }}">{{ $project['title'] }}</a>@else{{ $project['title'] }}@endif</h3>
+                    @if($project['short'])<p>{{ $project['short'] }}</p>@endif
+                    <ul class="w-chips" aria-label="{{ __('work.stack') }}">@foreach(collect($project['tags'] ?? [])->pluck('label')->take(3) as $t)<li class="w-chip">{{ $t }}</li>@endforeach</ul>
+                    @if($project['live_url'] || $project['github_url'])
+                    <div class="w-card-links">
+                        @if($project['live_url'])<a class="w-link" href="{{ $project['live_url'] }}" target="_blank" rel="noopener noreferrer">{{ __('work.live') }}<span class="sr-only"> — {{ $project['title'] }}</span></a>@endif
+                        @if($project['github_url'])<a class="w-link" href="{{ $project['github_url'] }}" target="_blank" rel="noopener noreferrer">{{ __('work.repo') }}<span class="sr-only"> — {{ $project['title'] }}</span></a>@endif
+                    </div>
+                    @endif
+                </div>
+            </article>
+            @endforeach
+        </div>
+        <p class="w-empty" id="libraryEmpty" hidden>{{ __('work.empty_filter') }}</p>
     </div>
 </section>
 
@@ -367,84 +439,55 @@
     </div>
 </section>
 
-{{-- ── STUFF I BUILT ── --}}
-<section class="works-section" id="works">
+@if(\App\Models\Setting::flag('show_experience'))
+{{-- ── WORK EXPERIENCE (Raymond-style topics) ── --}}
+<section class="experience-section exp-raymond-section" id="experience">
     <div class="container">
-        <div style="text-align:center"><span class="sec-label">{{ __('works.sec_label') }}</span></div>
-        <h2 class="section-title">{{ __('works.title') }}</h2>
-        <p class="section-subtitle">{{ __('works.subtitle') }}</p>
+        <div class="exp-raymond-head">
+            <span class="sec-label">{{ __('experience.sec_label') }}</span>
+            <h2 class="section-title exp-raymond-title">{{ __('experience.title') }}<span class="exp-raymond-accent">.</span></h2>
+            <p class="exp-raymond-lead">{{ __('experience.subtitle') }}</p>
+        </div>
 
-        <div class="works-grid">
-
-            @foreach($worksProjects as $project)
-            <article class="project-grid-card {{ $loop->first ? 'project-featured' : '' }}">
-                <div class="pgc-image {{ $project['gradient'] ?? '' }}">
-                    <img src="{{ asset(str_starts_with($project['image'] ?? '', 'images/') ? preg_replace('/\.png$/', '.webp', $project['image']) : ($project['image'] ?? '')) }}"
-                         alt="{{ $project['title'] }} — {{ __('motion.preview') }}" width="1672" height="941" loading="lazy" decoding="async">
-                    <span class="project-index" aria-hidden="true">{{ str_pad($loop->iteration, 2, '0', STR_PAD_LEFT) }} / {{ str_pad($loop->count, 2, '0', STR_PAD_LEFT) }}</span>
+        <div class="exp-topics-grid">
+            @foreach($experiences as $exp)
+            @php $highlights = $exp->lines('highlights'); $certKey = $exp->v('cert_key'); $minimal = $certKey && ! $exp->v('description'); @endphp
+            <article class="exp-topic {{ $minimal ? 'exp-topic-interactive exp-topic-minimal' : '' }}" @if($minimal) role="button" tabindex="0" data-open-cert="{{ $certKey }}" @endif>
+                <span class="exp-topic-marker" aria-hidden="true"></span>
+                <span class="exp-topic-num">{{ str_pad($loop->iteration, 2, '0', STR_PAD_LEFT) }}</span>
+                <h3 class="exp-topic-title exp-topic-title-serif">{{ $exp->v('role') }}</h3>
+                @if($exp->v('company') || $exp->v('period'))
+                <p class="exp-topic-meta">{{ collect([$exp->v('company'), $exp->v('period')])->filter()->implode(' · ') }}</p>
+                @endif
+                @if($exp->v('location'))<p class="exp-topic-location">{{ $exp->v('location') }}</p>@endif
+                @if($exp->v('description'))<p class="exp-topic-desc">{{ $exp->v('description') }}</p>@endif
+                @if($highlights)
+                <ul class="exp-topic-highlights">
+                    @foreach($highlights as $line)<li>{{ $line }}</li>@endforeach
+                </ul>
+                @endif
+                @if($exp->v('link_url') || ($certKey && ! $minimal))
+                <div class="exp-topic-actions">
+                    @if($exp->v('link_url'))
+                    <a href="{{ $exp->v('link_url') }}" target="_blank" rel="noopener" class="exp-topic-link">{{ __('experience.work_btn') }} <i class="fas fa-arrow-up-right-from-square"></i></a>
+                    @endif
+                    @if($certKey && ! $minimal)
+                    <button type="button" class="exp-topic-link exp-btn-cert" data-open-cert="{{ $certKey }}"><i class="fas fa-certificate"></i> {{ __('experience.lecturer_cert_hint') }}</button>
+                    @endif
                 </div>
-                <div class="pgc-info">
-                    @if($loop->first)<span class="sec-label">{{ __('motion.featured') }}</span>@endif
-                    <div class="pgc-header">
-                        <h3 class="pgc-name">{{ $project['title'] }}</h3>
-                        @if(($project['link_type'] ?? '') === 'github' && !empty($project['github_url']))
-                        <a href="{{ $project['github_url'] }}" target="_blank" rel="noopener" class="pgc-visit" aria-label="Github Repo">
-                            <i class="fab fa-github"></i>
-                        </a>
-                        @elseif(($project['link_type'] ?? '') === 'live' && !empty($project['live_url']))
-                        <a href="{{ $project['live_url'] }}" target="_blank" rel="noopener" class="pgc-visit" aria-label="Live Site">
-                            <i class="fas fa-globe"></i>
-                        </a>
-                        @endif
-                    </div>
-                    <p class="pgc-short-desc">{{ $project['short'] }}</p>
-                    <div class="project-stack">@foreach(array_slice($project['tags'] ?? [], 0, 3) as $tag)<span>{{ $tag['label'] }}</span>@endforeach</div>
-
-                    <div class="pgc-details-template" style="display:none">
-                        <div class="pm-detail-header">
-                            <h3 class="pm-detail-title">{{ $project['title'] }}</h3>
-                            <span class="pm-detail-tagline">{{ $project['tagline'] }}</span>
-                        </div>
-                        <p class="pm-detail-desc">{{ $project['desc'] }}</p>
-                        <h4 class="pm-sub-heading"><i class="fas fa-star" style="color:var(--blue2)"></i> {{ __('works.features_heading') }}</h4>
-                        <ul class="pc-bullets">
-                            @foreach($project['bullets'] ?? [] as $bullet)
-                            <li>{!! strip_tags($bullet, '<strong><em><b><i>') !!}</li>
-                            @endforeach
-                        </ul>
-                        <h4 class="pm-sub-heading"><i class="fas fa-tools" style="color:var(--blue2)"></i> {{ __('works.tech_stack') }}</h4>
-                        <div class="pc-tags">
-                            @foreach($project['tags'] ?? [] as $tag)
-                            <span class="pc-tag"><i class="{{ $tag['icon'] }}"></i> {{ $tag['label'] }}</span>
-                            @endforeach
-                        </div>
-                        <div class="pm-detail-footer">
-                            @if(!empty($project['github_url']))
-                            <a href="{{ $project['github_url'] }}" target="_blank" rel="noopener" class="btn btn-primary btn-sm"><i class="fab fa-github"></i> Repository</a>
-                            @elseif(!empty($project['live_url']))
-                            <a href="{{ $project['live_url'] }}" target="_blank" rel="noopener" class="btn btn-primary btn-sm"><i class="fas fa-globe"></i> {{ __($project['footer_label_key'] ?? 'works.live_demo') }}</a>
-                            @endif
-                        </div>
-                    </div>
-
-                    <button class="btn btn-outline btn-sm btn-view-details" style="width:100%;margin-top:1rem;justify-content:center"><i class="fas fa-search-plus"></i> {{ __('works.view_details') }}</button>
-                </div>
+                @elseif($minimal)
+                <span class="exp-topic-cert-hint"><i class="fas fa-certificate"></i> {{ __('experience.lecturer_cert_hint') }}</span>
+                @endif
             </article>
             @endforeach
-
         </div>
 
-        <div style="text-align:center;margin-top:2.5rem">
-            <a href="https://github.com/Muzaki29?tab=repositories" target="_blank" rel="noopener"
-               class="btn btn-outline">
-                <i class="fab fa-github"></i> See All on GitHub
-            </a>
-        </div>
+        <p class="exp-topics-counter" aria-live="polite">{{ $experiences->count() }} / {{ $experiences->count() }} {{ __('experience.topics_label') }}</p>
     </div>
 </section>
+@endif
 
-
-
+@if(\App\Models\Setting::flag('show_timeline'))
 {{-- ── TIMELINE / JOURNEY ── --}}
 <section class="timeline-section" id="timeline">
     <div class="container">
@@ -487,7 +530,30 @@
         </div>
     </div>
 </section>
+@endif
 
+@if(\App\Models\Setting::flag('show_process'))
+{{-- ── DEVELOPMENT PROCESS ── --}}
+<section class="w-section" id="process" aria-labelledby="process-title">
+    <div class="w-container">
+        <div class="w-section-head">
+            <h2 id="process-title">{{ __('process.title') }}</h2>
+            <p>{{ __('process.lead') }}</p>
+        </div>
+        <ol class="w-process">
+            @foreach(['discover', 'design', 'build', 'test', 'document'] as $step)
+            <li class="w-process-step">
+                <span class="w-eyebrow-num">{{ str_pad($loop->iteration, 2, '0', STR_PAD_LEFT) }}</span>
+                <h3>{{ __('process.'.$step.'_title') }}</h3>
+                <p>{{ __('process.'.$step.'_desc') }}</p>
+            </li>
+            @endforeach
+        </ol>
+    </div>
+</section>
+@endif
+
+@if(\App\Models\Setting::flag('show_certifications'))
 {{-- ── CERTIFICATIONS ── --}}
 <section class="certs-section" id="certifications">
     <div class="container">
@@ -568,6 +634,7 @@
         </div>
     </div>
 </section>
+@endif
 
 {{-- ── CONTACT ── --}}
 <section class="contact-section" id="contact">
@@ -665,7 +732,7 @@
             <nav class="footer-clean-nav" aria-label="Footer">
                 <a href="#about">{{ __('footer.about') }}</a>
                 <a href="#works">{{ __('footer.works') }}</a>
-                <a href="#certifications">{{ __('footer.certifications') }}</a>
+                @if(\App\Models\Setting::flag('show_certifications'))<a href="#certifications">{{ __('footer.certifications') }}</a>@endif
                 <a href="#contact">{{ __('footer.contact') }}</a>
             </nav>
             <div class="footer-soc footer-soc-clean">
@@ -774,7 +841,7 @@ window.i18n = {
 };
 window.portfolioExport = @json($portfolioExport);
 </script>
-<script src="{{ asset('js/portfolio.js') }}?v=4.1" defer></script>
+<script src="{{ asset('js/portfolio.js') }}?v=4.2" defer></script>
 <script src="{{ asset('js/portfolio-export.js') }}?v=2.0" defer></script>
 </body>
 </html>

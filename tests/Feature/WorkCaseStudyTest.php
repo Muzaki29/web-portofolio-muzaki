@@ -114,4 +114,25 @@ class WorkCaseStudyTest extends TestCase
         $this->assertStringStartsWith('storage/projects/gallery/', $path);
         $this->get('/work/proyek-uji')->assertSee(__('work.gallery'))->assertSee($path);
     }
+
+    public function test_case_study_bullets_never_render_attributes_or_scripts(): void
+    {
+        $this->project(['bullets' => ['id' => [
+            '<b onmouseover="alert(1)">x</b>',
+            '<strong>Tebal</strong> dan <em>miring</em>',
+            '<script>alert(1)</script>',
+        ]]]);
+
+        $this->get('/work/proyek-uji')->assertOk()
+            ->assertSee('<strong>Tebal</strong> dan <em>miring</em>', false) // bare allow-listed tags still work
+            ->assertDontSee('<b onmouseover', false)
+            ->assertDontSee('<script>alert(1)</script>', false);
+    }
+
+    public function test_json_ld_cannot_break_out_of_its_script_tag(): void
+    {
+        $this->project(['title' => ['id' => '</script><script>alert(1)</script>']]);
+
+        $this->get('/work/proyek-uji')->assertOk()->assertDontSee('</script><script>alert(1)', false);
+    }
 }

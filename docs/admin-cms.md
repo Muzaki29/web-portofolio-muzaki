@@ -34,7 +34,7 @@ Akun lokal untuk uji coba tersimpan di `storage/app/private/local-admin.txt` (di
 |---|---|---|
 | **Dashboard** | Grafik kunjungan 7/30/90 hari, pengunjung unik, perangkat, sumber kunjungan, jumlah konten | — |
 | **Karya** | Proyek: judul, tagline, deskripsi, fitur, teknologi, gambar, tautan GitHub/live | Section *Karya Saya* |
-| **Pengalaman** | Peran, perusahaan, periode, lokasi, deskripsi singkat, poin pencapaian, tautan, sertifikat terkait | Section *Pengalaman Kerja* |
+| **Pengalaman** | Peran, perusahaan, periode, lokasi, deskripsi singkat, poin pencapaian, gambar sinematik 16:9, tautan, sertifikat terkait | Section *Pengalaman Kerja* |
 | **Timeline** | Judul dan periode perjalanan karier/pendidikan | Section *Journey* |
 | **Sertifikat** | Judul, label, penerbit, tanggal, satu atau beberapa halaman gambar (lebih dari satu = slider) | Section *Sertifikasi* + angka sertifikat |
 | **Profil & Kontak** | Peran di hero, teks Tentang, lokasi, email (juga tujuan form kontak), LinkedIn, GitHub, Dribbble, Pinterest, Instagram, Threads — kosongkan untuk menyembunyikan | Hero, Tentang, Kontak (grup *Hubungi Saya* / *Karya & Konten*), footer |
@@ -89,6 +89,8 @@ diisi bila masih kosong. Setelah deploy pertama, buat akun admin dengan `php art
 | Skema field Pengalaman/Timeline/Sertifikat/Profil | `config/cms.php` |
 | Controller admin | `app/Http/Controllers/Admin/` |
 | Model | `app/Models/Project.php`, `ContentItem.php`, `Setting.php`, `PageVisit.php` |
+| Data landing page (`/`) | `app/Services/LandingPage.php` |
+| Captcha form kontak | `app/Services/Captcha.php` |
 | Pencatat kunjungan | `app/Http/Middleware/TrackVisit.php` |
 | Halaman React | `resources/js/admin/pages/` |
 | Komponen shadcn | `resources/js/admin/components/ui/` |

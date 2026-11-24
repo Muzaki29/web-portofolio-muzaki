@@ -53,6 +53,15 @@ class Project extends Model
         return array_values(array_filter(array_map('trim', preg_split('/\R/', (string) $this->t($field)))));
     }
 
+    /**
+     * Admin-authored text with light emphasis: everything is escaped first, then only the exact
+     * attribute-less tags <strong> <em> <b> <i> are restored. Attributes (onmouseover=…) never survive.
+     */
+    public static function inlineHtml(string $html): string
+    {
+        return preg_replace('#&lt;(/?)(strong|em|b|i)&gt;#i', '<$1$2>', e($html));
+    }
+
     public function caseStudyUrl(): ?string
     {
         return $this->slug ? route('work.show', $this->slug) : null;

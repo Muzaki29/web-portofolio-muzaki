@@ -40,7 +40,7 @@
             $profile['instagram_username'] ? 'https://www.instagram.com/'.$profile['instagram_username'].'/' : null,
             $profile['threads_username'] ? 'https://www.threads.com/@'.$profile['threads_username'] : null,
         ])),
-    ], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) !!}</script>
+    ], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_HEX_TAG) !!}</script>
     <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}?v=mai-2">
     <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('favicon-32.png') }}?v=mai-2">
     <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('favicon-16.png') }}?v=mai-2">
@@ -200,7 +200,16 @@
             <span class="w-head-label">{{ __('label.about') }}</span>
             <h2 class="w-head-title">{{ $profile['about_title'] }}</h2>
         </header>
-        <p class="about-desc">{{ $profile['about_description'] }}</p>
+        <div class="about-intro">
+        <p class="about-intro-lead">{{ __('hero.positioning') }}</p>
+        <p class="hero-supporting">{{ __('hero.supporting') }}</p>
+        <div class="hero-actions">
+            <a href="#works" class="hero-cta hero-cta-primary">{{ __('hero.cta_work') }} <span aria-hidden="true">↘</span></a>
+            <a href="#contact" class="hero-cta">{{ __('hero.cta_contact') }}</a>
+            <a href="{{ asset('cv/muzaki-abdullah-irsyad.pdf') }}" class="hero-cta" download>{{ __('about.download_cv') }}</a>
+        </div>
+    </div>
+        <p class="about-desc about-desc-wide">{{ $profile['about_description'] }}</p>
 
         <div class="details-grid details-grid-minimal">
             <div class="det-row">
@@ -446,51 +455,58 @@
 </section>
 
 @if(\App\Models\Setting::flag('show_experience'))
-{{-- ── WORK EXPERIENCE (Raymond-style topics) ── --}}
-<section class="experience-section exp-raymond-section" id="experience">
-    <div class="container">
+{{-- ── WORK EXPERIENCE: sticky cinematic stage (one frame per role, chapters scroll beside it) ── --}}
+@if($experiences->isNotEmpty())
+<section class="exp-stage-section" id="experience" aria-labelledby="exp-title">
+    <div class="w-container">
         <header class="w-head">
             <span class="w-head-label">{{ __('experience.sec_label') }}</span>
-            <h2 class="w-head-title">{{ __('experience.title') }}</h2>
+            <h2 class="w-head-title" id="exp-title">{{ __('experience.title') }}</h2>
             <p class="w-head-lead">{{ __('experience.subtitle') }}</p>
         </header>
 
-        <div class="exp-topics-grid">
-            @foreach($experiences as $exp)
-            @php $highlights = $exp->lines('highlights'); $certKey = $exp->v('cert_key'); $minimal = $certKey && ! $exp->v('description'); @endphp
-            <article class="exp-topic {{ $minimal ? 'exp-topic-interactive exp-topic-minimal' : '' }}" @if($minimal) role="button" tabindex="0" data-open-cert="{{ $certKey }}" @endif>
-                <span class="exp-topic-marker" aria-hidden="true"></span>
-                <span class="exp-topic-num">{{ str_pad($loop->iteration, 2, '0', STR_PAD_LEFT) }}</span>
-                <h3 class="exp-topic-title exp-topic-title-serif">{{ $exp->v('role') }}</h3>
-                @if($exp->v('company') || $exp->v('period'))
-                <p class="exp-topic-meta">{{ collect([$exp->v('company'), $exp->v('period')])->filter()->implode(' · ') }}</p>
-                @endif
-                @if($exp->v('location'))<p class="exp-topic-location">{{ $exp->v('location') }}</p>@endif
-                @if($exp->v('description'))<p class="exp-topic-desc">{{ $exp->v('description') }}</p>@endif
-                @if($highlights)
-                <ul class="exp-topic-highlights">
-                    @foreach($highlights as $line)<li>{{ $line }}</li>@endforeach
-                </ul>
-                @endif
-                @if($exp->v('link_url') || ($certKey && ! $minimal))
-                <div class="exp-topic-actions">
-                    @if($exp->v('link_url'))
-                    <a href="{{ $exp->v('link_url') }}" target="_blank" rel="noopener" class="exp-topic-link">{{ __('experience.work_btn') }} <i class="fas fa-arrow-up-right-from-square"></i></a>
-                    @endif
-                    @if($certKey && ! $minimal)
-                    <button type="button" class="exp-topic-link exp-btn-cert" data-open-cert="{{ $certKey }}"><i class="fas fa-certificate"></i> {{ __('experience.lecturer_cert_hint') }}</button>
+        <div class="exp-stage-grid">
+            <div class="exp-stage" aria-hidden="true">
+                @foreach($experiences as $exp)
+                @php $image = $exp->v('images')[0] ?? null; @endphp
+                <div class="exp-frame {{ $loop->first ? 'is-active' : '' }}">
+                    @if($image)
+                    <img src="{{ asset($image['full']) }}" alt="" width="1600" height="900" loading="{{ $loop->first ? 'eager' : 'lazy' }}" decoding="async">
                     @endif
                 </div>
-                @elseif($minimal)
-                <span class="exp-topic-cert-hint"><i class="fas fa-certificate"></i> {{ __('experience.lecturer_cert_hint') }}</span>
-                @endif
-            </article>
-            @endforeach
-        </div>
+                @endforeach
+                <span class="exp-counter">01</span>
+            </div>
 
-        <p class="exp-topics-counter" aria-live="polite">{{ $experiences->count() }} / {{ $experiences->count() }} {{ __('experience.topics_label') }}</p>
+            <div class="exp-chapters">
+                @foreach($experiences as $exp)
+                @php $certKey = $exp->v('cert_key'); @endphp
+                <article class="exp-chapter {{ $loop->first ? 'is-active' : '' }}">
+                    <span class="exp-meta">{{ str_pad((string) $loop->iteration, 2, '0', STR_PAD_LEFT) }}@if($exp->v('period')) · {{ $exp->v('period') }}@endif</span>
+                    <h3 class="exp-role">{{ $exp->v('role') }}</h3>
+                    @if($exp->v('company'))<p class="exp-company">{{ $exp->v('company') }}</p>@endif
+                    @if($exp->v('location'))<p class="exp-meta exp-dim">{{ $exp->v('location') }}</p>@endif
+                    @if($exp->v('description'))<p class="exp-desc">{{ $exp->v('description') }}</p>@endif
+                    @if($exp->lines('highlights'))
+                    <ul class="exp-list">@foreach($exp->lines('highlights') as $line)<li>{{ $line }}</li>@endforeach</ul>
+                    @endif
+                    @if($exp->v('link_url') || ($certKey && \App\Models\Setting::flag('show_certifications')))
+                    <div class="exp-actions">
+                        @if($exp->v('link_url'))
+                        <a href="{{ $exp->v('link_url') }}" target="_blank" rel="noopener" class="exp-link">{{ __('experience.work_btn') }} <i class="fas fa-arrow-up-right-from-square"></i></a>
+                        @endif
+                        @if($certKey && \App\Models\Setting::flag('show_certifications'))
+                        <button type="button" class="exp-link exp-btn-cert" data-open-cert="{{ $certKey }}"><i class="fas fa-certificate"></i> {{ __('experience.lecturer_cert_hint') }}</button>
+                        @endif
+                    </div>
+                    @endif
+                </article>
+                @endforeach
+            </div>
+        </div>
     </div>
 </section>
+@endif
 @endif
 
 @if(\App\Models\Setting::flag('show_timeline'))
@@ -551,12 +567,13 @@
             <h2 class="w-head-title" id="process-title">{{ __('process.title') }}</h2>
             <p class="w-head-lead">{{ __('process.lead') }}</p>
         </header>
-        <ol class="w-process">
+        <ol class="proc-index">
             @foreach(['discover', 'design', 'build', 'test', 'document'] as $step)
-            <li class="w-process-step" data-reveal>
-                <span class="w-eyebrow-num">{{ str_pad($loop->iteration, 2, '0', STR_PAD_LEFT) }}</span>
-                <h3>{{ __('process.'.$step.'_title') }}</h3>
-                <p>{{ __('process.'.$step.'_desc') }}</p>
+            <li class="proc-row" tabindex="0">
+                <span class="proc-num">{{ str_pad($loop->iteration, 2, '0', STR_PAD_LEFT) }}</span>
+                <h3 class="proc-title">{{ __('process.'.$step.'_title') }}</h3>
+                <p class="proc-desc">{{ __('process.'.$step.'_desc') }}</p>
+                <span class="proc-arrow" aria-hidden="true">→</span>
             </li>
             @endforeach
         </ol>
@@ -650,19 +667,14 @@
 @endif
 
 {{-- ── CONTACT ── --}}
-<section class="contact-section w-contact" id="contact" aria-labelledby="contact-title">
-    <img class="w-contact-photo" src="{{ asset('images/contact-lets-talk.webp') }}"
-         alt="{{ __('contact.visual_alt') }}" width="576" height="1024" loading="lazy" decoding="async">
-    <div class="w-contact-overlay w-container">
-        <h2 class="sr-only" id="contact-title">{{ __('contact.title') }}</h2>
-        <div class="w-contact-actions">
-            <button type="button" class="w-contact-btn w-contact-btn-primary" data-open-contact>
-                <i class="fas fa-paper-plane" aria-hidden="true"></i> {{ __('contact.form_title') }}
-            </button>
-            <a class="w-contact-btn" href="mailto:{{ $profile['contact_email'] }}">
-                <i class="fas fa-envelope" aria-hidden="true"></i> {{ $profile['contact_email'] }}
-            </a>
-        </div>
+<section class="contact-noir" id="contact" aria-labelledby="contact-title">
+    <div class="contact-noir-arch">
+        <img src="{{ asset('images/contact-lets-talk.webp') }}" alt="{{ __('contact.visual_alt') }}" width="576" height="1024" loading="lazy" decoding="async">
+    </div>
+    <div class="contact-noir-copy">
+        <h2 id="contact-title">{{ __('contact.title') }}</h2>
+        <a class="contact-noir-mail" href="mailto:{{ $profile['contact_email'] }}">{{ $profile['contact_email'] }}</a>
+        <button type="button" class="contact-noir-btn" data-open-contact>{{ __('contact.form_title') }} →</button>
     </div>
 </section>
 

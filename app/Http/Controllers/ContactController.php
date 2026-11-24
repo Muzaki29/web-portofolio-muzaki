@@ -4,13 +4,14 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Mail\ContactMail;
+use App\Services\Captcha;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Log;
 
 class ContactController extends Controller
 {
-    public function sendEmail(Request $request)
+    public function sendEmail(Request $request, Captcha $captcha)
     {
         $validator = Validator::make($request->all(), [
             'name' => 'required|string|max:255',
@@ -27,19 +28,7 @@ class ContactController extends Controller
             ], 422);
         }
 
-        // Validate Captcha Answer
-        $expected = session('captcha_answer');
-        $generatedAt = session('captcha_generated_at');
-
-        // Captcha expires after 5 minutes
-        if (is_null($generatedAt) || (now()->timestamp - intval($generatedAt)) > 300) {
-            return response()->json([
-                'success' => false,
-                'message' => __('contact.captcha_failed')
-            ], 422);
-        }
-
-        if (is_null($expected) || intval($request->captcha) !== intval($expected)) {
+        if (! $captcha->passes($request->captcha)) {
             return response()->json([
                 'success' => false,
                 'message' => __('contact.captcha_failed')
@@ -57,7 +46,7 @@ class ContactController extends Controller
                 )
             );
 
-            session()->forget(['captcha_answer', 'captcha_generated_at']);
+            $captcha->forget();
 
             return response()->json([
                 'success' => true,

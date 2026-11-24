@@ -67,8 +67,16 @@ class AdminCmsTest extends TestCase
         $this->get('/work/proyek-uji')->assertSee('<strong>Aman</strong>', false)->assertDontSee('<script>alert(1)</script>', false);
     }
 
-    public function test_landing_falls_back_to_config_when_cms_is_empty(): void
+    public function test_landing_renders_when_the_projects_table_is_empty(): void
     {
-        $this->get('/')->assertOk()->assertSee('PMO Merch');
+        $this->get('/')->assertOk()->assertSee('Muzaki Abdullah Irsyad');
+    }
+
+    public function test_robots_txt_does_not_reveal_the_admin_login_url(): void
+    {
+        $robots = file_get_contents(public_path('robots.txt'));
+
+        $this->assertStringNotContainsString('loginadmin', $robots);
+        $this->assertStringContainsString('Sitemap:', $robots);
     }
 }

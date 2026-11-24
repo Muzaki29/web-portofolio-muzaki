@@ -20,11 +20,17 @@ class Setting extends Model
     /** Raw settings map, cached until the admin saves. */
     public static function all_values(): array
     {
-        return Cache::rememberForever('cms.settings', fn () => rescue(
-            fn () => static::query()->get()->mapWithKeys(fn (Setting $s) => [$s->key => $s->value])->all(),
-            [],
-            false
-        ));
+        try {
+            return Cache::rememberForever(
+                'cms.settings',
+                fn () => static::query()->get()->mapWithKeys(fn (Setting $s) => [$s->key => $s->value])->all()
+            );
+        } catch (\Throwable $e) {
+            // Nothing was cached (the callback threw), so the next request retries. Defaults show meanwhile.
+            report($e);
+
+            return [];
+        }
     }
 
     /** Setting in the current locale; falls back to the given default when unset or blank. */

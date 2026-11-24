@@ -3,6 +3,7 @@
 namespace Tests\Feature;
 
 use App\Mail\ContactMail;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\Client\ConnectionException;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
@@ -11,6 +12,10 @@ use Tests\TestCase;
 
 class PortfolioRegressionTest extends TestCase
 {
+    // ContactController and the landing page read Settings, so these tests need the real schema
+    // (otherwise the missing `settings` table is reported to the log as a second error).
+    use RefreshDatabase;
+
     protected function setUp(): void
     {
         parent::setUp();

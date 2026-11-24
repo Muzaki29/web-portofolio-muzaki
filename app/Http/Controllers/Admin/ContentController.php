@@ -144,7 +144,7 @@ class ContentController extends Controller
             $existing->reject(fn ($img) => in_array($img['full'], $keep, true))->each(fn ($img) => $this->deleteUploaded($img['full']));
             $images = $existing->filter(fn ($img) => in_array($img['full'], $keep, true))->sortBy(fn ($img) => array_search($img['full'], $keep, true))->values()->all();
             foreach ($request->file('new_images', []) as $file) {
-                $path = 'storage/'.$file->store('certificates', 'public');
+                $path = 'storage/'.$file->store($section === 'certificate' ? 'certificates' : $section, 'public');
                 $images[] = ['full' => $path, 'preview' => $path];
             }
             $data['images'] = $images;

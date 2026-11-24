@@ -54,7 +54,7 @@
         'creator' => ['@type' => 'Person', 'name' => 'Muzaki Abdullah Irsyad', 'url' => url('/')],
         'keywords' => $stack->implode(', ') ?: null,
         'codeRepository' => $repo,
-    ]), JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) !!}</script>
+    ]), JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_HEX_TAG) !!}</script>
 </head>
 <body class="w-page">
 <a class="skip-link sr-only" href="#case">Skip to content</a>
@@ -118,7 +118,7 @@
         <section class="w-block"><h2>{{ __('work.solution') }}</h2><div class="w-block-body"><p>{{ $project->t('solution') }}</p></div></section>
         @endif
         @if($features->isNotEmpty())
-        <section class="w-block"><h2>{{ __('work.features') }}</h2><div class="w-block-body"><ul class="w-list">@foreach($features as $f)<li>{!! strip_tags($f, '<strong><em><b><i>') !!}</li>@endforeach</ul></div></section>
+        <section class="w-block"><h2>{{ __('work.features') }}</h2><div class="w-block-body"><ul class="w-list">@foreach($features as $f)<li>{!! \App\Models\Project::inlineHtml($f) !!}</li>@endforeach</ul></div></section>
         @endif
         @if($gallery->isNotEmpty())
         <section class="w-block"><h2>{{ __('work.gallery') }}</h2><div class="w-block-body"><div class="w-gallery">

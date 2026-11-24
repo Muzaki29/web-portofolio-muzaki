@@ -25,6 +25,7 @@ return [
                 ['name' => 'location', 'label' => 'Lokasi & tipe kerja', 'type' => 'text', 'translatable' => true, 'hint' => 'Contoh: Jakarta Selatan · Hybrid'],
                 ['name' => 'description', 'label' => 'Deskripsi singkat', 'type' => 'textarea', 'translatable' => true],
                 ['name' => 'highlights', 'label' => 'Poin pencapaian', 'type' => 'textarea', 'translatable' => true, 'hint' => 'Satu poin per baris. Tampil sebagai daftar di kartu pengalaman.'],
+                ['name' => 'images', 'label' => 'Gambar sinematik', 'type' => 'images', 'hint' => 'Satu gambar 16:9 (~1600×900). Gambar pertama jadi latar peran ini di landing page.'],
                 ['name' => 'link_url', 'label' => 'Tautan "Detail Karya"', 'type' => 'url'],
                 ['name' => 'cert_key', 'label' => 'Kunci sertifikat terkait', 'type' => 'text', 'hint' => 'Isi kunci sertifikat agar kartu ini membuka sertifikatnya. Kosongkan bila tidak ada.'],
             ],

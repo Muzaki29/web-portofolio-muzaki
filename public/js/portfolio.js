@@ -1033,3 +1033,22 @@
     dialog.addEventListener('close', () => opener?.focus?.());
     if (location.hash === '#contact-form') open();
 })();
+
+/* Experience stage: crossfade the sticky frame to the chapter in view */
+(function () {
+    var grid = document.querySelector('.exp-stage-grid');
+    if (!grid || !('IntersectionObserver' in window)) return;
+    var frames = [].slice.call(grid.querySelectorAll('.exp-frame')),
+        chapters = [].slice.call(grid.querySelectorAll('.exp-chapter')),
+        counter = grid.querySelector('.exp-counter');
+    function set(i) {
+        frames.forEach(function (f, k) { f.classList.toggle('is-active', k === i); });
+        chapters.forEach(function (c, k) { c.classList.toggle('is-active', k === i); });
+        counter.textContent = String(i + 1).padStart(2, '0');
+    }
+    grid.classList.add('is-enhanced');
+    var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) { if (e.isIntersecting) set(chapters.indexOf(e.target)); });
+    }, { rootMargin: '-45% 0px -45% 0px' });
+    chapters.forEach(function (c) { io.observe(c); });
+})();

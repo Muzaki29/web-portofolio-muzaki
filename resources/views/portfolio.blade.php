@@ -52,8 +52,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Syne:wght@700;800&family=Fira+Code:wght@400;500&family=Playfair+Display:ital,wght@0,500;0,700;1,500;1,700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-    <link rel="stylesheet" href="{{ asset('css/portfolio.css') }}?v=4.4">
-    <link rel="stylesheet" href="{{ asset('css/work.css') }}?v=2.8">
+    <link rel="stylesheet" href="{{ asset('css/portfolio.css') }}?v={{ filemtime(public_path('css/portfolio.css')) }}">
+    <link rel="stylesheet" href="{{ asset('css/work.css') }}?v={{ filemtime(public_path('css/work.css')) }}">
     @vite('resources/js/motion/index.js')
     <noscript><style>
         .skills-panel { display: block !important; margin-bottom: 2rem; }
@@ -870,7 +870,7 @@ window.i18n = {
 };
 window.portfolioExport = @json($portfolioExport);
 </script>
-<script src="{{ asset('js/portfolio.js') }}?v=4.4" defer></script>
-<script src="{{ asset('js/portfolio-export.js') }}?v=2.0" defer></script>
+<script src="{{ asset('js/portfolio.js') }}?v={{ filemtime(public_path('js/portfolio.js')) }}" defer></script>
+<script src="{{ asset('js/portfolio-export.js') }}?v={{ filemtime(public_path('js/portfolio-export.js')) }}" defer></script>
 </body>
 </html>
